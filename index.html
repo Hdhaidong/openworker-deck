@@ -63,6 +63,13 @@
   .card p{color:var(--dim);font-size:14px}
   .card .en-sub{font-size:12px;color:var(--acc);font-family:var(--mono);margin-top:6px}
 
+  /* design */
+  .design-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .design-grid figure{margin:0}
+  .design-grid img{width:100%;border:1px solid var(--line);border-radius:14px;display:block}
+  .design-grid figcaption{color:var(--dim);font-size:13.5px;margin-top:10px;line-height:1.6}
+  .design-grid figcaption b{color:var(--text)}
+
   /* loop */
   .loop{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:26px;font-family:var(--mono);font-size:13.5px;overflow-x:auto}
   .loop .l1{color:var(--acc2)} .loop .l2{color:var(--dim)} .loop .l3{color:var(--acc)}
@@ -114,18 +121,22 @@
 <header class="hero">
   <div class="wrap">
     <div class="badge-row">
-      <span class="badge hl">CROWDFUNDING · COMING SOON</span>
+      <span class="badge hl">KICKSTARTER · COMING SOON</span>
+      <span class="badge">直连设备 Direct Link · Modbus</span>
       <span class="badge">智能链接 Smart Link · MHS</span>
+      <span class="badge">工业网关 Industrial GW</span>
+      <span class="badge">无线网关 Wireless GW</span>
       <span class="badge">边缘计算 Edge Compute</span>
       <span class="badge">检测 Detection</span>
       <span class="badge">存储 Storage · 512 GB</span>
       <span class="badge">预测维护 Predictive Maintenance</span>
     </div>
     <h1>OpenWorker <span class="grad">Deck</span></h1>
-    <p class="tag">Give your AI coworker a body — <b>smart link</b> (MHS-native) · <b>edge computing</b> · <b>detection</b> · <b>storage</b> · predictive maintenance.</p>
-    <p class="zh-tag">给你的 AI 同事一个身体 —— 智能链接 · 边缘计算 · 检测 · 存储 · 预测维护</p>
+    <p class="tag">Give your AI coworker a body — <b>direct device link</b> (Modbus · industrial &amp; wireless gateway) · <b>smart link</b> (MHS-native) · <b>edge computing</b> · <b>detection</b> · <b>storage</b>.</p>
+    <p class="zh-tag">给你的 AI 同事一个身体 —— 直连设备（Modbus · 工业网关 · 无线网关）· 智能链接 · 边缘计算 · 检测 · 存储 · 预测维护</p>
     <div class="cta-row">
       <a class="btn pri" href="https://github.com/andrewyng/openworker" target="_blank">Built for OpenWorker</a>
+      <a class="btn sec" href="https://github.com/Hdhaidong/openworker-deck" target="_blank">Watch the repo · 收到上线通知</a>
       <a class="btn sec" href="#tiers">See the tiers</a>
     </div>
 
@@ -133,6 +144,7 @@
       <div class="deck-screen">
         <div class="screen-head"><span>OpenWorker · coworker</span><span id="clock">--:--</span></div>
         <div class="todo-item active"><span class="box">▸</span><span>CLASSIFY domain → MEDICAL (sterilizer)</span></div>
+        <div class="todo-item"><span class="box">✓</span><span>POLL Modbus RTU · 3 devices · unit 1–247</span></div>
         <div class="todo-item"><span class="box">✓</span><span>READ MHS telemetry — 1,247 cycles</span></div>
         <div class="todo-item"><span class="box">✓</span><span>Pull service manual · parts sheet</span></div>
         <div class="todo-item"><span class="box">·</span><span>Write maintenance-log entry</span></div>
@@ -154,12 +166,31 @@
     <p class="sub">Desk console and field sensor in the same box — the hardware half of an OpenWorker deployment.</p>
     <div class="grid">
       <div class="card"><div class="ic">🖥️</div><h3>Agent console · TRAE 式控制台</h3><p>4″ screen mirrors the coworker's live todo list and progress panel. Permission requests arrive as physical cards with Approve / Deny buttons — OpenWorker's <b>interactive</b> mode, in hardware.</p><div class="en-sub">status ring: idle / thinking / needs-you</div></div>
-      <div class="card"><div class="ic">🔗</div><h3>Smart link · MHS 智能链接</h3><p>Registers itself and every bridged device following the Model Hardware Standard pattern — standard read/write interface, auto-generated plain-language safety labels. Any MHS-compatible agent discovers it instantly.</p><div class="en-sub">CAN · RS-485 Modbus · OBD-II · BLE</div></div>
+      <div class="card"><div class="ic">🔗</div><h3>Smart link · MHS 智能链接</h3><p>Connects to equipment <b>directly</b> — Modbus RTU master (RS-485 multi-drop), Modbus TCP, CAN/J1939, OBD-II, BLE, LoRa — then registers itself and every bridged device following the Model Hardware Standard pattern: standard read/write interface, auto-generated plain-language safety labels. Any MHS-compatible agent discovers it instantly.</p><div class="en-sub">Modbus RTU/TCP · CAN/J1939 · OBD-II · BLE 5.2 · LoRa</div></div>
       <div class="card"><div class="ic">📡</div><h3>Detection · 四模态检测</h3><p>Vibration (3-axis accelerometer), thermal (IR thermopile), current signature (CT clamp), and acoustic (MEMS mic) — plus bridging into existing fault codes on equipped machines.</p><div class="en-sub">0–16 g · −20 to 400 °C · 0–100 A</div></div>
       <div class="card"><div class="ic">⚙️</div><h3>Edge computing · 边缘计算</h3><p>On-device NPU runs anomaly detection locally. Fully offline. Nothing leaves your network unless you say so — privacy is the default, not an option.</p><div class="en-sub">0.5 TOPS NPU · offline-first</div></div>
       <div class="card"><div class="ic">💾</div><h3>Storage · 本地存储</h3><p>Rolling telemetry history on microSD (up to 512 GB) + 8 GB eMMC. The Deck runs the night shift: it senses and stores while your computer is off, and the agent ingests the buffer when you're back.</p><div class="en-sub">512 GB microSD · 8 GB eMMC</div></div>
       <div class="card"><div class="ic">🔮</div><h3>Predictive maintenance · 预测维护</h3><p>Remaining-useful-life estimates from telemetry patterns — bearing wear, belt stretch, filter clog, refrigerant-loss curves. Alerts days or weeks before the failure, never after.</p><div class="en-sub">RUL estimates · early warnings</div></div>
     </div>
+  </div>
+</section>
+
+<section id="design">
+  <div class="wrap">
+    <div class="kicker">// industrial design / 工业设计</div>
+    <h2>Two editions, one design language</h2>
+    <p class="sub">哑光深灰机身、功能色点睛、无风扇被动散热 —— 桌面版陪 Agent 值守，工业版上 DIN 轨进柜。</p>
+    <div class="design-grid">
+      <figure>
+        <img src="img/deck-desktop.jpg" alt="OpenWorker Deck desktop edition — 4-inch agent console with Approve/Deny buttons and status ring">
+        <figcaption><b>Desktop edition · 桌面版</b> — 4″ Agent 控制台：todo / 进度面板 + 实体批准 / 拒绝权限卡 + 状态灯环。CNC 铝合金阳极氧化外壳，USB-C 供电，桌面常驻。</figcaption>
+      </figure>
+      <figure>
+        <img src="img/deck-industrial.jpg" alt="OpenWorker Deck industrial edition — DIN-rail gateway with RS-485, CAN, Ethernet, LoRa antenna and telemetry screen">
+        <figcaption><b>Industrial edition · 工业版</b> — 35 mm DIN 轨安装进柜：RS-485 / CAN 端子排、RJ45（Modbus TCP）、microSD、LoRa 天线、被动散热鳍片，宽温运行。</figcaption>
+      </figure>
+    </div>
+    <p class="sub" style="margin-top:20px">Design render, EVT-phase concept — final tooling may adjust. 设计渲染为 EVT 概念阶段，量产模具或有微调。</p>
   </div>
 </section>
 
@@ -174,6 +205,25 @@
 <span class="l3">you return: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Deck → buffered history → OpenWorker &nbsp;("while you were away...")</span>
     </div>
     <p class="sub" style="margin-top:24px">Pairs with the open-source <a href="https://github.com/andrewyng/openworker/pull/593" target="_blank">Hardware Repair Companion</a> coworker: the Deck senses, the agent diagnoses — telemetry as evidence, manuals and parts from public sources, a maintenance log per device.</p>
+  </div>
+</section>
+
+<section id="link">
+  <div class="wrap">
+    <div class="kicker">// connectivity / 直连设备</div>
+    <h2>Industrial gateway + wireless gateway, in one</h2>
+    <p class="sub">Legacy fieldbus on one side, MHS on the other. The Deck speaks the equipment's own protocols — <b>directly</b>, no integrator in the middle. Agent 永远不需要学厂商 SDK。</p>
+    <table>
+      <tr><th>链路</th><th>直连方式</th><th>典型设备</th></tr>
+      <tr><td>Modbus RTU</td><td>RS-485 主站 · 多点总线（32 台 · 单元号 1–247）直读寄存器与线圈</td><td>变频器 · PLC · 电表 · 灌溉阀 · 枢轴灌溉</td></tr>
+      <tr><td>Modbus TCP</td><td>以太网 / Wi-Fi 客户端 · 同一套寄存器，无需转接硬件</td><td>楼宇自控 · 电力监控 · 工业 PC</td></tr>
+      <tr><td>CAN 2.0B / J1939</td><td>总线直挂 250/500 kbit/s · PGN 解码</td><td>拖拉机 · 收割机 · 发动机 · 农具</td></tr>
+      <tr><td>OBD-II</td><td>转接线 · 标准 PID 直读</td><td>发电机 · 车辆 · 紧凑型拖拉机</td></tr>
+      <tr><td>BLE 5.2</td><td>中枢角色 · GATT 传感档案与厂商服务</td><td>电动工具电池 · BLE 传感器仪表</td></tr>
+      <tr><td>LoRa 868/915 MHz</td><td>Sub-GHz 无线网关 · 数百米至公里级</td><td>远端大棚 · 粮仓 · 水塔 · 泵站</td></tr>
+      <tr><td>1-Wire</td><td>直挂数字温度探头链</td><td>冷库 · 锅炉房 · 温度链</td></tr>
+    </table>
+    <p class="sub" style="margin-top:24px">No protocol island survives: the agent sees one MHS device tree — the Deck translates underneath. Equipment with no digital interface at all falls back to the four contactless sensing modalities.</p>
   </div>
 </section>
 
@@ -207,10 +257,10 @@
       <tr><td>Display</td><td>4″ LCD — todo/progress panel, permission cards</td></tr>
       <tr><td>Controls</td><td>Approve / Deny buttons · rotary encoder · status ring</td></tr>
       <tr><td>Sensors</td><td>3-axis accelerometer · IR thermopile · CT clamp (0–100 A) · MEMS mic</td></tr>
-      <tr><td>Ports</td><td>CAN 2.0B · RS-485 (Modbus RTU) · 1-Wire · OBD-II via adapter</td></tr>
-      <tr><td>Radios</td><td>BLE 5.2 · Wi-Fi 4</td></tr>
+      <tr><td>Ports</td><td>CAN 2.0B / J1939 · RS-485 (Modbus RTU multi-drop) · <b>10/100M Ethernet (Modbus TCP)</b> · 1-Wire · OBD-II via adapter</td></tr>
+      <tr><td>Radios</td><td>BLE 5.2 · Wi-Fi 4 · <b>LoRa 868/915 MHz</b> (optional)</td></tr>
       <tr><td>Power</td><td>USB-C PD · optional passive PoE</td></tr>
-      <tr><td>Enclosure</td><td>Desktop edition + IP65 field edition (−20 to 60 °C)</td></tr>
+      <tr><td>Enclosure</td><td>Desktop + IP65 field edition (−20 to 60 °C) + <b>DIN-rail industrial edition</b></td></tr>
       <tr><td>Firmware</td><td><b>Open source, MIT</b> — MHS-compatible registration</td></tr>
     </table>
   </div>
@@ -220,6 +270,7 @@
   <div class="wrap">
     <div class="kicker">// crowdfunding / 众筹档位</div>
     <h2>Reward tiers</h2>
+    <p class="sub">Platform: <b>Kickstarter</b> — all-or-nothing funding. Campaign goal: <b>$60,000</b>. 平台：Kickstarter（全有或全无），众筹目标 $60,000。</p>
     <div class="tiers">
       <div class="tier hot"><span class="flag">LIMITED 500</span><div class="tname">Early Bird</div><div class="price">$89</div><p>1× Deck · sensor set · desk stand</p></div>
       <div class="tier"><div class="tname">Standard</div><div class="price">$109</div><p>1× Deck · sensor set</p></div>
@@ -266,6 +317,7 @@
     <details><summary>Does it need the cloud?</summary><p>No. Sensing, anomaly detection, prediction and storage all run locally. An optional cloud bridge exists for fleet dashboards.</p></details>
     <details><summary>What if my equipment has no diagnostic port?</summary><p>The four contactless modalities — vibration, thermal, current, acoustic — work on any machine with power.</p></details>
     <details><summary>Can it control equipment, or only watch?</summary><p>Both, through MHS: reads are always safe; writes (resets, calibration, actuation) require explicit approval — on the physical buttons by default.</p></details>
+    <details><summary>Why not just buy an industrial gateway from Moxa or USR IOT?</summary><p>Because they solve a different problem. A Modbus gateway from an established industrial vendor (e.g. Moxa's MGate series) lists around $400+, and Chinese IIoT edge gateways (e.g. USR's edge series) run ¥1,099 — excellent boxes, but they translate protocols for <b>SCADA and clouds</b>. The Deck at $89–$109 covers the same field protocols in one box (Modbus RTU/TCP · CAN/J1939 · OBD-II · BLE · LoRa) <b>plus</b> what gateways don't do: MHS-native registration an AI agent can operate, a desk console with physical Approve/Deny, four-modality sensing, on-device anomaly detection, night-shift storage and predictive maintenance. 不是更便宜的网关，是不同品类：Agent 能亲手操作的网关。</p></details>
     <details><summary>Is it a medical device?</summary><p>No. In medical, clinic and dental settings the Deck monitors equipment rooms and duty cycles only — never patient-connected circuits. Fire-safety monitoring is record-keeping, never a replacement for certified inspection.</p></details>
   </div>
 </section>
@@ -283,7 +335,7 @@
 <footer>
   <div class="wrap">
     <p><a href="https://github.com/andrewyng/openworker" target="_blank">OpenWorker</a> companion hardware · MHS-compatible · open firmware (MIT)</p>
-    <p class="fr">© 2026 Hdhaidong — crowdfunding campaign page. Specs are targets for the EVT phase; tiers and dates are campaign commitments pending platform launch.</p>
+    <p class="fr">© 2026 Hdhaidong — Kickstarter campaign page (pre-launch). Specs are targets for the EVT phase; tiers and dates are campaign commitments pending platform launch review.</p>
   </div>
 </footer>
 
