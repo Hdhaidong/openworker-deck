@@ -66,6 +66,13 @@ private data:   computed by the local model, on the Deck                        
 cartridge out:  compute keeps running → eMMC buffer · history rides in your pocket
 ```
 
+**The mandatory authorization gate** — the same separation applied to model calls. External models (insurer underwriting, third-party evaluation, reviewed at onboarding) run in a sandbox and may only read the fields a consent card declares; they leave with signed inference outputs, never raw data. No consent card, no call — no bypass, no direct API in the architecture, and a revocation cuts the model's next call immediately:
+
+<p align="center">
+  <img src="img/mandatory-auth-gate.svg" alt="Mandatory authorization gate architecture — external models pass through a hardware-enforced gate to local data; signed inference outputs return, blocked direct paths, audit strip" width="860">
+</p>
+
+
 | Separation buys | Why it matters |
 |---|---|
 | Privacy by physics | Pull the cartridge and the history physically leaves the machine — no remote wipe needed, no "trust us" |
@@ -214,6 +221,13 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 ### 计算存储分离
 
 不是软盘，也不是黑盒 —— 计算平面与存储平面解耦，隐私数据由本地模型计算，历史装进可拔的加密卡。数据是你的，算力是它出的。
+
+**强制授权闸门** —— 同样的分离原则用在模型调用上。外部模型（核保、第三方评估，过审后接入）在隔离沙箱内运行，只读授权卡声明的字段；离开的只有签名推理输出，原始数据永不外流。无授权卡，调用即拒 —— 架构上不存在旁路与 API 直连，撤回授权当场断流：
+
+<p align="center">
+  <img src="img/mandatory-auth-gate.svg" alt="强制授权闸门架构图 —— 外部模型经硬件闸门访问本地数据，签名输出返回，直连路径被阻断，底部审计条" width="860">
+</p>
+
 
 | 分离带来什么 | 为什么重要 |
 |---|---|
