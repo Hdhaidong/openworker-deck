@@ -4,9 +4,9 @@
 
 **给你的 AI 同事一个身体 · Give your AI coworker a body**
 
-四大支柱：**智能链接**（MHS 原生，直连设备）· **本地模型**（个人隐私数据不出设备）· **检测** · **隐私存储**（可拔加密卡 · 计算存储分离），外加风险预测 —— 以及一块 TRAE 式的桌面 Agent 面板。它同时是一台**工业网关 + 无线网关**：Modbus（RTU/TCP）· CAN/J1939 · OBD-II · BLE · LoRa，直连现场设备，无需集成商。软盘的形态，保险库的内核。
+四大支柱：**智能链接**（MHS 原生，直连设备）· **本地模型**（个人隐私数据不出设备）· **检测** · **隐私存储**（可拔加密卡 · 计算存储分离），外加风险预测、SOS 急救提醒、气象计算、养老守护（健康数据对接 · 个人对照基线 · 机器人对接训练评估）、无屏守护吊牌、医疗设施监控与保险全链路 —— 以及一块 TRAE 式的桌面 Agent 面板。它同时是一台**工业网关 + 无线网关**：Modbus（RTU/TCP）· CAN/J1939 · OBD-II · BLE · LoRa，直连现场设备，无需集成商。软盘的形态，保险库的内核。
 
-An open-source hardware companion for [OpenWorker](https://github.com/andrewyng/openworker) — TRAE-style agent visibility on a desk device, built on four pillars: **smart link** (MHS-native) · **local model** (personal private data computed on-device) · **detection** · **privacy storage** (removable encrypted cartridge, compute-storage separation) — with risk prediction on top. It talks to equipment **directly**: an industrial + wireless gateway speaking Modbus (RTU/TCP), CAN/J1939, OBD-II, BLE and LoRa. The floppy's form, the vault's soul.
+An open-source hardware companion for [OpenWorker](https://github.com/andrewyng/openworker) — TRAE-style agent visibility on a desk device, built on four pillars: **smart link** (MHS-native) · **local model** (personal private data computed on-device) · **detection** · **privacy storage** (removable encrypted cartridge, compute-storage separation) — with risk prediction, SOS alert, weather intelligence, elder care (BLE health-data pairing, personal-baseline comparison model, care-robot training & evaluation), the screenless guardian pendant, medical-facility monitoring and a privacy-computing insurance full chain on top. It talks to equipment **directly**: an industrial + wireless gateway speaking Modbus (RTU/TCP), CAN/J1939, OBD-II, BLE and LoRa. The floppy's form, the vault's soul.
 
 [![Kickstarter](https://img.shields.io/badge/Status-Kickstarter_Coming_Soon-orange)](https://hdhaidong.github.io/openworker-deck/)
 [![MHS](https://img.shields.io/badge/Model_Hardware_Standard-compatible-blue)](https://modelhardwarestandard.com/)
@@ -39,6 +39,13 @@ Meanwhile, the machines you rely on — the tractor, the HVAC, the clinic steril
 | **Local model** | On-device NPU (0.5 TOPS) runs a **local model** — anomaly detection and small-model reasoning execute on the Deck itself. **Personal and private data are computed locally**: telemetry, logs and history never leave the device. Offline by default; the optional fleet bridge is opt-in and labeled. |
 | **Privacy storage** | Your data used to have a shape you could hold. It does again: a **removable floppy-form encrypted disk** (3.5″ silhouette in armored metal, up to 512 GB). The key lives in the disk, not the machine. Pull it and your data physically leaves with you; the Deck keeps running on the 8 GB eMMC buffer and syncs the moment you re-insert. Pull-to-own: three seconds, no menus. |
 | **Risk prediction** | Three risk classes per device, not just failure: **failure risk** (RUL curves — bearing wear, belt stretch, filter clog, refrigerant loss), **safety risk** (CO trends, thermal-runaway precursors, overload patterns — flagged early for human review), **compliance risk** (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, recommended action, evidence — it informs decisions, never a safety system. |
+| **SOS alert** | One long press: ring strobe + 90 dB piezo + an SOS card over MQTT (device location, last-minute telemetry) — LoRa long-range where there's no Wi-Fi, looping escalation until a guardian confirms. **Notification only — it never calls emergency services.** |
+| **Weather intelligence** | On-board barometer and humidity feed the local model — pressure trend, dew point, frost probability, heat index computed on-device, no forecast subscription. Cross-read with the equipment registry turns weather into per-machine action lists (frost → pre-dawn irrigation advisory; heat wave → compressor derating). Official warnings stay with meteorological agencies — the Deck is the offline complement. |
+| **Cold wallet (in the cartridge)** | The cartridge's secure element can hold keys that never touch a network: transactions are signed inside the cartridge, confirmed with the physical Approve button — one thumb, one signature. Self-custody by design; market-specific regulatory posture before shipping. |
+| **Elder care** | BLE-standard health devices (blood pressure, glucose, SpO₂, weight, wearables) pair directly — no apps, no accounts — and the local model builds each elder's **personal baseline**. Evaluation is deviation from *their own* normal, never population thresholds; trend reminders go to family, anomalies escalate to SOS. Care robots join via MHS/MQTT and are scored against the same baseline; physical assistance requires the physical Approve button. **Monitoring and reminders — never diagnosis.** |
+| **Guardian pendant (screenless)** | A screenless, nano-SIM (4G Cat.1bis) pendant for school kids, nursing-home elders and outdoor workers: calls preset contacts only, one-key SOS with location, guardian-loop confirmation, and triple positioning (GPS/WiFi/cellular) relaying to the family Deck — track history on the encrypted cartridge, **not a vendor cloud**. Minor data under guardian consent and minimization (PIPL); SRRC approvals before mass production. |
+| **Medical facilities (OR)** | In operating rooms and clinics the Deck monitors **equipment and environment only** — sterilizer cycles, anesthesia run-hours, temperature, humidity, pressure differential, HEPA lifetime — with a monthly audit-format facility report. Never patient-connected, never clinical; during surgery it is read-only, writes queue behind the physical button. |
+| **Insurance full chain** | Privacy-computing infrastructure for personal insurance: the local model computes risk tiers from health baseline + equipment + environment; sharing happens through **granular, revocable consent cards** (activated by the physical button, every grant audited); a licensed insurer underwrites from verifiable digests; SOS evidence packages assemble themselves at claim time. The surgical chain evaluates *facility readiness* pre-op, records a signed read-only timeline intra-op, tracks equipment and environment post-op — and hands neutral records to arbitration bodies, never verdicts. **Not an insurance product — data preparation and consent infrastructure.** |
 
 ### The night-shift loop
 
@@ -107,6 +114,7 @@ Three editions, one design language — matte graphite enclosures, functional co
 | **Industrial** | 35 mm DIN-rail, terminal blocks (RS-485/CAN), RJ45 (Modbus TCP), LoRa antenna, heatsink fins | Goes in the cabinet: wide-temperature, IP65 variant for the field |
 | **Socket** | Smart-plug form factor, pass-through outlet, built-in current sensing | Zero-wiring entry: plug it in the wall, plug the appliance into it — washer, water heater, compressor |
 | **Privacy disk** | 3.5″ floppy silhouette in armored metal — metal shutter, engraved lock, violet status edge | The removable encrypted medium itself: pull-to-own, key lives in the disk |
+| **Guardian pendant** | Screenless, nano-SIM (4G Cat.1bis), triple positioning, one SOS key | Three wearers: school kid, nursing-home elder, outdoor worker — calls home only, location to the family Deck, never a vendor cloud |
 
 Concept renders (EVT-phase): [`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) — final tooling may adjust.
 
@@ -155,6 +163,7 @@ Platform: **Kickstarter** (all-or-nothing). Campaign goal: **$60,000**. Launch p
 | Socket Trio | $129 | 3× socket editions — zero-wiring coverage for three appliances |
 | Fleet | $499 | 6× Decks, field edition, fleet dashboard |
 | Clinic / Lab Pack | $899 | 10× Decks, compliance-report templates, priority support |
+| Guardian Pack | $159 | 1× Deck, 2× screenless guardian pendants (kid/elder), first-year prepaid care plan (effective upon licensed approval, equivalent credit otherwise) |
 
 ### Competitive landscape
 
@@ -174,7 +183,7 @@ Campaign (30 days) → tooling & EVT (10 weeks) → DVT (8 weeks) → PVT & cert
 - **MHS is a research preview.** The Deck follows its published pattern (standard drivers, plain-language safety labels, read/write discipline) and will track the spec as it stabilizes — firmware updates are open source and shipped as they land.
 - **Certification timing** (FCC/CE and regional equivalents) gates shipping dates; we buffer PVT accordingly.
 - **Component supply** — the SoC and display have second-source plans.
-- **Compliance boundaries are fixed, not stretch goals**: the Deck is a monitoring device. It is not a medical device, and it does not replace certified fire-safety inspection.
+- **Compliance boundaries are fixed, not stretch goals**: the Deck is a monitoring device. It is not a medical device, and it does not replace certified fire-safety inspection. Elder care compares readings against personal baselines and never diagnoses; the guardian pendant handles minors' data under guardian consent and minimization (PIPL), and SOS notifies guardians — never emergency services; medical-facility monitoring is equipment-and-environment only (read-only during surgery); the insurance full chain is data-preparation and consent infrastructure — underwriting, pricing and payouts stay with licensed insurers subject to regulatory approval, and the prepaid plan falls back to equivalent credit if approval doesn't land.
 
 ### The creator
 
