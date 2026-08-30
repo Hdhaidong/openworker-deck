@@ -30,6 +30,10 @@
   .hero h1 .grad{background:linear-gradient(90deg,#7c5cff,#38e0b0);-webkit-background-clip:text;background-clip:text;color:transparent}
   .hero p.tag{font-size:20px;color:var(--dim);max-width:640px;margin:0 auto 32px}
   .hero .zh-tag{font-size:15px;color:var(--acc);margin-bottom:40px}
+  .hero-shot{margin:56px 0 0}
+  .hero-shot img{width:100%;border:1px solid var(--line);border-radius:16px;display:block;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+  .hero-shot figcaption{font-family:var(--mono);font-size:12.5px;color:var(--dim);margin-top:12px;text-align:center}
+  .hero-shot figcaption .zh{color:var(--acc)}
   .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .btn{display:inline-block;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;transition:transform .15s}
   .btn:hover{transform:translateY(-2px)}
@@ -157,6 +161,11 @@
       <div class="deck-btns"><div class="dbtn ok">● APPROVE</div><div class="dbtn no">● DENY</div></div>
       <div class="ring"><span class="dot"></span><span>needs-you · 等待确认</span></div>
     </div>
+
+    <figure class="hero-shot">
+      <img src="img/hero-scene.jpg" alt="OpenWorker Deck on a dusk desk beside a laptop running an AI agent — the 4-inch console shows a permission request card">
+      <figcaption>Concept render · EVT phase — the desk your AI coworker sits at · <span class="zh">你的 AI 同事坐镇的桌面</span></figcaption>
+    </figure>
   </div>
 </header>
 
@@ -181,6 +190,12 @@
     <div class="kicker">// architecture / 计算存储分离</div>
     <h2>Compute and storage, cleanly split</h2>
     <p class="sub">不是软盘，也不是黑盒 —— 计算平面与存储平面解耦：隐私数据由本地模型计算，历史装进可拔的加密卡。数据是你的，算力是它出的。</p>
+    <div class="design-grid" style="margin-bottom:22px">
+      <figure>
+        <img src="img/privacy-cartridge.jpg" alt="Fingers pulling the encrypted storage cartridge out of the OpenWorker Deck — gunmetal cartridge with engraved lock icon and violet unlock edge">
+        <figcaption><b>Pull-to-own · 拔卡即离场</b> — 软盘的形态，保险库的内核：密钥在卡里，不在机器里。The key lives in the cartridge, not the machine.</figcaption>
+      </figure>
+    </div>
     <div class="loop">
 <span class="l1">compute plane: &nbsp;local model · NPU anomaly detection · MHS registry · protocol bridge &nbsp;(always on)</span><br>
 <span class="l2">storage plane: &nbsp;encrypted cartridge · 8 GB eMMC buffer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(swappable · yours)</span><br>
@@ -222,6 +237,12 @@
     <div class="kicker">// how it works / 夜班闭环</div>
     <h2>The night-shift loop</h2>
     <p class="sub">Your computer sleeps. The machines don't.</p>
+    <div class="design-grid" style="margin-bottom:22px">
+      <figure>
+        <img src="img/night-shift.jpg" alt="At night in a dark workshop, the OpenWorker Deck on a shelf is the only light source — violet status ring and a mint telemetry graph watching over the machinery">
+        <figcaption><b>It runs the night shift · 它值守夜班</b> — 深蓝车间里唯一的光：本地模型盯着每条曲线，加密卡记录每个循环。</figcaption>
+      </figure>
+    </div>
     <div class="loop">
 <span class="l1">your computer on: &nbsp; OpenWorker ↔ Deck ↔ equipment &nbsp;&nbsp;(live: agent reads, you approve)</span><br>
 <span class="l2">your computer off: Deck → senses → stores &nbsp;&nbsp;(night shift: local model watches, vault records)</span><br>
@@ -361,7 +382,7 @@
 
 <footer>
   <div class="wrap">
-    <p><a href="https://github.com/andrewyng/openworker" target="_blank">OpenWorker</a> companion hardware · MHS-compatible · open firmware (MIT)</p>
+    <p><a href="https://github.com/andrewyng/openworker" target="_blank">OpenWorker</a> companion hardware · MHS-compatible · open firmware (MIT) · <a href="campaign-kit.html">Campaign copy &amp; design kit · 文案与视觉设计稿</a></p>
     <p class="fr">© 2026 Hdhaidong — Kickstarter campaign page (pre-launch). Specs are targets for the EVT phase; tiers and dates are campaign commitments pending platform launch review.</p>
   </div>
 </footer>
