@@ -1,0 +1,154 @@
+<svg viewBox="0 0 960 660" width="960" height="660" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PCB hardware design — socket gateway base board (4-layer, mains + logic + radio) and privacy cartridge board (6-layer, secure element + encrypted NAND), joined by the slot connector with mutual authentication">
+  <defs>
+    <marker id="pbA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7c5cff"/></marker>
+    <marker id="pbB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#38e0b0"/></marker>
+    <marker id="pbC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#93a0ba"/></marker>
+  </defs>
+  <style>.t{font-family:'Segoe UI',system-ui,sans-serif}.m{font-family:'Cascadia Code',Consolas,monospace}</style>
+
+  <text x="480" y="22" class="m" font-size="11" fill="#7c5cff" text-anchor="middle" letter-spacing="2">PCB HARDWARE DESIGN · SOCKET GATEWAY BASE + PRIVACY CARTRIDGE</text>
+  <text x="480" y="38" class="t" font-size="10" fill="#93a0ba" text-anchor="middle">two boards · one system — the base computes, the cartridge keeps secrets</text>
+
+  <!-- ============ LEFT PANEL: SOCKET GATEWAY BASE ============ -->
+  <rect x="20" y="48" width="420" height="482" rx="12" fill="#111623" stroke="#38e0b0" stroke-width="2"/>
+  <text x="230" y="72" class="m" font-size="11" fill="#38e0b0" text-anchor="middle" letter-spacing="2">SOCKET GATEWAY BASE · 4-LAYER</text>
+  <text x="230" y="86" class="t" font-size="9.5" fill="#93a0ba" text-anchor="middle">smart-plug form factor · 16 A pass-through · MQTT broker on-board</text>
+
+  <!-- mains zone -->
+  <rect x="34" y="96" width="392" height="100" rx="8" fill="#1a1420" stroke="#ff6b81" stroke-dasharray="5 4" stroke-opacity="0.7"/>
+  <text x="230" y="112" class="m" font-size="9" fill="#ff6b81" text-anchor="middle" letter-spacing="1">MAINS · 16 A PASS-THROUGH (power only)</text>
+  <rect x="44" y="120" width="62" height="26" rx="5" fill="#161d2e" stroke="#232c44"/>
+  <text x="75" y="136" class="m" font-size="8.5" fill="#e8edf7" text-anchor="middle">L · N IN</text>
+  <rect x="118" y="120" width="56" height="26" rx="5" fill="#161d2e" stroke="#232c44"/>
+  <text x="146" y="136" class="m" font-size="8.5" fill="#e8edf7" text-anchor="middle">FUSE</text>
+  <rect x="186" y="120" width="50" height="26" rx="5" fill="#161d2e" stroke="#232c44"/>
+  <text x="211" y="136" class="m" font-size="8.5" fill="#e8edf7" text-anchor="middle">MOV</text>
+  <rect x="248" y="120" width="54" height="26" rx="5" fill="#161d2e" stroke="#232c44"/>
+  <text x="275" y="136" class="m" font-size="8.5" fill="#e8edf7" text-anchor="middle">RELAY</text>
+  <rect x="314" y="120" width="60" height="26" rx="5" fill="#161d2e" stroke="#232c44"/>
+  <text x="344" y="136" class="m" font-size="8.5" fill="#e8edf7" text-anchor="middle">OUT 16A</text>
+  <line x1="106" y1="133" x2="116" y2="133" stroke="#93a0ba" stroke-width="1.5" marker-end="url(#pbC)"/>
+  <line x1="174" y1="133" x2="184" y2="133" stroke="#93a0ba" stroke-width="1.5" marker-end="url(#pbC)"/>
+  <line x1="236" y1="133" x2="246" y2="133" stroke="#93a0ba" stroke-width="1.5" marker-end="url(#pbC)"/>
+  <line x1="302" y1="133" x2="312" y2="133" stroke="#93a0ba" stroke-width="1.5" marker-end="url(#pbC)"/>
+  <rect x="44" y="158" width="150" height="28" rx="5" fill="#161d2e" stroke="#232c44"/>
+  <text x="119" y="175" class="t" font-size="8.5" fill="#38e0b0" text-anchor="middle">CT clamp — non-contact</text>
+  <rect x="208" y="158" width="218" height="28" rx="5" fill="#161d2e" stroke="#232c44"/>
+  <text x="317" y="175" class="t" font-size="8.5" fill="#e8edf7" text-anchor="middle">isolated flyback · 5 V / 2 A · SELV</text>
+
+  <!-- isolation barrier -->
+  <line x1="34" y1="206" x2="426" y2="206" stroke="#ff6b81" stroke-width="1.5" stroke-dasharray="7 4" opacity="0.7"/>
+  <text x="426" y="220" class="m" font-size="8" fill="#ff6b81" text-anchor="end">reinforced isolation · creepage ≥ 6.4 mm target</text>
+
+  <!-- logic zone -->
+  <rect x="36" y="228" width="196" height="104" rx="8" fill="#161d2e" stroke="#38e0b0" stroke-width="1.5"/>
+  <text x="134" y="248" class="m" font-size="10" fill="#38e0b0" text-anchor="middle">MAIN MCU</text>
+  <text x="134" y="268" class="t" font-size="9" fill="#e8edf7" text-anchor="middle">dual-core @ 240 MHz</text>
+  <text x="134" y="284" class="t" font-size="9" fill="#e8edf7" text-anchor="middle">NPU 0.1 TOPS · 12-bit ADC</text>
+  <text x="134" y="300" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">MQTT broker · local model</text>
+  <text x="134" y="316" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">runs the whole wall-slot stack</text>
+
+  <rect x="244" y="228" width="180" height="30" rx="6" fill="#161d2e" stroke="#232c44"/>
+  <text x="334" y="247" class="t" font-size="9" fill="#e8edf7" text-anchor="middle">Octal PSRAM 128 MB · ring buffer</text>
+  <rect x="244" y="264" width="180" height="44" rx="6" fill="#161d2e" stroke="#7c5cff" stroke-opacity="0.5"/>
+  <text x="334" y="282" class="t" font-size="9" fill="#e8edf7" text-anchor="middle">Wi-Fi 4 (2.4 GHz) + BLE 5.2</text>
+  <text x="334" y="298" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">combo module · antenna keepout</text>
+  <rect x="244" y="316" width="86" height="32" rx="6" fill="#161d2e" stroke="#232c44"/>
+  <text x="287" y="330" class="t" font-size="9" fill="#e8edf7" text-anchor="middle">Device SE</text>
+  <text x="287" y="343" class="t" font-size="8" fill="#93a0ba" text-anchor="middle">pairing root</text>
+  <rect x="338" y="316" width="86" height="32" rx="6" fill="#161d2e" stroke="#232c44"/>
+  <text x="381" y="330" class="t" font-size="9" fill="#e8edf7" text-anchor="middle">LED drv</text>
+  <text x="381" y="343" class="t" font-size="8" fill="#93a0ba" text-anchor="middle">PWM ×8</text>
+
+  <rect x="36" y="340" width="196" height="28" rx="6" fill="#161d2e" stroke="#232c44"/>
+  <text x="134" y="358" class="t" font-size="9" fill="#e8edf7" text-anchor="middle">CT AFE · PGA + anti-alias</text>
+  <path d="M 119 186 L 119 224" fill="none" stroke="#38e0b0" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#pbB)"/>
+  <rect x="36" y="374" width="196" height="28" rx="6" fill="#161d2e" stroke="#232c44"/>
+  <text x="134" y="392" class="t" font-size="9" fill="#93a0ba" text-anchor="middle">status ring purple · waveform strip green</text>
+  <rect x="36" y="408" width="196" height="32" rx="6" fill="#161d2e" stroke="#38e0b0" stroke-opacity="0.5"/>
+  <text x="134" y="421" class="m" font-size="9" fill="#38e0b0" text-anchor="middle">SLOT HOST</text>
+  <text x="134" y="434" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">UFS + USB2 + 3.3 V to the card</text>
+
+  <rect x="244" y="358" width="180" height="82" rx="8" fill="#161d2e" stroke="#232c44"/>
+  <text x="334" y="376" class="m" font-size="9" fill="#7c5cff" text-anchor="middle">POWER TREE</text>
+  <text x="334" y="394" class="t" font-size="8.5" fill="#e8edf7" text-anchor="middle">5 V iso → buck 3.3 V</text>
+  <text x="334" y="410" class="t" font-size="8.5" fill="#e8edf7" text-anchor="middle">→ LDO 1.8 V (PSRAM)</text>
+  <text x="334" y="428" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">rails: MCU · radio · slot</text>
+
+  <text x="230" y="470" class="m" font-size="8.5" fill="#93a0ba" text-anchor="middle">4-layer: L1 sig/RF · L2 GND · L3 PWR · L4 sig + creepage relief</text>
+  <text x="230" y="486" class="m" font-size="8.5" fill="#93a0ba" text-anchor="middle">mains copper 2 oz · thermals re-verified at 16 A full load</text>
+
+  <!-- ============ MIDDLE: SLOT CONNECTOR ============ -->
+  <rect x="462" y="190" width="56" height="180" rx="8" fill="#141026" stroke="#38e0b0" stroke-width="1.5"/>
+  <text x="490" y="180" class="m" font-size="9" fill="#38e0b0" text-anchor="middle" letter-spacing="2">SLOT</text>
+  <path d="M 442 226 L 538 226" fill="none" stroke="#7c5cff" stroke-width="2" marker-end="url(#pbA)"/>
+  <text x="490" y="218" class="m" font-size="8" fill="#7c5cff" text-anchor="middle">challenge</text>
+  <path d="M 538 266 L 442 266" fill="none" stroke="#38e0b0" stroke-width="2" marker-end="url(#pbB)"/>
+  <text x="490" y="258" class="m" font-size="8" fill="#38e0b0" text-anchor="middle">session AES</text>
+  <path d="M 442 306 L 538 306" fill="none" stroke="#93a0ba" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#pbC)"/>
+  <text x="490" y="298" class="m" font-size="8" fill="#93a0ba" text-anchor="middle">detect + 3.3 V</text>
+  <text x="490" y="392" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">mutual auth:</text>
+  <text x="490" y="406" class="t" font-size="8.5" fill="#ff6b81" text-anchor="middle">wrong host →</text>
+  <text x="490" y="420" class="t" font-size="8.5" fill="#ff6b81" text-anchor="middle">silent card</text>
+
+  <!-- ============ RIGHT PANEL: PRIVACY CARTRIDGE ============ -->
+  <rect x="540" y="48" width="400" height="482" rx="12" fill="#111623" stroke="#7c5cff" stroke-width="2"/>
+  <text x="740" y="72" class="m" font-size="11" fill="#7c5cff" text-anchor="middle" letter-spacing="2">PRIVACY CARTRIDGE · 6-LAYER</text>
+  <text x="740" y="86" class="t" font-size="9.5" fill="#93a0ba" text-anchor="middle">3.5″ floppy silhouette · armored metal · key born here</text>
+
+  <rect x="556" y="98" width="368" height="44" rx="6" fill="#161d2e" stroke="#38e0b0" stroke-width="1.5"/>
+  <text x="740" y="115" class="m" font-size="9" fill="#38e0b0" text-anchor="middle">EDGE CONNECTOR</text>
+  <text x="740" y="132" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">UFS/SDIO lanes · USB 2.0 to SE · 3.3 V · hot-plug detect</text>
+
+  <rect x="556" y="156" width="176" height="96" rx="8" fill="#161d2e" stroke="#7c5cff" stroke-width="1.5"/>
+  <text x="644" y="176" class="m" font-size="9.5" fill="#7c5cff" text-anchor="middle">SECURE ELEMENT</text>
+  <text x="644" y="194" class="t" font-size="8.5" fill="#e8edf7" text-anchor="middle">ECC P-256 · hardware TRNG</text>
+  <text x="644" y="210" class="t" font-size="8.5" fill="#e8edf7" text-anchor="middle">keygen — key born on-die</text>
+  <text x="644" y="226" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">sign: tx in → sig out</text>
+  <text x="644" y="242" class="t" font-size="8.5" fill="#38e0b0" text-anchor="middle">own USB 2.0 PHY · no storage path</text>
+
+  <rect x="556" y="264" width="176" height="76" rx="8" fill="#161d2e" stroke="#232c44"/>
+  <text x="644" y="284" class="m" font-size="9.5" fill="#e8edf7" text-anchor="middle">INLINE CRYPTO</text>
+  <text x="644" y="302" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">AES-256-XTS engine</text>
+  <text x="644" y="318" class="t" font-size="8.5" fill="#ffb454" text-anchor="middle">DEK volatile-only</text>
+  <text x="644" y="334" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">sealed on power-down</text>
+
+  <rect x="556" y="348" width="176" height="28" rx="6" fill="#161d2e" stroke="#232c44"/>
+  <text x="644" y="366" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">status LED edge · purple</text>
+
+  <rect x="744" y="156" width="180" height="184" rx="8" fill="#161d2e" stroke="#232c44"/>
+  <text x="834" y="180" class="m" font-size="9.5" fill="#e8edf7" text-anchor="middle">ENCRYPTED NAND</text>
+  <text x="834" y="200" class="t" font-size="9" fill="#93a0ba" text-anchor="middle">up to 512 GB</text>
+  <text x="834" y="222" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">media never holds keys</text>
+  <text x="834" y="240" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">bad-block managed</text>
+  <text x="834" y="258" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">wear-leveled</text>
+  <text x="834" y="286" class="t" font-size="8.5" fill="#ffb454" text-anchor="middle">pull the card → power drops</text>
+  <text x="834" y="304" class="t" font-size="8.5" fill="#ffb454" text-anchor="middle">→ DEK evaporates</text>
+  <text x="834" y="322" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">→ what remains is</text>
+  <text x="834" y="334" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">ciphertext, period</text>
+
+  <rect x="744" y="348" width="180" height="48" rx="8" fill="#161d2e" stroke="#ff6b81" stroke-opacity="0.5"/>
+  <text x="834" y="366" class="t" font-size="8.5" fill="#e8edf7" text-anchor="middle">shutter switch + mesh</text>
+  <text x="834" y="384" class="t" font-size="8.5" fill="#ff6b81" text-anchor="middle">tamper → SE wipes DEK</text>
+
+  <rect x="556" y="408" width="368" height="80" rx="8" fill="#0d1420" stroke="#232c44"/>
+  <text x="740" y="426" class="m" font-size="9" fill="#7c5cff" text-anchor="middle" letter-spacing="1">KEY LIFECYCLE</text>
+  <text x="740" y="444" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">SE generates root · wraps the DEK · unwrapped only into crypto registers while powered</text>
+  <text x="740" y="460" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">power-down re-seals · QR/USB signing path never touches the storage plane</text>
+  <text x="740" y="478" class="t" font-size="8.5" fill="#93a0ba" text-anchor="middle">6-layer: L1 sig · L2 GND · L3 storage lanes · L4 PWR · L5 GND · L6 sig + mesh</text>
+
+  <!-- ============ BOTTOM STRIP ============ -->
+  <rect x="20" y="544" width="450" height="86" rx="10" fill="#111623" stroke="#232c44"/>
+  <text x="245" y="566" class="m" font-size="9" fill="#ff6b81" text-anchor="middle" letter-spacing="1">ISOLATION &amp; SAFETY — EVT TARGETS</text>
+  <text x="245" y="588" class="t" font-size="9" fill="#93a0ba" text-anchor="middle">pass-through is power-only · CT sensing is non-contact by construction</text>
+  <text x="245" y="606" class="t" font-size="9" fill="#93a0ba" text-anchor="middle">mains→SELV: creepage ≥ 6.4 mm · clearance ≥ 4.0 mm (IEC 62368-1 targets)</text>
+  <text x="245" y="622" class="t" font-size="9" fill="#93a0ba" text-anchor="middle">MOV + fuse + thermal cutoff guard the mains chain</text>
+
+  <rect x="490" y="544" width="450" height="86" rx="10" fill="#111623" stroke="#232c44"/>
+  <text x="715" y="566" class="m" font-size="9" fill="#38e0b0" text-anchor="middle" letter-spacing="1">HOT-PLUG SEQUENCE</text>
+  <text x="715" y="588" class="t" font-size="9" fill="#93a0ba" text-anchor="middle">detect → pre-charge 3.3 V → mutual challenge-response</text>
+  <text x="715" y="606" class="t" font-size="9" fill="#93a0ba" text-anchor="middle">session key → AES-256 stream · pull = instant deauth</text>
+  <text x="715" y="622" class="t" font-size="9" fill="#93a0ba" text-anchor="middle">wrong pairing: socket won't write, card won't talk</text>
+
+  <text x="480" y="652" class="m" font-size="9" fill="#93a0ba" text-anchor="middle">EVT-phase design targets — DVT re-measures everything · firmware MIT · hardware files CERN-OHL-S on release</text>
+</svg>
