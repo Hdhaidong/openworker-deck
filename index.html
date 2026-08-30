@@ -72,7 +72,7 @@
 
   /* loop */
   .loop{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:26px;font-family:var(--mono);font-size:13.5px;overflow-x:auto}
-  .loop .l1{color:var(--acc2)} .loop .l2{color:var(--dim)} .loop .l3{color:var(--acc)}
+  .loop .l1{color:var(--acc2)} .loop .l2{color:var(--dim)} .loop .l3{color:var(--acc)} .loop .l4{color:var(--warn)}
 
   /* domains */
   .domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
@@ -126,14 +126,15 @@
       <span class="badge">智能链接 Smart Link · MHS</span>
       <span class="badge">工业网关 Industrial GW</span>
       <span class="badge">无线网关 Wireless GW</span>
-      <span class="badge">边缘计算 Edge Compute</span>
+      <span class="badge">边缘计算 Local Model · NPU</span>
       <span class="badge">检测 Detection</span>
-      <span class="badge">存储 Storage · 512 GB</span>
-      <span class="badge">预测维护 Predictive Maintenance</span>
+      <span class="badge">隐私存储 Privacy Vault · 可拔</span>
+      <span class="badge">计算存储分离 Compute ⊥ Storage</span>
+      <span class="badge">风险预测 Risk Prediction</span>
     </div>
     <h1>OpenWorker <span class="grad">Deck</span></h1>
-    <p class="tag">Give your AI coworker a body — <b>direct device link</b> (Modbus · industrial &amp; wireless gateway) · <b>smart link</b> (MHS-native) · <b>edge computing</b> · <b>detection</b> · <b>storage</b>.</p>
-    <p class="zh-tag">给你的 AI 同事一个身体 —— 直连设备（Modbus · 工业网关 · 无线网关）· 智能链接 · 边缘计算 · 检测 · 存储 · 预测维护</p>
+    <p class="tag">Give your AI coworker a body — <b>direct device link</b> (Modbus · industrial &amp; wireless gateway) · <b>local model</b> (private data never leaves) · <b>privacy storage</b> (pull-to-own cartridge) · <b>risk prediction</b>.</p>
+    <p class="zh-tag">给你的 AI 同事一个身体 —— 直连设备 · 智能链接 · 本地模型计算隐私数据 · 隐私存储（可拔）· 计算存储分离 · 风险预测</p>
     <div class="cta-row">
       <a class="btn pri" href="https://github.com/andrewyng/openworker" target="_blank">Built for OpenWorker</a>
       <a class="btn sec" href="https://github.com/Hdhaidong/openworker-deck" target="_blank">Watch the repo · 收到上线通知</a>
@@ -145,9 +146,9 @@
         <div class="screen-head"><span>OpenWorker · coworker</span><span id="clock">--:--</span></div>
         <div class="todo-item active"><span class="box">▸</span><span>CLASSIFY domain → MEDICAL (sterilizer)</span></div>
         <div class="todo-item"><span class="box">✓</span><span>POLL Modbus RTU · 3 devices · unit 1–247</span></div>
-        <div class="todo-item"><span class="box">✓</span><span>READ MHS telemetry — 1,247 cycles</span></div>
-        <div class="todo-item"><span class="box">✓</span><span>Pull service manual · parts sheet</span></div>
-        <div class="todo-item"><span class="box">·</span><span>Write maintenance-log entry</span></div>
+        <div class="todo-item"><span class="box">✓</span><span>LOCAL model · telemetry — 1,247 cycles</span></div>
+        <div class="todo-item"><span class="box">✓</span><span>RISK brief · failure 4% · compliance due 12d</span></div>
+        <div class="todo-item"><span class="box">·</span><span>Write maintenance-log → vault</span></div>
         <div class="perm-card">
           <div class="pt">PERMISSION REQUEST</div>
           <div class="pb">Write calibration value to sterilizer via MHS? Command: set_temp 121°C · writes to physical hardware</div>
@@ -168,10 +169,32 @@
       <div class="card"><div class="ic">🖥️</div><h3>Agent console · TRAE 式控制台</h3><p>4″ screen mirrors the coworker's live todo list and progress panel. Permission requests arrive as physical cards with Approve / Deny buttons — OpenWorker's <b>interactive</b> mode, in hardware.</p><div class="en-sub">status ring: idle / thinking / needs-you</div></div>
       <div class="card"><div class="ic">🔗</div><h3>Smart link · MHS 智能链接</h3><p>Connects to equipment <b>directly</b> — Modbus RTU master (RS-485 multi-drop), Modbus TCP, CAN/J1939, OBD-II, BLE, LoRa — then registers itself and every bridged device following the Model Hardware Standard pattern: standard read/write interface, auto-generated plain-language safety labels. Any MHS-compatible agent discovers it instantly.</p><div class="en-sub">Modbus RTU/TCP · CAN/J1939 · OBD-II · BLE 5.2 · LoRa</div></div>
       <div class="card"><div class="ic">📡</div><h3>Detection · 四模态检测</h3><p>Vibration (3-axis accelerometer), thermal (IR thermopile), current signature (CT clamp), and acoustic (MEMS mic) — plus bridging into existing fault codes on equipped machines.</p><div class="en-sub">0–16 g · −20 to 400 °C · 0–100 A</div></div>
-      <div class="card"><div class="ic">⚙️</div><h3>Edge computing · 边缘计算</h3><p>On-device NPU runs anomaly detection locally. Fully offline. Nothing leaves your network unless you say so — privacy is the default, not an option.</p><div class="en-sub">0.5 TOPS NPU · offline-first</div></div>
-      <div class="card"><div class="ic">💾</div><h3>Storage · 本地存储</h3><p>Rolling telemetry history on microSD (up to 512 GB) + 8 GB eMMC. The Deck runs the night shift: it senses and stores while your computer is off, and the agent ingests the buffer when you're back.</p><div class="en-sub">512 GB microSD · 8 GB eMMC</div></div>
-      <div class="card"><div class="ic">🔮</div><h3>Predictive maintenance · 预测维护</h3><p>Remaining-useful-life estimates from telemetry patterns — bearing wear, belt stretch, filter clog, refrigerant-loss curves. Alerts days or weeks before the failure, never after.</p><div class="en-sub">RUL estimates · early warnings</div></div>
+      <div class="card"><div class="ic">⚙️</div><h3>Local model · 本地模型计算</h3><p>The on-device NPU runs a <b>local model</b> — anomaly detection and small-model reasoning execute on the Deck itself. <b>Personal and private data are computed locally:</b> your telemetry, your logs, your history never leave the device. Fully offline by default; the optional cloud bridge is opt-in and labeled.</p><div class="en-sub">0.5 TOPS NPU · private data stays local</div></div>
+      <div class="card"><div class="ic">🔐</div><h3>Privacy storage · 隐私存储</h3><p>The modern floppy, but a vault: a <b>removable, hardware-encrypted cartridge</b> (up to 512 GB). Pull it out and your data physically leaves with you — nothing readable stays behind. The key lives in the cartridge, not the machine. 软盘的形态，保险库的内核。</p><div class="en-sub">AES-encrypted cartridge · pull-to-own · 512 GB</div></div>
+      <div class="card"><div class="ic">🛡️</div><h3>Risk prediction · 风险预测</h3><p>Three risk classes per device, not just failure: <b>failure risk</b> (RUL curves — bearing wear, belt stretch, filter clog), <b>safety risk</b> (CO trends, thermal-runaway precursors, overload patterns — escalated before danger), <b>compliance risk</b> (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, action, evidence.</p><div class="en-sub">failure · safety · compliance — briefed, not buried</div></div>
     </div>
+  </div>
+</section>
+
+<section id="arch">
+  <div class="wrap">
+    <div class="kicker">// architecture / 计算存储分离</div>
+    <h2>Compute and storage, cleanly split</h2>
+    <p class="sub">不是软盘，也不是黑盒 —— 计算平面与存储平面解耦：隐私数据由本地模型计算，历史装进可拔的加密卡。数据是你的，算力是它出的。</p>
+    <div class="loop">
+<span class="l1">compute plane: &nbsp;local model · NPU anomaly detection · MHS registry · protocol bridge &nbsp;(always on)</span><br>
+<span class="l2">storage plane: &nbsp;encrypted cartridge · 8 GB eMMC buffer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(swappable · yours)</span><br>
+<span class="l3">private data: &nbsp;&nbsp;&nbsp;computed by the local model, on the Deck &nbsp;&nbsp;(never uploaded by default)</span><br>
+<span class="l4">cartridge out: compute keeps running → eMMC &nbsp;(history rides in your pocket)</span>
+    </div>
+    <table style="margin-top:24px">
+      <tr><th>分离带来什么</th><th>为什么重要</th></tr>
+      <tr><td>Privacy by physics</td><td>Pull the cartridge and the history physically leaves the machine — no remote wipe needed, no "trust us". 拔卡即离场。</td></tr>
+      <tr><td>Local-model privacy</td><td>Personal and private data are computed by the on-device model — inference happens where the data lives, so nothing needs to be uploaded to be understood.</td></tr>
+      <tr><td>Independent upgrade</td><td>Swap to a bigger cartridge without touching compute; compute firmware updates never rewrite the data layer.</td></tr>
+      <tr><td>Failure isolation</td><td>A dead cartridge doesn't kill the sensor — edge detection continues, buffering to eMMC until you re-insert.</td></tr>
+      <tr><td>Audit path</td><td>Hand the cartridge (not the machine) to an auditor — the compliance trail travels without the live sensor.</td></tr>
+    </table>
   </div>
 </section>
 
@@ -201,7 +224,8 @@
     <p class="sub">Your computer sleeps. The machines don't.</p>
     <div class="loop">
 <span class="l1">your computer on: &nbsp; OpenWorker ↔ Deck ↔ equipment &nbsp;&nbsp;(live: agent reads, you approve)</span><br>
-<span class="l2">your computer off: Deck → senses → stores &nbsp;&nbsp;(night shift: buffered telemetry)</span><br>
+<span class="l2">your computer off: Deck → senses → stores &nbsp;&nbsp;(night shift: local model watches, vault records)</span><br>
+<span class="l4">cartridge pulled: &nbsp; compute continues → eMMC &nbsp;(history rides in your pocket)</span><br>
 <span class="l3">you return: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Deck → buffered history → OpenWorker &nbsp;("while you were away...")</span>
     </div>
     <p class="sub" style="margin-top:24px">Pairs with the open-source <a href="https://github.com/andrewyng/openworker/pull/593" target="_blank">Hardware Repair Companion</a> coworker: the Deck senses, the agent diagnoses — telemetry as evidence, manuals and parts from public sources, a maintenance log per device.</p>
@@ -252,9 +276,10 @@
     <h2>Specs</h2>
     <table>
       <tr><th>模块</th><th>规格</th></tr>
-      <tr><td>SoC</td><td>Dual-core Cortex-A7 @ 1.2 GHz + <b>0.5 TOPS NPU</b></td></tr>
-      <tr><td>Memory / Storage</td><td>256 MB RAM · 8 GB eMMC · microSD up to <b>512 GB</b></td></tr>
-      <tr><td>Display</td><td>4″ LCD — todo/progress panel, permission cards</td></tr>
+      <tr><td>SoC</td><td>Dual-core Cortex-A7 @ 1.2 GHz + <b>0.5 TOPS NPU</b> — runs the local model</td></tr>
+      <tr><td>Memory / Storage</td><td>256 MB RAM · 8 GB eMMC buffer · removable <b>encrypted cartridge</b> up to <b>512 GB</b></td></tr>
+      <tr><td>Security</td><td>Hardware AES cartridge encryption · secure element · key lives in the cartridge · nothing readable without it</td></tr>
+      <tr><td>Display</td><td>4″ LCD — todo/progress panel, permission cards, risk briefs</td></tr>
       <tr><td>Controls</td><td>Approve / Deny buttons · rotary encoder · status ring</td></tr>
       <tr><td>Sensors</td><td>3-axis accelerometer · IR thermopile · CT clamp (0–100 A) · MEMS mic</td></tr>
       <tr><td>Ports</td><td>CAN 2.0B / J1939 · RS-485 (Modbus RTU multi-drop) · <b>10/100M Ethernet (Modbus TCP)</b> · 1-Wire · OBD-II via adapter</td></tr>
@@ -314,10 +339,12 @@
     <div class="kicker">// faq / 常见问题</div>
     <h2>FAQ</h2>
     <details><summary>Does it require Claude or a subscription?</summary><p>No. The Deck works standalone. MHS-compatibility means any MHS-native agent can use it — OpenWorker, Claude, or whatever comes next.</p></details>
-    <details><summary>Does it need the cloud?</summary><p>No. Sensing, anomaly detection, prediction and storage all run locally. An optional cloud bridge exists for fleet dashboards.</p></details>
+    <details><summary>Does it need the cloud?</summary><p>No. The local model runs sensing, anomaly detection, risk prediction and storage — personal and private data are computed on the Deck itself and never uploaded by default. An optional cloud bridge exists for fleet dashboards, opt-in and labeled.</p></details>
+    <details><summary>What happens if I pull the storage cartridge out?</summary><p>Nothing breaks. Compute keeps running — sensing, the local model and protocol bridging continue, with telemetry buffering to the 8 GB eMMC. Your history travels with the cartridge: hardware-encrypted, the key lives in the cartridge itself, unreadable without it. Re-insert and the buffer syncs into the archive.</p></details>
+    <details><summary>How is my personal data kept private?</summary><p>Three layers. Compute: a local model does the inference on-device, so understanding your data never requires uploading it. Storage: the archive sits on a removable hardware-encrypted cartridge — pull it and the data physically leaves the machine. Network: offline by default, the fleet bridge is opt-in.</p></details>
     <details><summary>What if my equipment has no diagnostic port?</summary><p>The four contactless modalities — vibration, thermal, current, acoustic — work on any machine with power.</p></details>
     <details><summary>Can it control equipment, or only watch?</summary><p>Both, through MHS: reads are always safe; writes (resets, calibration, actuation) require explicit approval — on the physical buttons by default.</p></details>
-    <details><summary>Why not just buy an industrial gateway from Moxa or USR IOT?</summary><p>Because they solve a different problem. A Modbus gateway from an established industrial vendor (e.g. Moxa's MGate series) lists around $400+, and Chinese IIoT edge gateways (e.g. USR's edge series) run ¥1,099 — excellent boxes, but they translate protocols for <b>SCADA and clouds</b>. The Deck at $89–$109 covers the same field protocols in one box (Modbus RTU/TCP · CAN/J1939 · OBD-II · BLE · LoRa) <b>plus</b> what gateways don't do: MHS-native registration an AI agent can operate, a desk console with physical Approve/Deny, four-modality sensing, on-device anomaly detection, night-shift storage and predictive maintenance. 不是更便宜的网关，是不同品类：Agent 能亲手操作的网关。</p></details>
+    <details><summary>Why not just buy an industrial gateway from Moxa or USR IOT?</summary><p>Because they solve a different problem. A Modbus gateway from an established industrial vendor (e.g. Moxa's MGate series) lists around $400+, and Chinese IIoT edge gateways (e.g. USR's edge series) run ¥1,099 — excellent boxes, but they translate protocols for <b>SCADA and clouds</b>. The Deck at $89–$109 covers the same field protocols in one box (Modbus RTU/TCP · CAN/J1939 · OBD-II · BLE · LoRa) <b>plus what gateways don't do: MHS-native registration an AI agent can operate, a desk console with physical Approve/Deny, four-modality sensing, a local model computing your private data on-device, an encrypted pull-to-own storage cartridge, and three-class risk prediction. 不是更便宜的网关，是不同品类：Agent 能亲手操作的网关。</p></details>
     <details><summary>Is it a medical device?</summary><p>No. In medical, clinic and dental settings the Deck monitors equipment rooms and duty cycles only — never patient-connected circuits. Fire-safety monitoring is record-keeping, never a replacement for certified inspection.</p></details>
   </div>
 </section>
