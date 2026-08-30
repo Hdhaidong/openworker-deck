@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenWorker Deck — 加密出口管制合规核查报告</title>
+<style>
+  :root{
+    --bg:#0b0e14; --bg2:#111623; --card:#161d2e; --line:#232c44;
+    --text:#e8edf7; --dim:#93a0ba; --acc:#7c5cff; --acc2:#38e0b0;
+    --warn:#ffb454; --danger:#ff6b81;
+    --mono:'Cascadia Code',Consolas,'Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.7}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  section{padding:56px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:28px;margin-bottom:8px;letter-spacing:-.5px}
+  h3{font-size:19px;margin:30px 0 14px}
+  .kicker{color:var(--acc);font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+  .mono{font-family:var(--mono);font-size:12.5px;color:var(--acc2);background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;white-space:nowrap}
+  .sub{color:var(--dim);max-width:820px;margin-bottom:30px;font-size:15.5px}
+  .hero{padding:80px 0 56px;text-align:center;position:relative;overflow:hidden;
+    background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(56,224,176,.14),transparent)}
+  .hero h1{font-size:44px;letter-spacing:-1.2px;line-height:1.15;margin-bottom:16px}
+  .hero h1 .grad{background:linear-gradient(90deg,#7c5cff,#38e0b0);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{font-size:18px;color:var(--dim);max-width:760px;margin:0 auto 26px}
+  .meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+  .badge{font-family:var(--mono);font-size:12px;padding:5px 14px;border:1px solid var(--line);border-radius:999px;color:var(--dim);background:var(--bg2)}
+  .badge.hl{color:var(--acc2);border-color:rgba(56,224,176,.4)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .card h4{font-size:16px;margin-bottom:8px}
+  .card p{color:var(--dim);font-size:14px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--bg2);color:var(--acc);font-family:var(--mono);font-size:12px;letter-spacing:1px}
+  td{color:var(--dim)} td b{color:var(--text)} td:first-child{color:var(--text)}
+  .ok{color:var(--acc2)!important;font-weight:700}
+  .mid{color:var(--warn)!important;font-weight:700}
+  .bad{color:var(--danger)!important;font-weight:700}
+  .loop{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:24px;font-family:var(--mono);font-size:13px;overflow-x:auto;margin:14px 0}
+  .loop .l1{color:var(--acc2)} .loop .l2{color:var(--dim)} .loop .l3{color:var(--acc)} .loop .l4{color:var(--warn)} .loop .l5{color:var(--danger)}
+  .note{background:rgba(255,180,84,.07);border:1px solid rgba(255,180,84,.35);border-radius:12px;padding:16px 20px;color:var(--dim);font-size:13.5px;margin:18px 0}
+  .note b{color:var(--warn)}
+  .src li{color:var(--dim);margin:0 0 8px 20px;font-size:12.5px;line-height:1.55}
+  .src a{color:var(--acc2);text-decoration:none;word-break:break-all}
+  .flag{display:inline-block;font-size:12px;font-family:var(--mono);padding:2px 10px;border-radius:999px;margin-right:8px}
+  .flag.r{background:rgba(255,107,129,.12);color:var(--danger);border:1px solid rgba(255,107,129,.4)}
+  .flag.y{background:rgba(255,180,84,.1);color:var(--warn);border:1px solid rgba(255,180,84,.4)}
+  .flag.g{background:rgba(56,224,176,.1);color:var(--acc2);border:1px solid rgba(56,224,176,.4)}
+  footer{padding:40px 0;color:var(--dim);font-size:12.5px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="meta">
+      <span class="badge hl">compliance review v1</span>
+      <span class="badge">2026-08-31</span>
+      <span class="badge">OpenWorker Deck · 众筹前核查</span>
+    </div>
+    <h1>加密出口管制<span class="grad">核查报告</span></h1>
+    <p>加密存储卡 · 安全元件 · 本地加密计算 —— 这台设备往全球发货之前，必须先回答一个问题：哪些国家能发、按什么路径发、发货前后各欠哪些申报义务。本报告基于公开官方来源完成核查，是内部合规工作底稿，<b>不构成法律意见</b>。</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// 00 · 一页结论</div>
+    <h2>结论：大众市场路径可行，但有三件事必须做</h2>
+    <p class="sub">Deck 的加密功能（AES-256 存储卡、安全元件密钥生成/签名、TLS/BLE 无线加密）在各主要法域都有"大众市场/消费级"豁免通道 —— 但豁免不是自动的：美国要按年度自分类申报，中国要书面确认不落入安全芯片管制参数，中国大陆的冷钱包表述必须中性化。</p>
+
+    <table>
+      <tr><th>法域</th><th>判定</th><th>关键依据</th><th>残余义务</th></tr>
+      <tr><td><b>美国 EAR</b></td><td class="ok">大众市场自分类路径</td><td>加密强度触发 5A002 审查，但消费级零售产品符合 Note 3 大众市场标准 → 按 <span class="mono">5A992.c</span> 自分类处理</td><td>年度自分类报告（次年 2 月 1 日前，CSV 12 字段）+ 最终用户/实体清单逐单筛查</td></tr>
+      <tr><td><b>中国大陆进口</b></td><td class="ok">不属于进口许可清单品类</td><td>63 号公告进口清单仅含加密电话机/传真机/密码机/VPN 设备（且有 10Gbps 速率门槛），Deck 均不满足；《密码法》28 条：大众消费类产品所采用的商用密码<b>不实行进口许可</b></td><td>无（海关质疑时提交品类说明）</td></tr>
+      <tr><td><b>中国出口</b></td><td class="mid">大概率豁免，需书面确认</td><td>出口管制清单 1.1"安全芯片"要求满足"电力/税务/公安/金融领域专用算法"或"10Gbps 对称速率 / 50000 签名每秒"——消费级安全元件远低于速率门槛</td><td>量产前取得安全元件技术参数书面评估，留档备海关查验</td></tr>
+      <tr><td><b>大陆冷钱包表述</b></td><td class="bad">高风险，必须中性化</td><td>2021 十部委通知 + 2026 年 42 号文：虚拟货币相关业务属非法金融活动，市场主体名称与经营范围不得含"虚拟货币/加密资产"等字样</td><td>面向大陆受众的一切物料用"本地密钥保管 · 离线签名"表述，删除"冷钱包/私钥/加密资产"</td></tr>
+      <tr><td><b>香港</b></td><td class="ok">大众市场豁免可用</td><td>《进出口（战略物品）规例》+ 战略贸易管制通告 6/2018：零售公开售卖 + 密码功能不可轻易更改 + 用户可自行安装 → 豁免许可证</td><td>保留产品规格文件供工业贸易署查验（豁免条件第 4 项）</td></tr>
+      <tr><td><b>欧盟/英国</b></td><td class="ok">盟友目的地一般授权</td><td>Regulation (EU) 2021/821 Cat 5A002；英国 Cryptography Note 大众市场排除</td><td>仅在从欧盟/英国发货时适用；EU001 排除清单需逐目的地核对</td></tr>
+      <tr><td><b>日本/韩国/新加坡/澳洲</b></td><td class="ok">同类大众市场路径</td><td>均为瓦森纳成员，5A002 类目有对应本国条目与豁免</td><td>若设当地经销商需逐国确认；众筹直邮低风险</td></tr>
+      <tr><td><b>越南</b></td><td class="mid">进口许可（黄色）</td><td>带加密功能设备（含冷钱包类）需信息通信部加密进口许可（第三方来源，需确认）</td><td>黄色清单：先确认再发货，或排除</td></tr>
+      <tr><td><b>印尼</b></td><td class="mid">无线认证（黄色）</td><td>WiFi/BLE/LoRa 触发 SDPPI 认证（Decree 469/2025）</td><td>黄色清单：认证先行</td></tr>
+    </table>
+
+    <h3>发货国家三级分级（众筹落地页直接可用）</h3>
+    <div class="loop">
+<span class="l5">red — 平台+制裁双禁，永不发货： 白俄罗斯 · 古巴 · 伊朗 · 朝鲜 · 俄罗斯 · 苏丹 · 叙利亚 · 克里米亚/顿涅茨克/卢甘斯克</span><br>
+<span class="l4">yellow — 有条件，认证/许可先行： 越南（加密进口许可）· 印尼（SDPPI）· 委内瑞拉（CONATEL）· 哈萨克斯坦（本地 IOR 抬头）· 中国大陆（表述中性化+商密书面确认）</span><br>
+<span class="l1">green — 大众市场路径正常发货： 美国 · 加拿大 · 英国 · 欧盟 · 日本 · 韩国 · 新加坡 · 澳大利亚 · 新西兰 等 —— 逐单做最终用户/实体清单筛查</span>
+    </div>
+    <p class="sub" style="font-size:13px">红色清单与 Kickstarter 平台禁止发货清单一致（平台明列：白俄罗斯、古巴、伊朗、朝鲜、俄罗斯、苏丹、叙利亚及乌克兰相关争议地区）；EAR 与欧盟制裁叠加同一批目的地。中国属 EAR D:1 组，非禁运目的地 —— 大众市场路径下原则可发，但每单须过实体清单与军事最终用途筛查。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// 01 · 核查范围</div>
+    <h2>这台设备上，哪些东西是"加密物项"</h2>
+    <p class="sub">出口管制核查的第一步是物项盘点 —— Deck 上有四类功能落入"信息安全/密码"审查视野：</p>
+    <table>
+      <tr><th>物项</th><th>加密能力</th><th>触发点</th></tr>
+      <tr><td><b>隐私存储卡</b></td><td>硬件 AES-256 全盘加密，密钥在卡内</td><td>对称密钥超过 56-bit 门槛 → 5A002/5D002 审查；卡内含安全元件</td></tr>
+      <tr><td><b>安全元件</b></td><td>密钥生成、ECDSA 签名、真随机数</td><td>非对称椭圆曲线超过 112-bit 门槛；若单独销售则落入 740.17(b)(3)</td></tr>
+      <tr><td><b>无线链路</b></td><td>BLE/WiFi/LoRa 标准链路加密、MQTT TLS 桥接</td><td>通信加密，大众市场评估的一部分</td></tr>
+      <tr><td><b>本地模型</b></td><td>不加密数据本身，但读取加密卡</td><td>非加密物项 —— 不增加管制负担</td></tr>
+    </table>
+    <div class="note"><b>形态红线：</b>安全元件与加密卡只作为<b>整机原厂组件</b>随 Deck 销售、不单独开卖、不向第三方提供加密 SDK 或开发接口 —— 这是保住大众市场分类的前提。一旦"存储盘单独售卖"（哪怕作为配件），须重新评估是否落入 740.17(b)(3) 芯片/模块类目，届时需向 BIS 提交 CCATS 分类请求而非自分类。</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// 02 · 美国 EAR</div>
+    <h2>大众市场自分类路径与三项义务</h2>
+    <p class="sub">AES-256 与 ECDSA 的加密强度均超过 EAR 5A002.a 的技术门槛，所以 Deck <b>不是 EAR99 无管制物项</b>；但它以零售价面向普通消费者、功能固定不可定制、密码功能用户不可轻易更改 —— 符合 Category 5 Part 2 Note 3 大众市场标准，按 <span class="mono">5A992.c</span> 自分类处理，对大多数目的地适用 ENC 许可例外（NLR + 申报）。</p>
+
+    <h3>义务一：年度自分类报告</h3>
+    <div class="loop">
+<span class="l1">who:    发货人（众筹项目方）—— 自分类即自担分类责任</span><br>
+<span class="l2">what:  CSV 报告，12 个固定字段（品名/型号/厂商/ECCN/授权类型/物项类型/提交人/电话/邮箱/地址/非美组件/非美制造地）</span><br>
+<span class="l3">where: crypt-supp8@bis.doc.gov + enc@nsa.gov（BIS 与 NSA 加密请求协调员双收）</span><br>
+<span class="l4">when:  首次出口前提交一次，此后每年 2 月 1 日前更新；无变化可发"nothing has changed"邮件</span><br>
+<span class="l5">not:   半年度销售报告不适用（仅 740.17(b)(2)/(b)(3)(iii) 项下物项需要）</span>
+    </div>
+
+    <h3>义务二：目的地与最终用户筛查</h3>
+    <table>
+      <tr><th>目的地</th><th>判定</th><th>说明</th></tr>
+      <tr><td>伊朗 · 朝鲜 · 叙利亚 · 古巴 · 克里米亚</td><td class="bad">禁运</td><td>E:1/E:2 组 + 15 CFR 746 部分专项管制，加密物项逐项审查，实际不可发</td></tr>
+      <tr><td>俄罗斯 · 白俄罗斯</td><td class="bad">事实禁运</td><td>746.8(a)：5A992 仅对极窄的特定民事终端用户（美资全资子公司等）可适用 ENC —— 众筹零售场景不适用；Kickstarter 平台同样禁发</td></tr>
+      <tr><td>中国（大陆）</td><td class="mid">D:1 组，非禁运</td><td>大众市场物项原则可发；每单需过实体清单与军事最终用途/用户筛查</td></tr>
+      <tr><td>欧盟 · 英国 · 日本 · 澳新 · 加拿大等 A:5/A:6 组</td><td class="ok">正常</td><td>大众市场路径 + 常规筛查即可</td></tr>
+    </table>
+
+    <h3>义务三：de minimis 视角（若从非美地发货）</h3>
+    <p class="sub">若整机制造在中国/香港而包含美国原产受控加密技术（如美产加密 IP 核、加密库授权），外国制造物项内受控美国成分价值占比 ≤25% 可不落入 EAR 管辖 —— 但注意两个例外：美国原产<b>软件</b>不适用 de minimis 排除（单独传输时仍受控）；对伊朗、朝鲜等目的地阈值收紧至 10%。若固件内嵌美产加密库，发货矩阵需在量产前完成 BOM 原产地核查。</p>
+
+    <div class="note"><b>违规成本：</b>EAR 违规刑事处罚最高 20 年监禁 + 100 万美元/项（ECRA）；民事罚款按 IEEPA 口径最高 377,700 美元或交易额两倍取其高。对众筹项目而言，最现实的防线是：发货前完成自分类申报、订单过筛查、红色清单硬拦截。</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// 03 · 中国大陆与香港</div>
+    <h2>两道清单、一条豁免、一个表述雷区</h2>
+
+    <h3>63 号公告：进口许可清单与出口管制清单（2021-01-01 施行）</h3>
+    <p class="sub">商务部、国家密码管理局、海关总署 2020 年第 63 号公告确立两道清单。对 Deck 逐条比对：</p>
+    <table>
+      <tr><th>清单品类</th><th>门槛条件</th><th>Deck 是否触发</th></tr>
+      <tr><td>进口清单：加密电话机/传真机</td><td>64 位以上对称 + 特定非对称算法的通话设备</td><td class="ok">否 —— 非通话加密设备</td></tr>
+      <tr><td>进口清单：密码机（密码卡）</td><td>密码运算为主功能 + 对称速率 10Gbps 以上</td><td class="ok">否 —— 存储为主功能，速率远低</td></tr>
+      <tr><td>进口清单：加密 VPN 设备</td><td>IPSec/SSL VPN 为主功能 + 10Gbps 以上</td><td class="ok">否 —— 非专用 VPN 设备</td></tr>
+      <tr><td>出口清单 1.1：安全芯片</td><td>密码运算/密钥管理/随机数芯片 + （金融税务公安电力专用算法 或 10Gbps 对称 或 50000 签名/秒）</td><td class="mid">待书面确认 —— 消费级安全元件签名速率通常远低于 50000/s，且非领域专用算法，预期不触发；须以芯片技术参数书面评估留档</td></tr>
+      <tr><td>出口清单 1.4：密钥管理产品</td><td>服务端设备 + 管理对象 10000 以上</td><td class="ok">否 —— 单机个人设备</td></tr>
+    </table>
+
+    <h3>《密码法》第 28 条：大众消费类产品豁免（关键结论）</h3>
+    <div class="loop">
+<span class="l1">law:      "大众消费类产品所采用的商用密码不实行进口许可和出口管制制度"</span><br>
+<span class="l2">define:  社会公众可通过常规零售渠道不受限制购买 · 供个人使用 · 不能轻易改变密码功能</span><br>
+<span class="l3">fit:     Deck 符合全部三要素 —— 零售众筹、个人使用、加密功能出厂固定</span><br>
+<span class="l4">result:  中国大陆支持者收货、以及从中国发往全球，均预期无需商密进出口许可证</span>
+    </div>
+    <p class="sub">2023 年修订的《商用密码管理条例》同向确认：仅涉及国家安全、国计民生、社会公共利益并列入网络关键设备目录的商用密码产品才需强制检测认证后销售；一般消费产品适用自愿认证。若未来面向大陆规模化销售，可自愿申请商用密码认证作为渠道信任背书。</p>
+
+    <h3>冷钱包表述雷区（大陆物料红线）</h3>
+    <table>
+      <tr><th>表述</th><th>状态</th><th>替代写法（大陆物料）</th></tr>
+      <tr><td>冷钱包 / Cold wallet</td><td class="bad">停用</td><td>本地密钥保管模块</td></tr>
+      <tr><td>私钥永不联网</td><td class="mid">改写</td><td>密钥在卡内生成与存储，签名在卡内完成</td></tr>
+      <tr><td>比特币/以太坊/加密资产</td><td class="bad">停用</td><td>（不提及）—— 功能描述为离线签名与身份密钥保管</td></tr>
+    </table>
+    <p class="sub" style="font-size:13px">国际版（Kickstarter 英文页面）保留 cold wallet 表述可接受 —— 出口管制不限制功能描述；该红线仅针对<b>面向中国大陆受众</b>的宣传物料（监管依据：2021 十部委通知关于营销宣传与名称登记的限制，及 2026 年 42 号文的延续口径）。</p>
+
+    <h3>香港发货路径</h3>
+    <p class="sub">香港《进出口（战略物品）规例》对超过 56-bit 对称密钥的密码产品实行许可证管制，但战略贸易管制通告 6/2018 给出豁免：零售公开售卖 + 密码功能不可轻易更改 + 用户可自行安装 + 可向当局提供产品详情证明符合条件 —— Deck 满足全部四项。从香港发货按大众市场豁免处理，无需单独许可证。注意：香港豁免不改变目的地（如大陆）自身的进口与销售合规要求。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// 04 · 其他法域</div>
+    <h2>欧盟 · 英国 · 日本 · 韩国 · 新加坡 · 澳洲</h2>
+    <table>
+      <tr><th>法域</th><th>框架</th><th>对 Deck 的路径</th></tr>
+      <tr><td><b>欧盟</b></td><td>Regulation (EU) 2021/821，Annex I Cat 5A002（2025-09-08 完成与瓦森纳 2024 决议对齐的更新，5A002 仍受控）</td><td>盟友目的地可走 EU001 一般授权（无需逐单申请）；注意 EU001 排除清单（含中国等）—— 发往非盟友目的地需成员国逐单许可。仅在从欧盟境内发货时触发</td></tr>
+      <tr><td><b>英国</b></td><td>Export Control Order 2008 + Cryptography Note（Notice to Exporters 2018/07）</td><td>大众市场排除：零售无限制销售 + 用户不可更改密码功能 → 脱离 Cat 5 Part 2 管制；另有 OGEL 通用许可可兜底</td></tr>
+      <tr><td><b>日本</b></td><td>外汇及外国贸易法 + 输出贸易管理令（METI；2025 年多次修订，含新兴品目）</td><td>与瓦森纳对齐的 5A002 对应条目；消费级加密产品按大众市场/许可豁免路径，众筹直邮低风险</td></tr>
+      <tr><td><b>韩国</b></td><td>对外贸易法 + 战略物资进出口公告（MOTIE，2025-11 修订案预告中）</td><td>5A002 类目有许可豁免条款；消费级直邮低风险</td></tr>
+      <tr><td><b>新加坡</b></td><td>Strategic Goods Control Act（Singapore Customs）</td><td>瓦森纳对齐清单；大众市场消费加密产品按豁免路径</td></tr>
+      <tr><td><b>澳大利亚</b></td><td>Defence and Strategic Goods List（DSGL，2024 年修法新增 Section 10A）</td><td>5A002 类产品出口需按 DSGL 分类核查豁免；消费级大众市场有排除路径</td></tr>
+    </table>
+
+    <h3>进口侧黄色清单</h3>
+    <table>
+      <tr><th>国家</th><th>要求</th><th>行动</th></tr>
+      <tr><td>越南</td><td>带加密功能设备（含冷钱包类）需信息通信部加密进口许可，无证可能拒关退运（第三方来源，非官方清单）</td><td>黄色清单：发货前向物流确认或暂缓</td></tr>
+      <tr><td>印尼</td><td>WiFi/BLE/LoRa 触发 SDPPI 认证（Decree 469/2025，无线设备强制认证）</td><td>黄色清单：认证先行或暂缓</td></tr>
+      <tr><td>委内瑞拉</td><td>2025 年 CONATEL 电信设备进口新规（homologation）</td><td>黄色清单：暂缓</td></tr>
+      <tr><td>哈萨克斯坦</td><td>无专门加密禁令，但报关需本地注册实体（BIN）作为 IOR</td><td>黄色清单：需本地进口抬头</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// 05 · 行动清单</div>
+    <h2>按时间排的六件事</h2>
+    <table>
+      <tr><th>时点</th><th>动作</th><th>产出</th></tr>
+      <tr><td><b>众筹上线前</b></td><td>① 落地页更新发货政策：红/黄/绿三级清单 + 出口管制免责声明（已完成，见 index.html 风险节）；② 大陆物料冷钱包表述中性化审查</td><td>发货国家政策节 · 大陆物料审查记录</td></tr>
+      <tr><td><b>首次从美相关渠道出口前</b></td><td>③ 提交年度自分类报告（CSV 12 字段，双邮箱收件）</td><td>提交回执存档</td></tr>
+      <tr><td><b>EVT 定版时</b></td><td>④ 安全元件技术参数书面评估：确认非领域专用算法、对称速率 &lt;10Gbps、签名速率 &lt;50000/s —— 不落入中国出口管制清单 1.1</td><td>技术评估备忘录（供海关质疑时出示）</td></tr>
+      <tr><td><b>量产 BOM 冻结时</b></td><td>⑤ 美国原产受控成分盘点（加密 IP/库授权），确定 de minimis 立场</td><td>BOM 原产地合规表</td></tr>
+      <tr><td><b>发货执行期</b></td><td>⑥ 订单系统内置三级国家拦截 + 实体清单筛查；黄色清单订单人工复核</td><td>订单筛查日志</td></tr>
+    </table>
+    <div class="note"><b>与产品架构的一个交叉点：</b>用户要求的"插座 = MQTT 网关底座，插入隐私计算存储盘"架构，恰好在出口管制上更安全 —— 网关（插座）与加密盘是两个独立物项，加密盘作为整机配件原厂配套销售，避免安全元件单独开卖触发 740.17(b)(3) 的芯片/模块审查。</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// 06 · 声明</div>
+    <h2>本报告的边界</h2>
+    <p class="sub">本报告由公开官方来源（BIS、eCFR、联邦公报、商务部、国家密码管理局、中国人大网、香港工业贸易署、欧盟委员会、gov.uk、METI 等）与可靠第三方资料交叉整理而成，用于众筹项目内部决策。它不是律师出具的法律意见；ECCN 最终分类、豁免适用与许可证义务应在量产与发货前由具备出口管制执业资格的律师或合规顾问书面确认。越南加密进口许可等个别结论来自第三方来源，标注为待确认项。</p>
+    <ul class="src">
+      <li>BIS — Mass Market Encryption: https://www.bis.gov/learn-support/encryption-controls/mass-market</li>
+      <li>BIS — Annual Self-Classification: https://www.bis.gov/learn-support/encryption-controls/annual-self-classification</li>
+      <li>eCFR — 15 CFR 740.17 (License Exception ENC): https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-740/section-740.17</li>
+      <li>eCFR — 15 CFR 734.4 (De minimis): https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C/part-734/section-734.4</li>
+      <li>BIS — Russia and Belarus FAQs (746.8): https://media.bis.gov/media/documents/042922-russia-faqs-updated-license-exceptions-only-121724.pdf</li>
+      <li>BIS — Penalties: https://www.bis.gov/enforcement/penalties</li>
+      <li>商务部/国家密码管理局/海关总署 — 公告2020年第63号: https://www.mofcom.gov.cn/zcfb/zgdwjjmywg/art/2021/art_5724c922e85c4ddcba960a1485688c98.html</li>
+      <li>中国人大网 — 《密码法》: http://www.npc.gov.cn/npc/c2/c30834/201910/t20191026_301700.html</li>
+      <li>国家密码管理局 — 密码政策问答（八十七）: http://www.sca.gov.cn/sca/xxgk/2020-04/02/content_1060694.shtml</li>
+      <li>中国政府网 — 《商用密码管理条例》（2023修订）: https://www.gov.cn/zhengce/zhengceku/202305/content_6875928.htm</li>
+      <li>最高检 — 十部委虚拟货币风险通知（2021）: https://www.spp.gov.cn/zdgz/202109/t20210925_530808.shtml</li>
+      <li>证监会 — 银发〔2026〕42号通知: https://www.csrc.gov.cn/csrc/c100028/c7614318/content.shtml</li>
+      <li>香港工业贸易署 — 战略贸易管制通告6/2018: https://www.stc.tid.gov.hk/sc_chi/circular_pub/2018_stc06.html</li>
+      <li>香港工业贸易署 — 类别5第2部资讯安全: https://www.stc.tid.gov.hk/sc_chi/checkprod/cat_5_2.html</li>
+      <li>欧盟委员会 — 2025 Update of the EU Control List of Dual-Use Items: https://policy.trade.ec.europa.eu/news/2025-update-eu-control-list-dual-use-items-2025-09-08_en</li>
+      <li>爱尔兰企业贸易部 — Union General Export Authorisation Guidance: https://www.enterprise.gov.ie/en/publications/union-general-export-authorisation-guidance.html</li>
+      <li>gov.uk — Notice to Exporters 2018/07 (Cryptography Note): https://gov.uk/government/publications/notice-to-exporters-201807-guidance-on-the-cryptography-note/notice-to-exporters-201807-guidance-on-the-cryptography-note</li>
+      <li>METI — 関係法令・改正情報: https://www.meti.go.jp/policy/anpo/law00.html</li>
+      <li>澳洲国防部 — Defence and Strategic Goods List: https://www.defence.gov.au/business-industry/exporting/export-controls-framework/defence-strategic-goods-list</li>
+      <li>Ledger — Terms and Conditions（出口管制条款参考）: https://shop.ledger.com/zh/pages/terms-and-conditions</li>
+      <li>GetBlock — Trezor stops shipping to Russia (2022): https://getblock.net/en/news/hardware-wallet-developer-trezor-has-stopped-shipping-devices-to-russia</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>OpenWorker Deck · 加密出口管制合规核查报告 v1 · 2026-08-31 · 内部工作底稿，非法律意见 · 附属于众筹项目资料包</p>
+  </div>
+</footer>
+
+</body>
+</html>
