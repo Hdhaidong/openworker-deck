@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenWorker Deck · 众筹文案与视觉设计稿 v1.0</title>
+<style>
+:root{
+  --bg:#0b0d12;--bg2:#10131a;--bg3:#151926;
+  --text:#e8eaf2;--dim:#8a90a6;--line:#232733;
+  --acc:#8b7cf6;--acc2:#64e2b0;--warn:#ffb454;--danger:#ff6b6b;
+  --mono:"JetBrains Mono","Cascadia Code",Consolas,monospace;
+  --sans:"Inter","Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.75;font-size:15.5px}
+.wrap{max-width:960px;margin:0 auto;padding:0 28px}
+section{padding:64px 0;border-top:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--acc);text-transform:uppercase;margin-bottom:10px}
+h1{font-size:42px;line-height:1.2;letter-spacing:-.02em;margin:14px 0 10px}
+h2{font-size:27px;letter-spacing:-.01em;margin:6px 0 14px}
+h3{font-size:18px;margin:22px 0 8px;color:var(--text)}
+p{margin:10px 0;color:var(--text)}
+p b{color:#fff}
+em{color:var(--dim);font-style:normal;font-size:13.5px}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.sub{color:var(--dim);font-size:16px;max-width:720px}
+.badge{display:inline-block;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--acc2);border:1px solid var(--line);border-radius:99px;padding:3px 12px;margin:3px 4px 3px 0;background:var(--bg2)}
+.badge.hl{color:var(--warn);border-color:#4a3a1e;background:#1e1608}
+
+/* copy blocks */
+.copy{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:14px 0}
+.copy .lang{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--dim);margin-bottom:10px;text-transform:uppercase}
+.copy.en{border-left:3px solid var(--acc)}
+.copy.zh{border-left:3px solid var(--acc2)}
+.copy h4{font-size:17px;margin-bottom:6px}
+.copy p{margin:9px 0}
+.note{font-family:var(--mono);font-size:12.5px;color:var(--warn);background:#171208;border:1px solid #3d3116;border-radius:8px;padding:10px 14px;margin:12px 0;line-height:1.7}
+.note b{color:var(--warn)}
+.note i{color:var(--dim);font-style:normal}
+
+/* tables */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text)}
+tr:last-child td{border-bottom:none}
+td b{color:#fff}
+
+/* wireframe */
+.wire{display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin:20px 0}
+.wire div{border:1px dashed #3a4157;border-radius:6px;background:var(--bg2);font-family:var(--mono);font-size:11px;color:var(--dim);padding:14px 10px;text-align:center;line-height:1.5;min-height:54px;display:flex;align-items:center;justify-content:center}
+.wire .full{grid-column:span 12}
+.wire .half{grid-column:span 6}
+.wire .third{grid-column:span 4}
+.wire .hero{min-height:110px;border-style:solid;border-color:var(--acc);color:var(--acc);background:#141024}
+.wire .key{border-color:var(--acc2);color:var(--acc2)}
+
+/* images */
+.imggrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:18px 0}
+.imggrid figure{margin:0}
+.imggrid img{width:100%;border:1px solid var(--line);border-radius:10px;display:block}
+.imggrid figcaption{font-size:12.5px;color:var(--dim);margin-top:8px;line-height:1.6;font-family:var(--mono)}
+.imggrid figcaption b{color:var(--text);font-family:var(--sans)}
+
+/* swatches */
+.sw{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.sw div{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg2)}
+.sw .chip{height:52px}
+.sw .lbl{padding:8px 12px;font-family:var(--mono);font-size:11.5px;color:var(--dim);line-height:1.6}
+.sw .lbl b{color:var(--text);display:block}
+
+/* code */
+pre{font-family:var(--mono);font-size:13px;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:18px 20px;overflow-x:auto;line-height:1.8;margin:14px 0;color:var(--text)}
+pre .a{color:var(--acc)}pre .b{color:var(--acc2)}pre .c{color:var(--dim)}pre .d{color:var(--warn)}
+ul{margin:10px 0 10px 22px}
+li{margin:6px 0;color:var(--text)}
+.fr{font-family:var(--mono);font-size:12px;color:var(--dim);text-align:center;margin-top:40px}
+.toc{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:18px 24px;margin-top:24px;font-size:14px}
+.toc a{display:block;padding:3px 0}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap" style="padding-top:72px">
+    <div class="kicker">// campaign kit · v1.0 · 2026-08-31</div>
+    <h1>OpenWorker Deck<br>众筹文案与视觉设计稿</h1>
+    <p class="sub">Kickstarter 页面完整物料包：页面结构地图 · 逐节双语文案 · 视觉排布 · 设计规范。线上落地页：<a href="https://hdhaidong.github.io/openworker-deck/" target="_blank">hdhaidong.github.io/openworker-deck</a></p>
+    <div>
+      <span class="badge hl">平台 KICKSTARTER</span>
+      <span class="badge">目标 $60,000</span>
+      <span class="badge">档位 $89 – $899</span>
+      <span class="badge">交付 Q3 2027</span>
+      <span class="badge">双语 · EN 主 / ZH 辅</span>
+    </div>
+    <div class="toc">
+      <b style="font-family:var(--mono);font-size:12px;color:var(--dim)">目录</b>
+      <a href="#map">00 页面地图</a>
+      <a href="#hero">01 主视觉与标题</a>
+      <a href="#story">02 开篇故事</a>
+      <a href="#pillars">03 四大支柱</a>
+      <a href="#link">04 直连设备</a>
+      <a href="#privacy">05 隐私架构</a>
+      <a href="#risk">06 风险预测</a>
+      <a href="#night">07 夜班场景</a>
+      <a href="#design">08 工业设计</a>
+      <a href="#tiers">09 众筹档位</a>
+      <a href="#timeline">10 时间线</a>
+      <a href="#rr">11 风险与挑战</a>
+      <a href="#faq">12 FAQ</a>
+      <a href="#ds">13 设计规范</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 00 页面地图 ============ -->
+<section id="map">
+  <div class="wrap">
+    <div class="kicker">// 00 · page map</div>
+    <h2>页面地图 <em>— 自上而下的叙事流</em></h2>
+    <p class="sub">Kickstarter 页是一根单轴叙事线：先立"痛点—解法"，再用证据（架构 / 协议 / 设计）加压，最后以档位和风险坦诚收口。</p>
+    <div class="wire">
+      <div class="full hero">01 HERO · 主视觉 + 标题 + 一句话 + CTA</div>
+      <div class="full">02 STORY · 痛点三段（Agent 没有手 → MHS 时机 → 缺的那只手）</div>
+      <div class="third key">03a 智能链接</div>
+      <div class="third key">03b 本地模型</div>
+      <div class="third key">03c 隐私存储</div>
+      <div class="third key">03d 检测</div>
+      <div class="third key">03e 风险预测</div>
+      <div class="third">03f Agent 控制台</div>
+      <div class="full">04 DIRECT LINK · 协议直连表格（Modbus / CAN / OBD-II / BLE / LoRa / 1-Wire）</div>
+      <div class="full key">05 PRIVACY · 隐私卡特写 + 计算存储分离架构图</div>
+      <div class="full">06 NIGHT SHIFT · 夜班场景 + 时序循环图</div>
+      <div class="half">07 DESIGN · 桌面版渲染</div>
+      <div class="half">07 DESIGN · 工业版渲染</div>
+      <div class="full">08 TIERS · 五档回报表</div>
+      <div class="full">09 TIMELINE · 众筹→量产里程碑</div>
+      <div class="full">10 RISKS · 诚实的风险登记表</div>
+      <div class="full">11 FAQ · 6 问</div>
+    </div>
+    <div class="note"><b>叙事逻辑：</b>痛点（没有手）→ 时机（MHS 发布）→ 解法（六合一）→ 证据（直连 / 隐私 / 预测）→ 信任（设计 / 时间线 / 风险）→ 转化（档位）。<i>每节回答读者心里依次冒出的一个问题。</i></div>
+  </div>
+</section>
+
+<!-- ============ 01 HERO ============ -->
+<section id="hero">
+  <div class="wrap">
+    <div class="kicker">// 01 · hero</div>
+    <h2>主视觉与标题</h2>
+
+    <div class="imggrid">
+      <figure>
+        <img src="img/hero-scene.jpg" alt="主视觉：黄昏书桌上 Deck 与笔记本协作场景">
+        <figcaption><b>hero-scene.jpg</b> · 16:9 · 黄昏桌面：Deck 与笔记本同框，权限卡琥珀色高亮，紫环 + 绿/红双键功能色清晰可辨<br>用途：页首大图 / 社交分享卡 / 视频封面首帧</figcaption>
+      </figure>
+    </div>
+
+    <div class="copy en">
+      <div class="lang">English · Kickstarter 主文案</div>
+      <h4>OpenWorker Deck — Give Your AI Coworker a Body</h4>
+      <p><b>A TRAE-style agent console and industrial gateway in one.</b> Connects Claude and OpenWorker agents directly to your equipment — Modbus RTU/TCP, CAN/J1939, OBD-II, BLE, LoRa — with a local model, privacy-vault storage, and three-class risk prediction.</p>
+      <p style="color:var(--dim);font-size:14px">Smart link · Local model · Detection · Privacy storage · Risk prediction. Your agent reads the code; the Deck feels the machine.</p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文 · 社媒 / 国内渠道</div>
+      <h4>OpenWorker Deck —— 给你的 AI 同事一个身体</h4>
+      <p><b>TRAE 式 Agent 控制台 + 工业网关，装进一台设备。</b>Claude 和 OpenWorker 的 Agent 通过它直连你的设备——Modbus RTU/TCP、CAN/J1939、OBD-II、BLE、LoRa——本地模型计算，隐私卡存储，三类风险预测。</p>
+    </div>
+
+    <div class="note"><b>标题规则：</b>英文标题 ≤ 60 字符（Kickstarter 搜索优化）；主标题带情绪（"a body"），副标题带参数（协议清单）。<i>核心动词是 "connects directly"——区别于所有"上云"叙事。</i></div>
+  </div>
+</section>
+
+<!-- ============ 02 STORY ============ -->
+<section id="story">
+  <div class="wrap">
+    <div class="kicker">// 02 · story</div>
+    <h2>开篇故事 <em>— 三段式：没有手 → 时机 → 缺的那只手</em></h2>
+
+    <div class="copy en">
+      <div class="lang">English</div>
+      <p><b>Your AI colleague is brilliant — and completely handless.</b></p>
+      <p>It reads your code, browses your docs, writes your tests. But walk it into a workshop, a clinic, a lab, or a barn, and it goes blind: it can't feel the bearing wear in your compressor, can't read the sterilizer's cycle counter, can't tell you the tractor threw a code at 3 a.m.</p>
+      <p>Anthropic's new Model Hardware Standard just gave agents a standard way to operate physical devices — standard drivers, plain-language safety labels, safe read/write calls. The first adopters are top labs and advanced manufacturers, where Claude now tunes instruments overnight.</p>
+      <p><b>What's still missing is the box on your side:</b> something that speaks fieldbus to your equipment and MHS to your agent, watches the night shift, keeps your data physically yours, and puts permission on physical buttons you can actually press.</p>
+      <p><b>That's the Deck.</b> One device, six jobs — a desk your AI coworker sits at.</p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>你的 AI 同事很聪明 —— 但它没有手。</b></p>
+      <p>它读你的代码、翻你的文档、写你的测试。可一旦走进车间、诊所、实验室或谷仓，它就瞎了：它摸不到空压机轴承的磨损，读不到灭菌器的循环计数，更不知道拖拉机凌晨三点报了码。</p>
+      <p>Anthropic 新发布的模型硬件标准（MHS）刚给 Agent 开了一条操作物理设备的标准通道——标准化驱动、自然语言安全标签、安全的读写指令。首批接入的是顶级实验室和先进制造商：Claude 已经能在那里通宵调仪器了。</p>
+      <p><b>还缺的是你这一侧的那只手：</b>一台对下说现场总线、对上说 MHS 的设备；一台替你值守夜班、把数据物理地留在你手里、把权限放在真实按键上的设备。</p>
+      <p><b>这就是 Deck。</b>一台设备，六件事 —— 你的 AI 同事坐镇的桌面。</p>
+    </div>
+
+    <div class="note"><b>设计说明：</b>此节纯文字 + 一张 hero 延伸图，不加参数表。<i>故事先于规格，Kickstarter 高转化页面第一节从不说"参数"。</i>叙事钩子按顺序回答：为什么现在（MHS 时机）→ 为什么是我（缺的那只手）。</div>
+  </div>
+</section>
+
+<!-- ============ 03 PILLARS ============ -->
+<section id="pillars">
+  <div class="wrap">
+    <div class="kicker">// 03 · pillars</div>
+    <h2>四大支柱 <em>— 每柱一屏，一图一断言</em></h2>
+
+    <div class="copy en">
+      <div class="lang">English · 卡片标题与正文</div>
+      <p><b>Smart link · MHS-native</b> — Registers itself and every bridged device following the Model Hardware Standard pattern: standard read/write interface, auto-generated plain-language safety labels. Any MHS-compatible agent discovers it instantly. <i>En-sub: Modbus RTU/TCP · CAN/J1939 · OBD-II · BLE 5.2 · LoRa</i></p>
+      <p><b>Local model · private data stays local</b> — The on-device NPU runs anomaly detection and small-model reasoning. Personal and private data are computed locally: telemetry, logs, history never leave the device. Offline by default; the optional fleet bridge is opt-in and labeled. <i>En-sub: 0.5 TOPS NPU · offline-first</i></p>
+      <p><b>Privacy storage · pull-to-own</b> — The modern floppy, but a vault: a removable, hardware-encrypted cartridge (up to 512 GB). The key lives in the cartridge, not the machine. <i>En-sub: AES-encrypted cartridge · 512 GB</i></p>
+      <p><b>Risk prediction · briefed, not buried</b> — Three risk classes per device: failure, safety, compliance. Output is a risk brief with likelihood, time window, action, evidence. <i>En-sub: failure · safety · compliance</i></p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文 · 对应短句（用于双语卡片）</div>
+      <p><b>智能链接</b>——MHS 原生注册，Agent 即插即发现<br>
+      <b>本地模型</b>——个人隐私数据本地计算，不出设备<br>
+      <b>隐私存储</b>——可拔加密卡，拔卡即离场<br>
+      <b>风险预测</b>——故障 · 安全 · 合规，三类简报</p>
+    </div>
+
+    <div class="note"><b>排布：</b>2×2 卡片网格；每卡 emoji 图标 + 中英标题 + 一段正文 + mono 小字参数行。<i>卡片顺序按说服力排：链接（能干啥）→ 隐私（凭什么信）→ 预测（值多少钱）。</i></div>
+  </div>
+</section>
+
+<!-- ============ 04 DIRECT LINK ============ -->
+<section id="link">
+  <div class="wrap">
+    <div class="kicker">// 04 · direct link</div>
+    <h2>直连设备 <em>— 证据节之一：协议表格</em></h2>
+
+    <div class="copy en">
+      <div class="lang">English · 引导文案</div>
+      <p><b>Industrial gateway + wireless gateway, in one.</b></p>
+      <p>Legacy fieldbus on one side, MHS on the other. The Deck speaks the equipment's own protocols — directly, no integrator in the middle. The agent never learns a vendor SDK.</p>
+      <p>No protocol island survives: the agent sees one MHS device tree, and the Deck translates underneath it. Equipment with no digital interface at all falls back to the four contactless sensing modalities.</p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>工业网关 + 无线网关，一体。</b>一侧接传统现场总线，一侧输出 MHS。Agent 永远不需要学厂商 SDK。</p>
+      <p>协议孤岛到此为止：Agent 看到的是一棵 MHS 设备树，翻译由 Deck 在底层完成。完全没有数字接口的设备，退回四模态非接触感知。</p>
+    </div>
+
+    <table>
+      <tr><th>链路 Link</th><th>直连方式 How it connects</th><th>典型设备 Typical equipment</th></tr>
+      <tr><td><b>Modbus RTU</b></td><td>RS-485 主站 · 多点总线（32 台 · 单元号 1–247）直读寄存器与线圈</td><td>变频器 · PLC · 电表 · 灌溉阀 · 枢轴灌溉</td></tr>
+      <tr><td><b>Modbus TCP</b></td><td>以太网 / Wi-Fi 客户端 · 同一套寄存器，无需转接硬件</td><td>楼宇自控 · 电力监控 · 工业 PC</td></tr>
+      <tr><td><b>CAN 2.0B / J1939</b></td><td>总线直挂 250/500 kbit/s · PGN 解码</td><td>拖拉机 · 收割机 · 发动机 · 农具</td></tr>
+      <tr><td><b>OBD-II</b></td><td>转接线 · 标准 PID 直读</td><td>发电机 · 车辆 · 紧凑型拖拉机</td></tr>
+      <tr><td><b>BLE 5.2</b></td><td>中枢角色 · GATT 传感档案与厂商服务</td><td>电动工具电池 · BLE 传感器仪表</td></tr>
+      <tr><td><b>LoRa 868/915</b></td><td>Sub-GHz 无线网关 · 数百米至公里级</td><td>远端大棚 · 粮仓 · 水塔 · 泵站</td></tr>
+      <tr><td><b>1-Wire</b></td><td>直挂数字温度探头链</td><td>冷库 · 锅炉房 · 温度链</td></tr>
+    </table>
+
+    <div class="note"><b>设计说明：</b>表格是本节主角——黑白灰底 + 高亮协议名。<i>此表同时是 SEO 落点（"modbus gateway" / "j1939" 搜索流量）。</i>移动端表格转卡片式堆叠。</div>
+  </div>
+</section>
+
+<!-- ============ 05 PRIVACY ============ -->
+<section id="privacy">
+  <div class="wrap">
+    <div class="kicker">// 05 · privacy · 核心差异节</div>
+    <h2>隐私架构 <em>— 本项目的灵魂卖点</em></h2>
+
+    <div class="imggrid">
+      <figure>
+        <img src="img/privacy-cartridge.jpg" alt="隐私卡拔出特写">
+        <figcaption><b>privacy-cartridge.jpg</b> · 16:9 · 手指拔出加密存储卡瞬间：枪灰色卡身 + 铭刻锁孔 + 紫色解锁光边<br>用途：本节首图 / "pull-to-own" 概念主视觉</figcaption>
+      </figure>
+    </div>
+
+    <div class="copy en">
+      <div class="lang">English</div>
+      <p><b>The floppy's form. The vault's soul.</b></p>
+      <p>The Deck's archive lives on a removable, hardware-encrypted cartridge — up to 512 GB. The key lives in the cartridge, not the machine. Pull it out and your history physically leaves with you: nothing readable stays behind.</p>
+      <p><b>And your private data is computed by a local model, on-device.</b> Telemetry, logs, histories — inference happens where the data lives, so understanding your data never requires uploading it.</p>
+      <p>Compute and storage are cleanly split:</p>
+<pre>compute plane:  local model · NPU anomaly detection · MHS registry · protocol bridge   <span class="c">(always on)</span>
+storage plane:  hardware-encrypted cartridge · 8 GB eMMC buffer                         <span class="c">(swappable · yours)</span>
+private data:   computed by the local model, on the Deck                                <span class="c">(never uploaded by default)</span>
+cartridge out:  compute keeps running → eMMC buffer · history rides in your pocket</pre>
+      <p><b>What the split buys you:</b></p>
+      <ul>
+        <li><b>Privacy by physics</b> — pull the cartridge and it's yours; no remote wipe needed, no "trust us"</li>
+        <li><b>Local-model privacy</b> — personal data computed on the Deck itself</li>
+        <li><b>Independent upgrade</b> — swap cartridge capacity without touching compute</li>
+        <li><b>Failure isolation</b> — a dead cartridge doesn't kill the sensor</li>
+        <li><b>Audit path</b> — hand the auditor the cartridge, not the machine</li>
+      </ul>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>软盘的形态，保险库的内核。</b></p>
+      <p>Deck 的档案库装在一张可拔的硬件加密存储卡里——最高 512GB。密钥在卡里，不在机器里。拔出来，你的历史就物理地跟你走了：机器里不留任何可读内容。</p>
+      <p><b>你的隐私数据由本地模型计算，就在设备上。</b>遥测、日志、历史——推理发生在数据所在之处，理解你的数据从不需要上传它。</p>
+      <p><b>计算与存储，干净分离：</b>拔卡不停机——计算继续，缓存在 eMMC；换卡不碰固件；卡坏不影响传感；审计交卡不交机器。</p>
+    </div>
+
+    <div class="note"><b>排布：</b>本节是全页视觉重心——左文右图，架构图用等宽字体渲染（非位图），保持与整页一致的"工程感"。<i>"Privacy by physics" 是本节金句，社交传播时单独做成金句卡。</i></div>
+  </div>
+</section>
+
+<!-- ============ 06 RISK ============ -->
+<section id="risk">
+  <div class="wrap">
+    <div class="kicker">// 06 · risk prediction</div>
+    <h2>风险预测 <em>— 从"预测维护"升级为"三类风险"</em></h2>
+
+    <div class="copy en">
+      <div class="lang">English</div>
+      <p><b>Risk, briefed — not buried.</b></p>
+      <p>Most "predictive maintenance" boxes predict one thing: failure. Real equipment carries three risks, and the Deck briefs all of them, every morning, per fleet:</p>
+      <ul>
+        <li><b>Failure risk</b> — RUL curves: bearing wear, belt stretch, filter clog, refrigerant loss. Alerts days or weeks before, never after.</li>
+        <li><b>Safety risk</b> — CO trends, thermal-runaway precursors, overload patterns. Escalated before danger, not logged after it.</li>
+        <li><b>Compliance risk</b> — inspection deadlines, sensor-expiry dates. The boring one that costs the most when missed.</li>
+      </ul>
+      <p>Each brief carries four fields: <b>likelihood · time window · recommended action · evidence.</b> The agent doesn't just watch — it reads the brief and proposes the next step. You approve it on the physical button.</p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>风险要简报，不是埋起来。</b>多数"预测维护"盒子只会预测一件事：故障。真实世界的设备背着三类风险，Deck 每天早上按车队逐台简报：<b>故障风险</b>（RUL 曲线：轴承磨损、皮带拉伸、滤芯堵塞、制冷剂流失）· <b>安全风险</b>（CO 趋势、热失控前兆、过载模式——危险之前升级预警）· <b>合规风险</b>（年检与传感器到期日程——最枯燥、误期最贵的那类）。</p>
+      <p>每份简报四要素：<b>可能性 · 时间窗 · 建议动作 · 证据</b>。Agent 不只是看——它读简报、提方案，你在实体按键上批准。</p>
+    </div>
+
+    <div class="note"><b>配图建议：</b>用落地页模拟屏截图（<i>RISK brief · failure 4% · compliance due 12d</i>）——已实现的 UI 比抽象插画可信。<i>本节向医疗/诊所档位（$899）输送价值。</i></div>
+  </div>
+</section>
+
+<!-- ============ 07 NIGHT SHIFT ============ -->
+<section id="night">
+  <div class="wrap">
+    <div class="kicker">// 07 · night shift</div>
+    <h2>夜班场景 <em>— 情绪节：安静的守望者</em></h2>
+
+    <div class="imggrid">
+      <figure>
+        <img src="img/night-shift.jpg" alt="深夜车间里独自值守的 Deck">
+        <figcaption><b>night-shift.jpg</b> · 16:9 · 深蓝车间中唯一光源：货架上的 Deck，紫环 + 荧光绿遥测曲线<br>用途：本节全宽背景图 / 视频中段空镜</figcaption>
+      </figure>
+    </div>
+
+    <div class="copy en">
+      <div class="lang">English</div>
+      <p><b>It runs the night shift.</b></p>
+      <p>Your computer goes to sleep. The Deck doesn't. While you're away it keeps polling, sensing, storing — the local model watching every curve, the vault recording every cycle. Come back, and the agent greets you with what happened while you were gone: "Bearing temperature drifted 3 °C at 02:40. Risk brief filed. Nothing needs you yet."</p>
+<pre>your computer on:    OpenWorker ↔ Deck ↔ equipment   <span class="b">(live: agent reads, you approve)</span>
+your computer off:   Deck → senses → stores          <span class="c">(night shift: local model watches, vault records)</span>
+cartridge pulled:   compute continues → eMMC        <span class="d">(history rides in your pocket)</span>
+you return:         Deck → buffered history → OpenWorker   <span class="b">("while you were away...")</span></pre>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>它值守夜班。</b>你的电脑睡了，Deck 不睡。你不在时它持续轮询、感知、存储——本地模型盯着每条曲线，加密卡记录每个循环。你回来，Agent 迎上来："你不在的这段时间，轴承温度在 02:40 漂了 3 °C，风险简报已归档，暂时不需要你。"</p>
+    </div>
+
+    <div class="note"><b>设计说明：</b>全宽沉浸式底图 + 深色蒙层，文字浮于其上。<i>此节卖情绪不是卖参数——留白多、字少、图大。</i></div>
+  </div>
+</section>
+
+<!-- ============ 08 DESIGN ============ -->
+<section id="design">
+  <div class="wrap">
+    <div class="kicker">// 08 · industrial design</div>
+    <h2>工业设计 <em>— 信任节：让人看到"真的做了"</em></h2>
+
+    <div class="imggrid">
+      <figure>
+        <img src="img/deck-desktop.jpg" alt="桌面版概念渲染">
+        <figcaption><b>deck-desktop.jpg</b> · 桌面版 —— CNC 铝合金 4″ 控制台 · 实体批准/拒绝键 · 状态灯环</figcaption>
+      </figure>
+      <figure>
+        <img src="img/deck-industrial.jpg" alt="工业版概念渲染">
+        <figcaption><b>deck-industrial.jpg</b> · 工业版 —— 35mm DIN 轨 · RS-485/CAN 端子 · RJ45 · LoRa 天线 · 散热鳍片</figcaption>
+      </figure>
+    </div>
+
+    <div class="copy en">
+      <div class="lang">English</div>
+      <p><b>Two editions, one design language.</b> Matte graphite enclosures, functional color accents, fanless passive cooling. The desktop edition sits next to you — todo panel, permission cards, status ring. The industrial edition goes in the cabinet on a 35 mm DIN rail — wide-temperature, with an IP65 variant for the field.</p>
+      <p style="color:var(--dim);font-size:13px">Concept renders, EVT phase — final tooling may adjust.</p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>两种形态，一个设计语言。</b>哑光深灰机身、功能色点睛、无风扇被动散热。桌面版坐在你手边——任务面板、权限卡、状态灯环；工业版上 DIN 轨进柜——宽温运行，另有 IP65 场版。渲染为 EVT 概念阶段，量产模具或有微调。</p>
+    </div>
+
+    <div class="note"><b>诚实条款：</b>必须保留 "EVT-phase concept" 声明。<i>Kickstarter 硬件项目最常见的差评来源就是把渲染图当实拍图卖。</i></div>
+  </div>
+</section>
+
+<!-- ============ 09 TIERS ============ -->
+<section id="tiers">
+  <div class="wrap">
+    <div class="kicker">// 09 · reward tiers</div>
+    <h2>众筹档位 <em>— 五档，从冲动到机构</em></h2>
+
+    <table>
+      <tr><th>档位 Tier</th><th>价格</th><th>回报 Includes</th><th>目标人群</th></tr>
+      <tr><td><b>Early Bird</b></td><td>$89 <em>· 限量 500</em></td><td>1× Deck · 传感套件 · 桌面支架</td><td>尝鲜开发者 / OpenWorker 用户</td></tr>
+      <tr><td><b>Standard</b></td><td>$109</td><td>1× Deck · 传感套件</td><td>个人用户</td></tr>
+      <tr><td><b>Duo</b></td><td>$199</td><td>2× Deck —— 桌面 + 工作台</td><td>重度用户 / 小团队</td></tr>
+      <tr><td><b>Fleet</b></td><td>$499</td><td>6× Deck · 场版（IP65）· 车队仪表盘</td><td>农机队 / 维保团队</td></tr>
+      <tr><td><b>Clinic / Lab Pack</b></td><td>$899</td><td>10× Deck · 合规报告模板 · 优先支持</td><td>诊所 / 实验室</td></tr>
+    </table>
+
+    <div class="copy en">
+      <div class="lang">English · 档位引导文案</div>
+      <p><b>$89 gets you what a $426 gateway can't:</b> the protocols <i>and</i> the agent. Early birds fund the first EVT run — and get the cartridge slot labeled with their backer number.</p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>$89 买到 $426 网关买不到的东西：</b>协议之外，还有 Agent。早鸟资助首批 EVT 板——存储卡槽旁激光刻 backers 编号。</p>
+    </div>
+
+    <div class="note"><b>定价锚点：</b>Moxa MGate Modbus 网关 ~$426、有人边缘网关 ¥1,099。<i>本档位刻意锚在"网关的 1/4 价格、多 5 种能力"——竞品价是本页最好的销售员。</i></div>
+  </div>
+</section>
+
+<!-- ============ 10 TIMELINE ============ -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="kicker">// 10 · timeline</div>
+    <h2>时间线 <em>— 承诺要具体到月</em></h2>
+
+    <table>
+      <tr><th>阶段</th><th>时间</th><th>交付物</th></tr>
+      <tr><td><b>众筹结束</b></td><td>Nov 2026</td><td>资金到账 · 供应链下单</td></tr>
+      <tr><td><b>EVT</b></td><td>Dec 2026 – Jan 2027</td><td>工程验证板 · 固件开源</td></tr>
+      <tr><td><b>DVT</b></td><td>Feb – Mar 2027</td><td>设计验证 · 认证送检（CE/FCC）· 背 backers 内测</td></tr>
+      <tr><td><b>PVT</b></td><td>Apr 2027</td><td>产线试产 · 包装定稿</td></tr>
+      <tr><td><b>量产</b></td><td>May 2027</td><td>Q2 末开始分批发货</td></tr>
+      <tr><td><b>交付</b></td><td>Jun – Jul 2027</td><td>全部档位发运完毕</td></tr>
+    </table>
+
+    <div class="copy en">
+      <div class="lang">English · 引导文案</div>
+      <p><b>We publish a monthly build log.</b> Backers see it first — every EVT board photo, every failed test, every vendor hiccup. Open-source hardware means the schedule is auditable too.</p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>每月公开构建日志。</b>Backers 先看——每张 EVT 板照片、每次失败的测试、每个供应商的意外。开源硬件的意思是：连进度表都可审计。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 RISKS ============ -->
+<section id="rr">
+  <div class="wrap">
+    <div class="kicker">// 11 · risks &amp; challenges · kickstarter 必填节</div>
+    <h2>风险与挑战 <em>— 诚实的风险登记表</em></h2>
+
+    <div class="copy en">
+      <div class="lang">English</div>
+      <p><b>This is a hardware campaign — here's our honest risk register.</b></p>
+      <ul>
+        <li><b>Supply chain.</b> The SoC and the encrypted-cartridge controller come from two vendors; alternates are qualified for both.</li>
+        <li><b>Certification.</b> CE/FCC in the DVT window. Our medical-adjacent positioning is <i>monitoring only</i> by design — we make no FDA-regulated claims and never will.</li>
+        <li><b>Spec evolution.</b> MHS is a research preview. The Deck follows its read/write pattern and ships a compatibility layer; firmware is open-source, so spec changes land as updates, not as bricks.</li>
+        <li><b>Physical intuition limits.</b> Like Anthropic, we acknowledge that models have limited spatial/physical reasoning — which is exactly why writes sit behind physical Approve/Deny buttons.</li>
+        <li><b>Schedule.</b> Hardware slips. Our mitigation is scope discipline (six jobs, no more) and the monthly build log — you'll know a slip the same week we do.</li>
+      </ul>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>这是硬件众筹——这是我们的诚实风险清单：</b>供应链（双供应商已验证替代）；认证（DVT 窗口送检 CE/FCC，医疗场景只做"监测"定位，不做受 FDA 监管的声明）；规格演进（MHS 是研究预览版，固件开源 + 兼容层）；物理直觉局限（写操作必须过实体批准键——这正是按键存在的理由）；进度（硬件会延期，对策是范围纪律 + 月度构建日志）。</p>
+    </div>
+
+    <div class="note"><b>写作原则：</b>每条风险配一条已落地的对策。<i>Kickstarter 的风险节不是免责声明，是信任建设节——写得越具体，转化越高。</i></div>
+  </div>
+</section>
+
+<!-- ============ 12 FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="kicker">// 12 · faq</div>
+    <h2>FAQ <em>— 六问，覆盖全部疑虑</em></h2>
+
+    <div class="copy en">
+      <div class="lang">English</div>
+      <p><b>1. Does it need the cloud?</b> No. The local model runs sensing, anomaly detection, risk prediction and storage — private data is computed on the Deck and never uploaded by default. The fleet bridge is opt-in and labeled.</p>
+      <p><b>2. What happens if I pull the cartridge out?</b> Nothing breaks. Compute keeps running, buffering to 8 GB eMMC. Your history travels with the cartridge — hardware-encrypted, key inside it. Re-insert and the buffer syncs into the archive.</p>
+      <p><b>3. How is my personal data kept private?</b> Three layers: local-model compute, encrypted removable storage, offline-by-default network.</p>
+      <p><b>4. Can it control equipment, or only watch?</b> Both, through MHS — reads are always safe; writes require explicit approval on the physical buttons by default.</p>
+      <p><b>5. Which agents does it work with?</b> Any MHS-compatible agent — OpenWorker and Claude today; the standard is model-agnostic.</p>
+      <p><b>6. Why not just buy an industrial gateway from Moxa or USR IOT?</b> They solve a different problem — protocol translation for SCADA and clouds. The Deck covers the same field protocols plus MHS-native registration an agent can operate, the approval console, sensing, local-model detection, the vault cartridge and risk prediction. Not a cheaper gateway — a different category: the gateway your agent operates.</p>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>1. 需要云吗？</b>不需要。本地模型跑感知、异常检测、风险预测与存储——隐私数据在 Deck 上计算，默认从不上传。车队云桥接可选且明确标注。</p>
+      <p><b>2. 拔出存储卡会怎样？</b>什么都不坏。计算继续，缓存在 eMMC。历史跟着卡走——硬件加密，密钥在卡里。重新插入，缓冲自动归档。</p>
+      <p><b>3. 隐私怎么保障？</b>三层：本地模型计算 · 可拔加密存储 · 默认离线。</p>
+      <p><b>4. 能控制设备还是只能看？</b>都能，走 MHS——读永远安全；写必须过实体按键的明确批准。</p>
+      <p><b>5. 兼容哪些 Agent？</b>任何 MHS 兼容 Agent——今天的 OpenWorker 和 Claude；标准与模型无关。</p>
+      <p><b>6. 为什么不直接买 Moxa 或有人的网关？</b>它们解决的是另一个问题——为 SCADA 和云做协议翻译。Deck 覆盖同样的现场协议，外加 Agent 可操作的 MHS 注册、批准控制台、四模态感知、本地模型、隐私卡与风险预测。不是更便宜的网关——是不同品类：Agent 能亲手操作的网关。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 DESIGN SYSTEM ============ -->
+<section id="ds">
+  <div class="wrap">
+    <div class="kicker">// 13 · design system</div>
+    <h2>视觉规范 <em>— 全套物料的统一语言</em></h2>
+
+    <h3>色板</h3>
+    <div class="sw">
+      <div><div class="chip" style="background:#0b0d12"></div><div class="lbl"><b>#0b0d12</b>bg 主底色</div></div>
+      <div><div class="chip" style="background:#10131a"></div><div class="lbl"><b>#10131a</b>bg2 卡片底</div></div>
+      <div><div class="chip" style="background:#8b7cf6"></div><div class="lbl"><b>#8b7cf6</b>violet 主强调</div></div>
+      <div><div class="chip" style="background:#64e2b0"></div><div class="lbl"><b>#64e2b0</b>mint 次强调/确认</div></div>
+      <div><div class="chip" style="background:#ffb454"></div><div class="lbl"><b>#ffb454</b>amber 权限/警示</div></div>
+      <div><div class="chip" style="background:#ff6b6b"></div><div class="lbl"><b>#ff6b6b</b>coral 拒绝/危险</div></div>
+      <div><div class="chip" style="background:#e8eaf2"></div><div class="lbl"><b>#e8eaf2</b>text 正文</div></div>
+      <div><div class="chip" style="background:#8a90a6"></div><div class="lbl"><b>#8a90a6</b>dim 弱文字</div></div>
+    </div>
+
+    <h3>字体</h3>
+    <ul>
+      <li><b>标题 / 正文</b>：Inter（拉丁）+ PingFang SC / Microsoft YaHei（中文），标题 letter-spacing −0.02em</li>
+      <li><b>代码 / 架构图 / 参数行</b>：JetBrains Mono / Cascadia Code，11–13px，配 syntax 高亮（violet/mint/dim/amber 四色）</li>
+      <li><b>kicker 眉标</b>：mono 12px · letter-spacing 0.14em · 大写 · violet</li>
+    </ul>
+
+    <h3>图片清单（全部已产出）</h3>
+    <table>
+      <tr><th>文件</th><th>比例</th><th>角色</th><th>投放位置</th></tr>
+      <tr><td><b>hero-scene.jpg</b></td><td>16:9</td><td>主视觉：黄昏桌面协作场景</td><td>页首 / 分享卡 / 视频首帧</td></tr>
+      <tr><td><b>privacy-cartridge.jpg</b></td><td>16:9</td><td>隐私卡拔出特写</td><td>隐私节首图 / 金句卡背景</td></tr>
+      <tr><td><b>night-shift.jpg</b></td><td>16:9</td><td>深夜车间守望场景</td><td>夜班节全宽底图 / 视频空镜</td></tr>
+      <tr><td><b>deck-desktop.jpg</b></td><td>16:9</td><td>桌面版工业设计渲染</td><td>设计节 / 产品页</td></tr>
+      <tr><td><b>deck-industrial.jpg</b></td><td>16:9</td><td>DIN 轨工业版渲染</td><td>设计节 / 工业渠道</td></tr>
+    </table>
+
+    <h3>页面基调三条铁律</h3>
+    <ul>
+      <li><b>工程感优先</b>：架构用等宽字体文本图，不用花哨矢量插画——受众是开发者与技师</li>
+      <li><b>功能色即语义</b>：紫=Agent、绿=批准、红=拒绝、琥珀=权限请求——全物料一致，不挪用</li>
+      <li><b>诚实标注</b>：渲染标 "EVT concept"、云桥接标 "opt-in"、医疗标 "monitoring only"——信任是众筹页最贵的资产</li>
+    </ul>
+
+    <div class="note"><b>视频脚本建议（60s）：</b>0–5s hero 场景镜头 · 5–15s 痛点（"你的 AI 没有手"字幕 + 手指敲无反应设备）· 15–30s MHS 直连演示（Modbus 读数上屏）· 30–40s 拔卡（卡离机字幕 "your history, in your pocket"）· 40–50s 夜班空镜 · 50–60s 档位 + CTA。<i>全片无解说词，用屏幕 UI 与字幕叙事，降低本地化成本。</i></div>
+  </div>
+</section>
+
+<p class="fr">© 2026 Hdhaidong — OpenWorker Deck campaign kit v1.0 · 本稿为文案与设计基线，Kickstarter 上线前以平台审核反馈为准修订</p>
+
+</body>
+</html>
