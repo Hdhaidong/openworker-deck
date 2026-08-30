@@ -13,6 +13,8 @@ An open-source hardware companion for [OpenWorker](https://github.com/andrewyng/
 [![OpenWorker](https://img.shields.io/badge/OpenWorker-companion_agent-8A2BE2)](https://github.com/andrewyng/openworker)
 [![License](https://img.shields.io/badge/Firmware-MIT-green)]()
 
+<sub>**Independent project · 非官方独立项目。** Not affiliated with, endorsed by, or sponsored by Andrew Ng, deeplearning.ai, or the [OpenWorker](https://github.com/andrewyng/openworker) project (MIT license, © 2024 Andrew Ng) — "OpenWorker" is used solely to indicate compatibility. 本项目与 OpenWorker 官方无隶属或背书关系，名称仅用于说明兼容性。</sub>
+
 </div>
 
 ---
@@ -35,8 +37,8 @@ Meanwhile, the machines you rely on — the tractor, the HVAC, the clinic steril
 | **Smart link (MHS-native)** | Connects to equipment **directly** — Modbus RTU master (RS-485 multi-drop), Modbus TCP, CAN 2.0B/J1939, OBD-II, BLE 5.2 and LoRa — then registers itself and every bridged device on your network following the [Model Hardware Standard](https://modelhardwarestandard.com/) pattern: standard read/write interface, natural-language safety labels auto-generated. Any MHS-compatible agent (OpenWorker, Claude) discovers it instantly. |
 | **Detection** | Four sensing modalities: vibration (3-axis accelerometer), thermal (IR thermopile), current signature (CT clamp), and acoustic (MEMS mic). Plus CAN 2.0B / RS-485 Modbus / OBD-II / BLE bridging into existing fault codes. |
 | **Local model** | On-device NPU (0.5 TOPS) runs a **local model** — anomaly detection and small-model reasoning execute on the Deck itself. **Personal and private data are computed locally**: telemetry, logs and history never leave the device. Offline by default; the optional fleet bridge is opt-in and labeled. |
-| **Privacy storage** | The floppy, reborn: a **removable floppy-form encrypted disk** (3.5″ silhouette in armored metal, up to 512 GB). Pull it and your data physically leaves with you — the key lives in the disk, not the machine. The Deck runs the night shift: it senses and stores while your computer is off, and the agent ingests the buffer when you're back. |
-| **Risk prediction** | Three risk classes per device, not just failure: **failure risk** (RUL curves — bearing wear, belt stretch, filter clog, refrigerant loss), **safety risk** (CO trends, thermal-runaway precursors, overload patterns — escalated before danger), **compliance risk** (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, recommended action, evidence. |
+| **Privacy storage** | Your data used to have a shape you could hold. It does again: a **removable floppy-form encrypted disk** (3.5″ silhouette in armored metal, up to 512 GB). The key lives in the disk, not the machine. Pull it and your data physically leaves with you; the Deck keeps running on the 8 GB eMMC buffer and syncs the moment you re-insert. Pull-to-own: three seconds, no menus. |
+| **Risk prediction** | Three risk classes per device, not just failure: **failure risk** (RUL curves — bearing wear, belt stretch, filter clog, refrigerant loss), **safety risk** (CO trends, thermal-runaway precursors, overload patterns — flagged early for human review), **compliance risk** (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, recommended action, evidence — it informs decisions, never a safety system. |
 
 ### The night-shift loop
 
