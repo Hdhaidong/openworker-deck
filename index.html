@@ -18,6 +18,7 @@
   section{padding:72px 0;border-bottom:1px solid var(--line)}
   h2{font-size:30px;margin-bottom:8px;letter-spacing:-.5px}
   .kicker{color:var(--acc);font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+  .mono{font-family:var(--mono);font-size:12.5px;color:var(--acc2);background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;white-space:nowrap}
   .sub{color:var(--dim);max-width:720px;margin-bottom:36px;font-size:16px}
 
   /* hero */
@@ -130,6 +131,7 @@
       <span class="badge">智能链接 Smart Link · MHS</span>
       <span class="badge">工业网关 Industrial GW</span>
       <span class="badge">无线网关 Wireless GW</span>
+      <span class="badge">消息网关 MQTT Broker</span>
       <span class="badge">边缘计算 Local Model · NPU</span>
       <span class="badge">检测 Detection</span>
       <span class="badge">隐私存储 Privacy Vault · 可拔</span>
@@ -197,7 +199,7 @@
       </figure>
     </div>
     <div class="loop">
-<span class="l1">compute plane: &nbsp;local model · NPU anomaly detection · MHS registry · protocol bridge &nbsp;(always on)</span><br>
+<span class="l1">compute plane: &nbsp;local model · NPU anomaly detection · MHS registry · protocol bridge · MQTT broker &nbsp;(always on)</span><br>
 <span class="l2">storage plane: &nbsp;encrypted cartridge · 8 GB eMMC buffer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(swappable · yours)</span><br>
 <span class="l3">private data: &nbsp;&nbsp;&nbsp;computed by the local model, on the Deck &nbsp;&nbsp;(never uploaded by default)</span><br>
 <span class="l4">cartridge out: compute keeps running → eMMC &nbsp;(history rides in your pocket)</span>
@@ -268,6 +270,16 @@
       <tr><td>LoRa 868/915 MHz</td><td>Sub-GHz 无线网关 · 数百米至公里级</td><td>远端大棚 · 粮仓 · 水塔 · 泵站</td></tr>
       <tr><td>1-Wire</td><td>直挂数字温度探头链</td><td>冷库 · 锅炉房 · 温度链</td></tr>
     </table>
+
+    <h3 style="margin-top:34px">Northbound: the message gateway <span class="zh-tag" style="display:inline;font-size:14px">北向 · 消息网关</span></h3>
+    <p class="sub">Southbound speaks fieldbus to machines; northbound speaks MQTT to everything else. Every bridged device mirrors onto a topic tree — dashboards, automations and other agents subscribe instead of polling.</p>
+    <table>
+      <tr><th>消息层</th><th>能力</th><th>对接什么</th></tr>
+      <tr><td><b>MQTT broker</b>（内置）</td><td>本地 broker（MQTT 3.1.1 / 5.0）—— 每台桥接设备自动映射为话题树 <span class="mono">deck/{device}/{register}</span>，遥测即发布</td><td>Node-RED · Home Assistant · Grafana · SCADA</td></tr>
+      <tr><td><b>MHS ↔ MQTT 映射</b></td><td>MHS 设备树镜像到话题：Agent 订阅即感知，写指令经权限卡闸门</td><td>任何 MQTT 客户端的 Agent / 脚本 / 自动化</td></tr>
+      <tr><td><b>云桥接</b>（可选）</td><td>TLS 桥接到你自己的 broker —— 默认关闭，开启即在页面上标注</td><td>Azure IoT · AWS IoT · 阿里云 · EMQX · 自建</td></tr>
+      <tr><td><b>离线缓冲</b></td><td>断网期间消息落加密卡，重连补发（QoS 1 · store-and-forward）</td><td>弱网现场：大棚 · 泵站 · 移动设备</td></tr>
+    </table>
     <p class="sub" style="margin-top:24px">No protocol island survives: the agent sees one MHS device tree — the Deck translates underneath. Equipment with no digital interface at all falls back to the four contactless sensing modalities.</p>
   </div>
 </section>
@@ -305,6 +317,7 @@
       <tr><td>Sensors</td><td>3-axis accelerometer · IR thermopile · CT clamp (0–100 A) · MEMS mic</td></tr>
       <tr><td>Ports</td><td>CAN 2.0B / J1939 · RS-485 (Modbus RTU multi-drop) · <b>10/100M Ethernet (Modbus TCP)</b> · 1-Wire · OBD-II via adapter</td></tr>
       <tr><td>Radios</td><td>BLE 5.2 · Wi-Fi 4 · <b>LoRa 868/915 MHz</b> (optional)</td></tr>
+      <tr><td>Message layer</td><td><b>Built-in MQTT broker</b> (3.1.1 / 5.0) · MHS↔topic mapping · optional TLS cloud bridge · QoS 1 store-and-forward</td></tr>
       <tr><td>Power</td><td>USB-C PD · optional passive PoE</td></tr>
       <tr><td>Enclosure</td><td>Desktop + IP65 field edition (−20 to 60 °C) + <b>DIN-rail industrial edition</b></td></tr>
       <tr><td>Firmware</td><td><b>Open source, MIT</b> — MHS-compatible registration</td></tr>
