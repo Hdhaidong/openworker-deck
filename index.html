@@ -146,6 +146,7 @@
       <a class="btn sec" href="https://github.com/Hdhaidong/openworker-deck" target="_blank">Watch the repo · 收到上线通知</a>
       <a class="btn sec" href="#tiers">See the tiers</a>
     </div>
+    <p class="sub" style="margin-top:18px;font-size:12.5px">Independent community project — not affiliated with or endorsed by Andrew Ng, deeplearning.ai, or the OpenWorker project. 独立社区项目，与 OpenWorker 官方无隶属或背书关系。</p>
 
     <div class="deck">
       <div class="deck-screen">
@@ -182,22 +183,27 @@
       <div class="card"><div class="ic">📡</div><h3>Detection · 四模态检测</h3><p>Vibration (3-axis accelerometer), thermal (IR thermopile), current signature (CT clamp), and acoustic (MEMS mic) — plus bridging into existing fault codes on equipped machines.</p><div class="en-sub">0–16 g · −20 to 400 °C · 0–100 A</div></div>
       <div class="card"><div class="ic">⚙️</div><h3>Local model · 本地模型计算</h3><p>The on-device NPU runs a <b>local model</b> — anomaly detection and small-model reasoning execute on the Deck itself. <b>Personal and private data are computed locally:</b> your telemetry, your logs, your history never leave the device. Fully offline by default; the optional cloud bridge is opt-in and labeled.</p><div class="en-sub">0.5 TOPS NPU · private data stays local</div></div>
       <div class="card"><div class="ic">🔐</div><h3>Privacy storage · 隐私存储</h3><p>The modern floppy, but a vault: a <b>removable, hardware-encrypted cartridge</b> (up to 512 GB). Pull it out and your data physically leaves with you — nothing readable stays behind. The key lives in the cartridge, not the machine. 软盘的形态，保险库的内核。</p><div class="en-sub">AES-encrypted cartridge · pull-to-own · 512 GB</div></div>
-      <div class="card"><div class="ic">🛡️</div><h3>Risk prediction · 风险预测</h3><p>Three risk classes per device, not just failure: <b>failure risk</b> (RUL curves — bearing wear, belt stretch, filter clog), <b>safety risk</b> (CO trends, thermal-runaway precursors, overload patterns — escalated before danger), <b>compliance risk</b> (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, action, evidence.</p><div class="en-sub">failure · safety · compliance — briefed, not buried</div></div>
+      <div class="card"><div class="ic">🛡️</div><h3>Risk prediction · 风险预测</h3><p>Three risk classes per device, not just failure: <b>failure risk</b> (RUL curves — bearing wear, belt stretch, filter clog), <b>safety risk</b> (CO trends, thermal-runaway precursors, overload patterns — flagged early for human review), <b>compliance risk</b> (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, action, evidence. It informs decisions — it never acts as a safety system.</p><div class="en-sub">failure · safety · compliance — briefed, not buried</div></div>
     </div>
   </div>
 </section>
 
 <section id="arch">
   <div class="wrap">
-    <div class="kicker">// architecture / 计算存储分离</div>
-    <h2>Compute and storage, cleanly split</h2>
-    <p class="sub">不是软盘，也不是黑盒 —— 计算平面与存储平面解耦：隐私数据由本地模型计算，历史装进可拔的加密卡。数据是你的，算力是它出的。</p>
+    <div class="kicker">// privacy cartridge / 软盘形态隐私卡</div>
+    <h2>Your data used to have a shape you could hold. It does again.</h2>
+    <p class="sub">你的数据曾经有形状、拿得起来——后来云把它吃掉了。隐私卡把形状还给你：3.5″ 软盘轮廓、装甲金属内核、512 GB 硬件加密。<b>The key lives in the disk, not in the machine.</b></p>
     <div class="design-grid" style="margin-bottom:22px">
       <figure>
         <img src="img/cartridge-floppy.jpg" alt="Floppy-form encrypted storage cartridge — the 3.5-inch silhouette reborn in armored metal with metal shutter and engraved lock icon">
-        <figcaption><b>Pull-to-own · 拔盘即离场</b> — 软盘的形态，保险库的内核：3.5″ 轮廓重铸装甲金属，密钥在盘里，不在机器里。The key lives in the disk, not the machine.</figcaption>
+        <figcaption><b>Pull-to-own · 拔盘即离场</b> — 金属滑盖 = 物理写保护，铭刻锁孔 = 密钥在盘，标签区 = 人工识别。拔出来，卡槽就只是一个空槽，什么都留不下。</figcaption>
+      </figure>
+      <figure>
+        <img src="img/privacy-cartridge.jpg" alt="Close-up of the removable encrypted privacy cartridge being pulled from the OpenWorker Deck">
+        <figcaption><b>Three seconds, no menus · 三秒，无菜单</b> — 没有设置页，没有导出向导，没有"正在准备您的档案"进度条。像当年退软盘一样，用手把数据退出来。</figcaption>
       </figure>
     </div>
+    <p class="sub" style="margin-bottom:22px"><b>Compute here. Store there. 计算在这，存储在那。</b> The Deck runs two planes, separated on purpose: the compute plane — NPU, local model, sensing — never leaves the device; the storage plane is the cartridge. Pull it and the archive physically leaves with you; the Deck keeps running on 8 GB eMMC and syncs the moment you re-insert. Nothing breaks — and by design, nothing readable is left behind. 这就是"计算存储分离"做成金属而不是做成隐私政策的样子。</p>
     <div class="loop">
 <span class="l1">compute plane: &nbsp;local model · NPU anomaly detection · MHS registry · protocol bridge · MQTT broker &nbsp;(always on)</span><br>
 <span class="l2">storage plane: &nbsp;encrypted cartridge · 8 GB eMMC buffer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(swappable · yours)</span><br>
@@ -212,6 +218,11 @@
       <tr><td>Failure isolation</td><td>A dead cartridge doesn't kill the sensor — edge detection continues, buffering to eMMC until you re-insert.</td></tr>
       <tr><td>Audit path</td><td>Hand the cartridge (not the machine) to an auditor — the compliance trail travels without the live sensor.</td></tr>
     </table>
+    <div class="grid" style="margin-top:24px">
+      <div class="card"><div class="ic">🏥</div><h3>Clinic · 诊所</h3><p>打烊时，盘进抽屉。今晚维护与合规记录不在任何网络上。</p></div>
+      <div class="card"><div class="ic">🧪</div><h3>Lab · 实验室</h3><p>一整年的实验遥测，装在衬衫口袋里去合作方现场。</p></div>
+      <div class="card"><div class="ic">🏠</div><h3>Home · 家</h3><p>卖房子不卖数据——盘几个月前就走了。</p></div>
+    </div>
   </div>
 </section>
 
@@ -239,6 +250,29 @@
       </figure>
     </div>
     <p class="sub" style="margin-top:20px">Design render, EVT-phase concept — final tooling may adjust. 设计渲染为 EVT 概念阶段，量产模具或有微调。</p>
+  </div>
+</section>
+
+<section id="socket">
+  <div class="wrap">
+    <div class="kicker">// socket edition / 插座版</div>
+    <h2>Your washer has no Modbus port. It has a plug. That's enough.</h2>
+    <p class="sub">值得盯的机器，大多生来就没打算被盯：洗衣机没有 RS-485，热水器不会说 CAN，后屋那台空压机比 BLE 老二十岁。它们与现代世界共享的接口只有一个——插头。插座版是 Deck 生态的零接线大门：<b>插上墙，电器插它上面，完事。</b>不用电工，不用配协议，不用开柜子。</p>
+    <div class="design-grid" style="margin-bottom:22px">
+      <figure>
+        <img src="img/deck-socket.jpg" alt="OpenWorker Deck socket edition — smart-plug form factor in a wall outlet with pass-through socket and current-waveform strip">
+        <figcaption><b>Zero wiring · 零接线</b> — 紫环状态灯在盯的时候会呼吸，电流波形条用荧光绿显示实时电流。被盯这件事，应该看得见。</figcaption>
+      </figure>
+    </div>
+    <p class="sub" style="margin-bottom:22px"><b>What a current signature knows · 电流特征知道什么。</b> Built-in sensing reads the power signature directly: start-current spikes, duty-cycle drift, running-current creep — compressor stall, heating-element degradation, bearing wear in the drum motor <i>weeks before it's audible</i>. The local model turns the waveform into risk classes on the Deck, and the socket registers itself on MHS like any other device — your agent sees <i>"washer"</i> on the topic tree, not <i>"unknown plug 3"</i>.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🚿</div><h3>Water heater · 热水器</h3><p>Deck 学会你的用水节奏，在洗出温水澡之前、而不是之后，标记加热管老化。</p></div>
+      <div class="card"><div class="ic">🔧</div><h3>Compressor · 空压机</h3><p>堵转特征在傍晚 6:40 被捕获，赶在早班要用气之前。</p></div>
+      <div class="card"><div class="ic">🏘️</div><h3>Rental units · 出租屋</h3><p>$129 覆盖三台电器，接线少到房东永远不会发现。</p></div>
+      <div class="card"><div class="ic">🏭</div><h3>Workshop · 车间</h3><p>入门尺寸的工业监控：空压机、除尘器、冷却泵——三个插座，一份点名到机的早报。柜内配 DIN 轨工业版，同一个 Agent 同时读现场总线和插拔舰队。</p></div>
+    </div>
+    <p class="sub" style="margin-top:16px;font-size:13px">以上为典型场景示例——检测能力为 EVT 阶段设计目标，实际效果以量产实测为准，不构成性能保证。</p>
+    <p class="sub" style="margin-top:16px"><b>The cheapest seat in the ecosystem. 生态里最便宜的座位。</b> Not every machine deserves a DIN-rail gateway — some machines just need someone to notice when they start limping. That's the whole job — at Kickstarter it works out to <b>$43 an outlet</b>（三只装众筹价折算；量产零售价另定，认证参数 DVT 后写定）。</p>
   </div>
 </section>
 
@@ -342,7 +376,7 @@
       <div class="tier hot"><span class="flag">LIMITED 500</span><div class="tname">Early Bird</div><div class="price">$89</div><p>1× Deck · sensor set · desk stand</p></div>
       <div class="tier"><div class="tname">Standard</div><div class="price">$109</div><p>1× Deck · sensor set</p></div>
       <div class="tier"><div class="tname">Duo</div><div class="price">$199</div><p>2× Decks — desk + workshop</p></div>
-      <div class="tier"><div class="tname">Socket Trio</div><div class="price">$129</div><p>3× socket editions — 零接线接入三台电器</p></div>
+      <div class="tier"><div class="tname">Socket Trio</div><div class="price">$129</div><p>3× socket editions — washer · water heater · compressor 零接线点名到机，不进配电柜的最便宜工业监控</p></div>
       <div class="tier"><div class="tname">Fleet</div><div class="price">$499</div><p>6× Decks · field edition · fleet dashboard</p></div>
       <div class="tier"><div class="tname">Clinic / Lab</div><div class="price">$899</div><p>10× Decks · compliance templates · priority support</p></div>
     </div>
@@ -366,14 +400,20 @@
 
 <section>
   <div class="wrap">
-    <div class="kicker">// honesty / 风险</div>
-    <h2>Risks, stated plainly</h2>
+    <div class="kicker">// honesty / 风险与合规</div>
+    <h2>Risks and compliance boundaries, stated plainly</h2>
     <ul class="risk">
       <li><b>MHS is a research preview.</b> The Deck follows its published pattern — standard drivers, plain-language safety labels, read/write discipline — and tracks the spec as it stabilizes. Firmware is open source; updates ship as they land.</li>
-      <li><b>Certification timing</b> (FCC/CE and regional equivalents) gates shipping dates; PVT is buffered accordingly.</li>
+      <li><b>Certification timing</b> (FCC/CE and regional equivalents) gates shipping dates; PVT is buffered accordingly. Nothing on this page is certified yet.</li>
       <li><b>Component supply</b> — SoC and display both have second-source plans.</li>
-      <li><b>Compliance boundaries are fixed:</b> the Deck is a monitoring device. It is not a medical device, and it does not replace certified fire-safety inspection.</li>
+      <li><b>Medical boundary, fixed:</b> the Deck is a <b>monitoring device</b>. It is not a medical device, makes no diagnosis or treatment claims, and is never patient-connected. Clinic scenarios describe data storage of maintenance records only. 涉及患者的任何判断，永远由持证人员进行。</li>
+      <li><b>Fire safety boundary, fixed:</b> detector-health and pressure-trend logs support — never replace — certified inspection and code-mandated testing.</li>
+      <li><b>Electrical safety:</b> the socket edition's pass-through load rating is an EVT target spec; the final rating ships only after certification, and high-power resistive loads (space heaters etc.) are out of scope until certified figures are published.</li>
+      <li><b>Encryption export:</b> the encrypted cartridge contains cryptography subject to export-control regulations; we ship in accordance with applicable law and will state any country restrictions before the campaign closes.</li>
+      <li><b>Performance claims:</b> detection scenarios on this page are design goals illustrated with typical examples. Actual detection performance is established by DVT measurements and published in the build log — not guaranteed by the campaign.</li>
+      <li><b>Pricing:</b> tier prices are campaign prices. Future retail pricing, if any, is not locked by this campaign.</li>
     </ul>
+    <p class="sub" style="margin-top:20px;font-size:13px">Not medical advice. Not a certified safety system. Concept renders throughout — EVT-phase industrial design, final tooling may adjust. 本页非医疗建议，非认证安全系统；全页渲染为 EVT 概念阶段。</p>
   </div>
 </section>
 
@@ -405,6 +445,7 @@
 <footer>
   <div class="wrap">
     <p><a href="https://github.com/andrewyng/openworker" target="_blank">OpenWorker</a> companion hardware · MHS-compatible · open firmware (MIT) · <a href="campaign-kit.html">Campaign copy &amp; design kit · 文案与视觉设计稿</a></p>
+    <p class="fr">This is an independent community project. It is <b>not affiliated with, endorsed by, or sponsored by</b> Andrew Ng, deeplearning.ai, or the OpenWorker project — "OpenWorker" is used solely to indicate compatibility, under its <a href="https://github.com/andrewyng/openworker" target="_blank">MIT license</a> terms with attribution. 本项目为独立社区项目，与 Andrew Ng、deeplearning.ai 及 OpenWorker 官方无任何隶属或背书关系；"OpenWorker" 名称仅用于说明兼容性。</p>
     <p class="fr">© 2026 Hdhaidong — Kickstarter campaign page (pre-launch). Specs are targets for the EVT phase; tiers and dates are campaign commitments pending platform launch review.</p>
   </div>
 </footer>
