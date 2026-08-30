@@ -84,7 +84,7 @@ li{margin:6px 0;color:var(--text)}
 
 <header>
   <div class="wrap" style="padding-top:72px">
-    <div class="kicker">// campaign kit · v1.1 · 2026-08-31</div>
+    <div class="kicker">// campaign kit · v1.2 · 2026-08-31</div>
     <h1>OpenWorker Deck<br>众筹文案与视觉设计稿</h1>
     <p class="sub">Kickstarter 页面完整物料包：页面结构地图 · 逐节双语文案 · 视觉排布 · 设计规范。线上落地页：<a href="https://hdhaidong.github.io/openworker-deck/" target="_blank">hdhaidong.github.io/openworker-deck</a></p>
     <div>
@@ -107,6 +107,11 @@ li{margin:6px 0;color:var(--text)}
       <a href="#design">08 工业设计</a>
       <a href="#cartridge">08a 软盘隐私卡 · 专项文案</a>
       <a href="#socket">08b 插座版 · 专项文案</a>
+      <a href="#sosweather">08c SOS + 气象 · 专项文案</a>
+      <a href="#eldercare">08d 养老守护 · 专项文案</a>
+      <a href="#pendantkit">08e 守护吊牌 · 专项文案</a>
+      <a href="#orkit">08f 手术室与医疗设施 · 专项文案</a>
+      <a href="#insurekit">08g 保险全链路 · 专项文案</a>
       <a href="#tiers">09 众筹档位</a>
       <a href="#timeline">10 时间线</a>
       <a href="#rr">11 风险与挑战</a>
@@ -574,11 +579,234 @@ you return:         Deck → buffered history → OpenWorker   <span class="b">(
   </div>
 </section>
 
+<!-- ============ 08C SOS + 气象专项文案 ============ -->
+<section id="sosweather">
+  <div class="wrap">
+    <div class="kicker">// 08c · sos &amp; weather · dedicated copy</div>
+    <h2>SOS 急救提醒与气象计算 <em>— "该喊的时候喊，该躲的时候躲"</em></h2>
+
+    <h3>标题方案 <em>— A/B 二选一</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "One long press. Everything it can do, it does."</p>
+      <p><b>B.</b> "A body should know when to shout — and when to head for shelter."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "长按一次。能做的，它全做。"</p>
+      <p><b>B.</b> "该喊的时候喊，该躲的时候躲。"</p>
+    </div>
+
+    <h3>SOS 主文案 <em>— 产品故事</em></h3>
+    <div class="copy en">
+      <div class="lang">English · SOS body copy</div>
+      <p><b>The SOS button is the one control that needs no screen, no menu, no explanation.</b> Long-press 1.5 seconds and the Deck does what a body should: the status ring strobes, the piezo sounds — its own voice first, because the workshop's far end doesn't read notifications. Then the broadcast: an SOS card with device location from the registry and the last minute of telemetry, pushed over MQTT to the contacts and agents you named. No Wi-Fi on site? LoRa long-range carries the shout to receivers kilometers out — greenhouses, pump stations, valley pastures. Solo in the field: no confirmation and the escalation sequence runs — family first, backup contacts next. Someone knowing is where first aid starts.</p>
+      <p><b>Notification only.</b> It does not call emergency services — in a real emergency, you call local services first. Misfire? Press again within 3 seconds to cancel.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · SOS 主文案</div>
+      <p><b>SOS 键是唯一不需要屏幕、不需要菜单、不需要解释的控制。</b>长按 1.5 秒，Deck 做一个身体该做的事：灯环爆闪、蜂鸣响起——先亮自己的嗓子，因为车间的另一头不看通知。然后是广播：SOS 卡片带注册表里的设备位置和最近一分钟遥测，经 MQTT 推给你指定的联系人和 Agent。现场没有 Wi-Fi？LoRa 长距信道把喊声送到数公里外的接收端——大棚、泵站、山谷牧场。独自作业：无人确认就按预设序列升级——先家人，后备用联系人。有人知道，是急救的第一步。</p>
+      <p><b>仅通知，不代拨。</b>它不呼叫急救服务——真实紧急情况，请先打当地急救电话。误触？3 秒内再按一次取消。</p>
+    </div>
+
+    <h3>气象主文案 <em>— 产品故事</em></h3>
+    <div class="copy en">
+      <div class="lang">English · weather body copy</div>
+      <p><b>Weather, computed where you stand.</b> No subscription, no app, no cloud: the on-board barometer and humidity sensor feed the local model — pressure trend, dew point, frost probability, heat index all run on the Deck itself. The point isn't forecasting; it's cross-reading weather into your equipment list: frost probability × pivot irrigation → a pre-dawn watering advisory; heat index × compressor duty → a derating schedule; pressure drop rate → an outdoor-protection checklist; rain streak × pump status → pre-flood-season test reminders. One climate event, one action per machine. Official warnings still come from meteorological agencies — the Deck is the offline complement that turns them into tasks.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 气象主文案</div>
+      <p><b>天气，站在哪就算在哪。</b>不订阅、不装 App、不上云：板载气压计与湿度传感器喂给本地模型——气压趋势、露点、霜冻概率、热指数全在 Deck 上算。重点不是报天气，是把天气读进你的设备清单：霜冻概率 × 灌溉枢轴 → 凌晨预灌建议；热指数 × 空压机负载 → 降容排程；气压骤降率 → 户外防护清单；连雨湿度 × 泵站状态 → 汛前试机提醒。一个气候事件，每台机器一条动作。官方预警仍出自气象部门——Deck 是把它们翻译成任务的那个离线补充。</p>
+    </div>
+
+    <h3>场景文案 <em>— 气象四象限</em></h3>
+    <div class="copy zh">
+      <div class="lang">中文 · 场景一句话</div>
+      <ul>
+        <li><b>霜冻。</b>霜冻概率 × 灌溉枢轴 → 凌晨预灌建议：水护苗。提前 6 小时进早报，不用你半夜盯天。</li>
+        <li><b>热浪。</b>热指数 × 空压机 → 降容排程：高温时段减载运行，避开热故障高发窗口。</li>
+        <li><b>风暴。</b>气压骤降率 → 户外设备防护清单：盖发电机、收工具、加固棚顶——清单式提醒，逐项确认。</li>
+        <li><b>洪涝。</b>连雨湿度 × 泵站 → 排水泵试机提醒：汛前验证每台泵打得着火。</li>
+      </ul>
+    </div>
+
+    <div class="note"><b>合规红线：</b>SOS 绝不写"呼叫急救服务"——通知与警报可以，代拨电话不行；真实紧急情况的指引永远是"先打当地急救电话"。气象绝不做官方预警的替代——"本地推算 + 设备关联动作"是它的全部疆界，官方预警机构永远优先。<i>极端气候的卖点是"规避动作"而不是"预报准确"——前者承诺的是清单，后者承诺的是准确率，只有前者是硬件能兑现的。</i></div>
+  </div>
+</section>
+
+<!-- ============ 08D 养老守护专项文案 ============ -->
+<section id="eldercare">
+  <div class="wrap">
+    <div class="kicker">// 08d · elder care · dedicated copy</div>
+    <h2>养老守护 <em>— "数据算在家里，判断留给人"</em></h2>
+
+    <h3>标题方案 <em>— A/B 二选一</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "Your parents' health data, computed at home — not in someone's cloud."</p>
+      <p><b>B.</b> "It learns what's normal for THEM. Then it watches for the departure."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "父母的健康数据，算在家里，不在云上。"</p>
+      <p><b>B.</b> "它学的是'他自己'的正常——然后盯着偏离。"</p>
+    </div>
+
+    <h3>主文案 <em>— 产品故事</em></h3>
+    <div class="copy en">
+      <div class="lang">English · body copy</div>
+      <p><b>Most elder-care devices upload everything. This one inverts that.</b> The blood-pressure cuff, the glucose meter, the pulse oximeter, the scale, the wearable — all standard BLE health profiles, all pairing directly with the Deck. No apps to install, no accounts to register: the elder measures, the data lands on the encrypted cartridge, and the key travels with the disk.</p>
+      <p><b>The comparison model: the baseline is the elder's own, not a population's.</b> A 7-day rolling baseline per metric — blood-pressure rhythm, activity, sleep. Evaluation is deviation from <i>their own</i> normal: today's systolic 18% above HIS baseline → a trend card to family. Never population thresholds, never the word "hypertension" — that word belongs to a doctor. Anomaly plus no family confirmation inside the window escalates to the SOS sequence from the previous section.</p>
+      <p><b>Care-model evaluation: alerts that learn from the family.</b> Every reminder gets confirmed or dismissed, and the model recalibrates — false alarms fall week over week. A weekly digest rides the family's MQTT topic: trends, medication adherence, anomaly counts, sensitivity changes. What's evaluated is the model, not the elder.</p>
+      <p><b>Robots join the same loop.</b> Care robots register via MHS — same read/write discipline, same safety labels — or hang off the MQTT topic tree for ROS/ROS2. Interaction history (sensors + health baseline + robot action log) stays on the encrypted cartridge as local training data, and robot actions are scored against the elder's baseline plus family feedback. Physical assistance requires the physical Approve button: evaluation hands out scores, the gate stays human.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 主文案</div>
+      <p><b>市面上的养老设备把一切上传。这台反过来。</b>血压计、血糖仪、血氧仪、体重秤、穿戴设备——全是蓝牙标准健康档案，全部与 Deck 直连。不装 App、不注册账号：老人测量，数据落本地加密卡，密钥跟着盘走。</p>
+      <p><b>对照模型：基线是老人自己的，不是人群的。</b>每个指标 7 天滚动基线——血压节律、活动、睡眠。评估是对<b>他自己正常值</b>的偏离：今天的收缩压比他自己的基线高 18% → 趋势卡发给家人。不用人群阈值，不说"高血压"——那个词属于医生。异常 + 窗口内家人无确认，升级为上一节的 SOS 序列。</p>
+      <p><b>养老模型评估：提醒从家人反馈里学。</b>每条提醒被确认或忽略，模型自校准——误报逐周下降。每周摘要经家人订阅的 MQTT 话题送达：趋势、用药依从性、异常次数、灵敏度变化。被评估的是模型，不是老人。</p>
+      <p><b>机器人进同一个环。</b>护理机器人经 MHS 注册——同一套读写纪律、同一套安全标签——或经 MQTT 话题树接入 ROS/ROS2。交互历史（传感 + 健康基线 + 机器人动作日志）留在本地加密卡作为训练数据，机器人动作对照老人基线加家人反馈打分。物理辅助必须过实体确认键：评估给分数，闸门留给人。</p>
+    </div>
+
+    <h3>场景文案 <em>— 三句话，三种居住</em></h3>
+    <div class="copy en">
+      <div class="lang">English · scenario one-liners</div>
+      <ul>
+        <li><b>Living alone.</b> Blood pressure spikes against his own baseline — the daughter gets the trend card before she gets the worry.</li>
+        <li><b>Medication.</b> Reminders ring-and-light, confirm-to-clear; missed doses land in the weekly digest — no nagging, but it remembers.</li>
+        <li><b>Care home.</b> N elders, N baselines, one Deck per room — BLE multi-pair, family digests separated per topic.</li>
+      </ul>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 场景一句话</div>
+      <ul>
+        <li><b>独居。</b>血压对"他自己"的基线突升——女儿先收到趋势卡，再收到担心。</li>
+        <li><b>用药。</b>提醒灯环加蜂鸣，确认即消；漏服次数进周报——不唠叨，但记得。</li>
+        <li><b>养老院。</b>N 位老人、N 条基线、每屋一台 Deck——BLE 多配对，家人周报按话题分流。</li>
+      </ul>
+    </div>
+
+    <div class="note"><b>合规红线（本节最重）：</b>非医疗器械、不做诊断、不用人群诊断阈值——三个"不"必须贯穿每一句。<i>可用词：监测、提醒、趋势、偏离、个人基线。禁用词：诊断、检测出疾病、预测疾病、血压高/糖尿病。就医决策永远写"由家人与医生判断"。机器人物理辅助必须"过实体确认键、人在环中"——评估分数与安全闸门分离，是这节文案最重要的一句。</i></div>
+  </div>
+</section>
+
+<!-- ============ 08E 守护吊牌专项文案 ============ -->
+<section id="pendantkit">
+  <div class="wrap">
+    <div class="kicker">// 08e · guardian pendant · dedicated copy</div>
+    <h2>无屏守护吊牌 <em>— "打得了电话，刷不了视频"</em></h2>
+
+    <h3>标题方案 <em>— A/B 二选一</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "It can call home. It can't play a video — because it has no screen."</p>
+      <p><b>B.</b> "Everything the walk home needs. Nothing it doesn't."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "打得了电话，刷不了视频——因为它没有屏幕。"</p>
+      <p><b>B.</b> "放学路上该有的都有，不该有的一概没有。"</p>
+    </div>
+
+    <h3>主文案 <em>— 产品故事</em></h3>
+    <div class="copy en">
+      <div class="lang">English · body copy</div>
+      <p><b>The kids' watch market solved the wrong problem: it gave children a screen to keep them safe.</b> The pendant returns to the brief — reachability without the feed. One device, three wearers: the school kid on the walk home, the nursing-home elder, the outdoor worker. nano-SIM in, it calls the preset contacts and nothing else; no screen means no short videos, no games, no "five more minutes." SOS long-press sends location and recent track to the guardian sequence and loops until someone confirms — with the family Deck's ring strobing in parallel. And the privacy nobody offers: triple positioning (GPS/WiFi/cellular) relays home to the family Deck, where track history lands on the encrypted cartridge — not a vendor cloud. For a family, that's the difference between knowing where your kid is and a corporation knowing.</p>
+      <p><b>For a rescue, the golden information is where, what, and since when.</b> The SOS card carries it: one-key location, a rescue-context card (blood type, allergies, chronic conditions — filled by family, stored locally), and the confirmation timeline. For claims, the evidence package assembles itself — timeline, telemetry digest, guardian confirmations — exported as PDF/JSON from the cartridge, while the insurer sees digests and your originals stay on the disk.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 主文案</div>
+      <p><b>儿童手表市场解错了题：为了安全，给了孩子一块屏幕。</b>吊牌回到题面——要的是"联系得上"，不是"刷得动"。一个硬件，三类佩戴者：放学路上的小学生、养老院的老人、户外作业者。nano-SIM 插入即通，只打预设联系人；没有屏幕，就没有短视频、没有游戏、没有"再看五分钟"。SOS 长按：位置 + 最近轨迹推送到监护人序列，循环直至确认——家里 Deck 的灯环同步爆闪。还有没人给过的隐私：GPS/WiFi/基站三重定位回到<b>家里的 Deck</b>，轨迹落本地加密卡——不是某家厂商的云。对家庭来说，这是"你知道孩子在哪"和"某家公司知道"的区别。</p>
+      <p><b>急救的黄金信息是"在哪、什么情况、从什么时候开始"。</b>SOS 卡片全带着：一键定位、救援背景卡（血型、过敏、慢病——家属填写、本地存储）、确认时间线。理赔侧，证据包自动组装——时间线、遥测摘要、监护确认——从加密卡导出 PDF/JSON，保险看摘要，原始数据留盘里。</p>
+    </div>
+
+    <h3>场景文案 <em>— 三句话，三种佩戴</em></h3>
+    <div class="copy zh">
+      <div class="lang">中文 · 场景一句话</div>
+      <ul>
+        <li><b>放学。</b>校门到家 20 分钟，轨迹到家即存本地卡——放学路上没屏幕，只有通话和定位。</li>
+        <li><b>养老院。</b>每人一枚吊牌，床号写进位置卡——SOS 一键，护工和家属同时知道在哪个房间。</li>
+        <li><b>工地。</b>山谷牧场、跨区工地：一键 SOS，位置卡推监护人序列，循环到有人按下确认。</li>
+      </ul>
+    </div>
+
+    <div class="note"><b>合规红线：</b>未成年人个人信息——监护人同意 + 最小必要（PIPL），只采集位置与通信元数据；SOS 通知监护人序列而非急救服务，真实紧急情况先打当地急救电话；蜂窝与射频合规（SRRC 型号核准、进网许可）量产前完成。<i>"无屏"是卖点也是立场：绝不暗示其他产品有害，只说"没有屏幕就没有短视频"。理赔证据包只写"数据准备"，预付保险计划未获批前不构成任何保障承诺。</i></div>
+  </div>
+</section>
+
+<!-- ============ 08F 手术室与医疗设施专项文案 ============ -->
+<section id="orkit">
+  <div class="wrap">
+    <div class="kicker">// 08f · medical facilities · dedicated copy</div>
+    <h2>手术室与医疗设施 <em>— "手术有人盯，设备没人盯"</em></h2>
+
+    <h3>标题方案 <em>— A/B 二选一</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "In the OR, what nobody watches is what needs watching."</p>
+      <p><b>B.</b> "The surgery has a team. The equipment has no one."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "手术室里最该被盯的，是没人在盯的。"</p>
+      <p><b>B.</b> "手术有团队，设备没人管。"</p>
+    </div>
+
+    <h3>主文案 <em>— 产品故事</em></h3>
+    <div class="copy en">
+      <div class="lang">English · body copy</div>
+      <p><b>The Deck enters a medical facility to do exactly two jobs: equipment health and environment compliance.</b> Sterilizer cycles and batch records, anesthesia-machine and ventilator run-hours, surgical-light ballasts, the surgical elevator — read directly over Modbus, maintenance countdowns decrementing on their own. Temperature, humidity, pressure differential, HEPA lifetime, air quality — sensed and logged to the encrypted cartridge, so the audit trail travels with the disk. A monthly facility report combines both into audit-format export: the self-check draft before the regulator visit or the JCI review.</p>
+      <p><b>And the discipline that makes it OR-safe: during surgery, read-only.</b> Never patient-connected, never clinical; any write operation — calibration, reset — queues behind the physical button until the procedure ends. Equipment maintenance always yields to the surgery.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 主文案</div>
+      <p><b>Deck 进医疗设施只做两件事：设备健康与环境合规。</b>灭菌器周期与批次记录、麻醉机与呼吸机运行时长、无影灯镇流器、手术电梯——Modbus 直读，维护周期自动递减。温湿度、压差、HEPA 滤芯寿命、空气质量——传感挂入、记录落加密卡，审计跟着盘走。月度设施评估报告把两者合成审计格式一键导出：卫健委检查与 JCI 评审前的自检底稿。</p>
+      <p><b>让它能进手术室的纪律：术中只读。</b>不碰患者回路、不做临床判断；任何写操作（校准、复位）排队到术后，实体确认键物理上锁——设备维护永远给手术让路。</p>
+    </div>
+
+    <div class="note"><b>合规红线：</b>只监测设备与环境——不接患者回路、不做临床判断、术中只读不写；医疗环境电磁兼容（IEC 60601-1-2）为 DVT 目标；合规记录的效力以当地监管与评审机构认定为准。<i>这一节的每个卖点（就绪评估、审计报告）都必须写明"设备与环境"——读者一旦以为是患者监测，整节就踩线了。</i></div>
+  </div>
+</section>
+
+<!-- ============ 08G 保险全链路专项文案 ============ -->
+<section id="insurekit">
+  <div class="wrap">
+    <div class="kicker">// 08g · insurance full chain · dedicated copy</div>
+    <h2>保险全链路 <em>— "保单看摘要，数据不出盘"</em></h2>
+
+    <h3>标题方案 <em>— A/B 二选一</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "The policy sees digests. Your data never leaves the disk."</p>
+      <p><b>B.</b> "Underwriting from authorized digests — not from your raw life."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "保单看摘要，数据不出盘。"</p>
+      <p><b>B.</b> "核保看的是授权摘要——不是你的原始人生。"</p>
+    </div>
+
+    <h3>主文案 <em>— 产品故事</em></h3>
+    <div class="copy en">
+      <div class="lang">English · body copy</div>
+      <p><b>Insurance runs on data it was never allowed to see. The chain runs the other way.</b> Sense: health baseline, equipment, environment, SOS events — raw data on the cartridge. Compute: the local model turns it into risk tiers and event summaries — digests that are verifiable (signed, timestamped) but opaque. Authorize: a consent card per sharing act — which metric, which institution, how much, for how long — effective only when the physical Approve button is pressed, revocable anytime, every grant audited. Underwrite: a licensed insurer evaluates from those digests — seeing trust without seeing you. Claims: the SOS timeline, telemetry digest and guardian confirmations assemble into a one-tap evidence package (PDF/JSON), turning dispute cycles into checklists.</p>
+      <p><b>The surgical chain is the same architecture, tightening one notch.</b> Pre-op it evaluates <i>facility readiness</i> — sterilizer batches, anesthesia maintenance, environment in spec — never the patient's surgical risk. Intra-op it records a passive, signed, read-only timeline. Post-op it tracks equipment cycles, environment compliance and authorized recovery digests. And when a dispute goes to arbitration, the neutral equipment and environment records are there for arbitration bodies and forensic experts — the Deck provides records, never verdicts.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 主文案</div>
+      <p><b>保险运转在它从未被允许看见的数据上。这条链反着走。</b>传感：健康基线、设备、环境、SOS 事件——原始数据在加密卡。计算：本地模型算成风险分级与事件摘要——摘要可验（签名 + 时间戳）但看不穿。授权：每次共享一张授权卡——哪项数据、给哪家机构、看到什么程度、给多久——实体确认键按下才生效，随时可撤，每次授权有审计。核保：持牌机构凭摘要评估——看得见信任，看不见你。理赔：SOS 时间线、遥测摘要、监护确认自动成包（PDF/JSON），理赔周期从扯皮变成对表。</p>
+      <p><b>手术保险链是同一套架构，收紧一档。</b>术前评的是<b>设施就绪</b>——灭菌器批次、麻醉机维护、环境达标——绝不评患者手术风险。术中被动只读、签名时间线。术后追踪设备周期、环境合规与授权恢复期摘要。纠纷进仲裁时，中立的设备与环境记录就在那里——Deck 提供记录，不提供裁决。</p>
+    </div>
+
+    <div class="note"><b>合规红线（金融 + 医疗双敏感）：</b>我们不是保险公司，全链路是数据准备与授权基础设施——核保、定价、赔付归持牌机构；监管审批前不承诺任何核保结果与赔付；健康数据用于核保按 PIPL 敏感个人信息规则单独明示同意；预付保险计划未获批则等值折让。<i>禁用词：保障、赔付承诺、保费优惠、免责。手术链禁用词：患者风险评估、手术成功率、责任判定。"授权""摘要""证据包"是安全词。</i></div>
+  </div>
+</section>
+
 <!-- ============ 09 TIERS ============ -->
 <section id="tiers">
   <div class="wrap">
     <div class="kicker">// 09 · reward tiers</div>
-    <h2>众筹档位 <em>— 六档，从冲动到机构</em></h2>
+    <h2>众筹档位 <em>— 七档，从冲动到机构</em></h2>
 
     <table>
       <tr><th>档位 Tier</th><th>价格</th><th>回报 Includes</th><th>目标人群</th></tr>
@@ -586,6 +814,7 @@ you return:         Deck → buffered history → OpenWorker   <span class="b">(
       <tr><td><b>Standard</b></td><td>$109</td><td>1× Deck · 传感套件</td><td>个人用户</td></tr>
       <tr><td><b>Duo</b></td><td>$199</td><td>2× Deck —— 桌面 + 工作台</td><td>重度用户 / 小团队</td></tr>
       <tr><td><b>Socket Trio</b></td><td>$129</td><td>3× 插座版 —— 三台电器零接线接入</td><td>家庭 / 出租屋 / 小车间</td></tr>
+      <tr><td><b>Guardian Pack</b></td><td>$159</td><td>1× Deck · 2× 无屏守护吊牌（小学生 / 老人）· 预付保险计划首年（审批后生效，未落地等值折让）</td><td>有老人 / 孩子的家庭</td></tr>
       <tr><td><b>Fleet</b></td><td>$499</td><td>6× Deck · 场版（IP65）· 车队仪表盘</td><td>农机队 / 维保团队</td></tr>
       <tr><td><b>Clinic / Lab Pack</b></td><td>$899</td><td>10× Deck · 合规报告模板 · 优先支持</td><td>诊所 / 实验室</td></tr>
     </table>
@@ -594,12 +823,14 @@ you return:         Deck → buffered history → OpenWorker   <span class="b">(
       <div class="lang">English · 档位引导文案</div>
       <p><b>$89 gets you what a $426 gateway can't:</b> the protocols <i>and</i> the agent. Early birds fund the first EVT run — and get the cartridge slot labeled with their backer number.</p>
       <p><b>Already have a Deck? $129 covers the three machines that never made it onto any bus.</b> Socket Trio is the add-on tier: washer, water heater, compressor — zero wiring, each one reporting to the same agent morning brief. The cheapest industrial monitoring that doesn't involve a panel.</p>
+      <p><b>Elders or kids at home? $159 is the one that watches over them.</b> Guardian Pack: a Deck plus two screenless pendants — calls to preset contacts only, one-key SOS with location, track history on the family's encrypted cartridge. First-year prepaid care plan rides along <i>if</i> the licensed partnership clears approval; otherwise the equivalent comes back as credit. No promise before it exists.</p>
     </div>
 
     <div class="copy zh">
       <div class="lang">中文</div>
       <p><b>$89 买到 $426 网关买不到的东西：</b>协议之外，还有 Agent。早鸟资助首批 EVT 板——存储卡槽旁激光刻 backers 编号。</p>
       <p><b>已经有 Deck 了？$129 搞定三台从没上过总线的机器。</b>Socket Trio 是加购档：洗衣机、热水器、空压机——零接线，同一份 Agent 早报点名。不进配电柜的最便宜工业监控。</p>
+      <p><b>家里有老人或孩子？$159 是看住他们的那一档。</b>Guardian Pack：一台 Deck 加两枚无屏守护吊牌——只通预设联系人、SOS 一键定位、轨迹落家里的加密卡。首年预付保险计划<b>若</b>持牌合作获批则随档附赠，未落地则等值折让——承诺之前，先不承诺。</p>
     </div>
 
     <div class="note"><b>定价锚点：</b>Moxa MGate Modbus 网关 ~$426、有人边缘网关 ¥1,099。<i>本档位刻意锚在"网关的 1/4 价格、多 5 种能力"——竞品价是本页最好的销售员。</i></div>
