@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenWorker Deck — Give your AI coworker a body</title>
+<style>
+  :root{
+    --bg:#0b0e14; --bg2:#111623; --card:#161d2e; --line:#232c44;
+    --text:#e8edf7; --dim:#93a0ba; --acc:#7c5cff; --acc2:#38e0b0;
+    --warn:#ffb454; --danger:#ff6b81;
+    --mono:'Cascadia Code',Consolas,'Courier New',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.65}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:30px;margin-bottom:8px;letter-spacing:-.5px}
+  .kicker{color:var(--acc);font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+  .sub{color:var(--dim);max-width:720px;margin-bottom:36px;font-size:16px}
+
+  /* hero */
+  .hero{padding:96px 0 72px;text-align:center;position:relative;overflow:hidden;
+    background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(124,92,255,.18),transparent)}
+  .badge-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+  .badge{font-family:var(--mono);font-size:12px;padding:5px 12px;border:1px solid var(--line);border-radius:999px;color:var(--dim);background:var(--bg2)}
+  .badge.hl{color:var(--acc2);border-color:rgba(56,224,176,.4)}
+  .hero h1{font-size:56px;letter-spacing:-1.5px;line-height:1.1;margin-bottom:18px}
+  .hero h1 .grad{background:linear-gradient(90deg,#7c5cff,#38e0b0);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.tag{font-size:20px;color:var(--dim);max-width:640px;margin:0 auto 32px}
+  .hero .zh-tag{font-size:15px;color:var(--acc);margin-bottom:40px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.pri{background:var(--acc);color:#fff}
+  .btn.sec{border:1px solid var(--line);color:var(--text);background:var(--card)}
+
+  /* deck mockup */
+  .deck{max-width:560px;margin:56px auto 0;border:1px solid var(--line);border-radius:20px;background:var(--bg2);padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .deck-screen{border:1px solid var(--line);border-radius:12px;background:#0a0f1c;padding:18px;font-family:var(--mono);font-size:13px;text-align:left}
+  .screen-head{display:flex;justify-content:space-between;color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:10px}
+  .todo-item{display:flex;gap:10px;padding:5px 0;color:var(--dim)}
+  .todo-item .box{color:var(--acc2)}
+  .todo-item.active{color:var(--text)}
+  .todo-item.active .box{color:var(--acc)}
+  .perm-card{margin-top:14px;border:1px solid rgba(255,180,84,.35);background:rgba(255,180,84,.07);border-radius:10px;padding:12px 14px}
+  .perm-card .pt{color:var(--warn);font-weight:700;font-size:12px;letter-spacing:1px;margin-bottom:6px}
+  .perm-card .pb{color:var(--text);font-size:12.5px}
+  .deck-btns{display:flex;gap:10px;margin-top:16px}
+  .dbtn{flex:1;text-align:center;padding:10px;border-radius:8px;font-family:var(--mono);font-size:13px;font-weight:700;border:1px solid var(--line)}
+  .dbtn.ok{color:var(--acc2);border-color:rgba(56,224,176,.4);background:rgba(56,224,176,.08)}
+  .dbtn.no{color:var(--danger);border-color:rgba(255,107,129,.4);background:rgba(255,107,129,.08)}
+  .ring{display:flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--dim)}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--warn);box-shadow:0 0 12px var(--warn);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* pillars */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .card .ic{font-size:26px;margin-bottom:10px}
+  .card h3{font-size:17px;margin-bottom:8px}
+  .card p{color:var(--dim);font-size:14px}
+  .card .en-sub{font-size:12px;color:var(--acc);font-family:var(--mono);margin-top:6px}
+
+  /* loop */
+  .loop{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:26px;font-family:var(--mono);font-size:13.5px;overflow-x:auto}
+  .loop .l1{color:var(--acc2)} .loop .l2{color:var(--dim)} .loop .l3{color:var(--acc)}
+
+  /* domains */
+  .domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .dom{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:var(--card)}
+  .dom b{display:block;font-size:14.5px;margin-bottom:3px}
+  .dom span{color:var(--dim);font-size:12.5px}
+  .dom.safe b{color:var(--acc2)} .dom.ltd b{color:var(--warn)}
+
+  /* tables */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{border:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
+  th{background:var(--bg2);color:var(--acc);font-family:var(--mono);font-size:12.5px;letter-spacing:1px}
+  td{color:var(--dim)} td b{color:var(--text)} td:first-child{color:var(--text);white-space:nowrap}
+
+  /* tiers */
+  .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .tier{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--card);position:relative}
+  .tier.hot{border-color:var(--acc);box-shadow:0 0 30px rgba(124,92,255,.15)}
+  .tier .price{font-size:28px;font-weight:800;margin:6px 0 2px}
+  .tier .tname{color:var(--acc);font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+  .tier p{color:var(--dim);font-size:13px;margin-top:8px}
+  .tier .flag{position:absolute;top:-10px;right:12px;background:var(--acc);color:#fff;font-size:11px;font-family:var(--mono);padding:2px 10px;border-radius:999px}
+
+  /* timeline */
+  .tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;counter-reset:step}
+  .tl div{padding:16px 14px;border-left:2px solid var(--line);position:relative;counter-increment:step}
+  .tl div::before{content:counter(step,decimal-leading-zero);font-family:var(--mono);color:var(--acc);font-size:12px}
+  .tl b{display:block;margin-top:4px;font-size:14px}
+  .tl span{color:var(--dim);font-size:12.5px}
+
+  /* risks & faq */
+  .risk li{color:var(--dim);margin:0 0 10px 20px;font-size:14.5px}
+  .risk b{color:var(--text)}
+  details{border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px;background:var(--card)}
+  summary{cursor:pointer;font-weight:600;font-size:15px}
+  details p{color:var(--dim);font-size:14px;margin-top:10px}
+
+  footer{padding:48px 0 64px;text-align:center;color:var(--dim);font-size:13.5px}
+  footer .fr{font-family:var(--mono);font-size:12px;margin-top:14px;color:#5a6784}
+  a{color:var(--acc2)}
+  @media(max-width:640px){.hero h1{font-size:38px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="badge-row">
+      <span class="badge hl">CROWDFUNDING · COMING SOON</span>
+      <span class="badge">MHS-compatible</span>
+      <span class="badge">Open firmware · MIT</span>
+      <span class="badge">Local-first</span>
+    </div>
+    <h1>OpenWorker <span class="grad">Deck</span></h1>
+    <p class="tag">Give your AI coworker a body — TRAE-style agent visibility on a desk device, MHS smart links to your equipment, edge detection and predictive maintenance with local storage.</p>
+    <p class="zh-tag">给你的 AI 同事一个身体 —— 桌面上的 TRAE 式 Agent 面板 · MHS 智能链接 · 边缘计算检测 · 预测维护</p>
+    <div class="cta-row">
+      <a class="btn pri" href="https://github.com/andrewyng/openworker" target="_blank">Built for OpenWorker</a>
+      <a class="btn sec" href="#tiers">See the tiers</a>
+    </div>
+
+    <div class="deck">
+      <div class="deck-screen">
+        <div class="screen-head"><span>OpenWorker · coworker</span><span id="clock">--:--</span></div>
+        <div class="todo-item active"><span class="box">▸</span><span>CLASSIFY domain → MEDICAL (sterilizer)</span></div>
+        <div class="todo-item"><span class="box">✓</span><span>READ MHS telemetry — 1,247 cycles</span></div>
+        <div class="todo-item"><span class="box">✓</span><span>Pull service manual · parts sheet</span></div>
+        <div class="todo-item"><span class="box">·</span><span>Write maintenance-log entry</span></div>
+        <div class="perm-card">
+          <div class="pt">PERMISSION REQUEST</div>
+          <div class="pb">Write calibration value to sterilizer via MHS? Command: set_temp 121°C · writes to physical hardware</div>
+        </div>
+      </div>
+      <div class="deck-btns"><div class="dbtn ok">● APPROVE</div><div class="dbtn no">● DENY</div></div>
+      <div class="ring"><span class="dot"></span><span>needs-you · 等待确认</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="pillars">
+  <div class="wrap">
+    <div class="kicker">// the device / 六大支柱</div>
+    <h2>One device, six jobs</h2>
+    <p class="sub">Desk console and field sensor in the same box — the hardware half of an OpenWorker deployment.</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🖥️</div><h3>Agent console · TRAE 式控制台</h3><p>4″ screen mirrors the coworker's live todo list and progress panel. Permission requests arrive as physical cards with Approve / Deny buttons — OpenWorker's <b>interactive</b> mode, in hardware.</p><div class="en-sub">status ring: idle / thinking / needs-you</div></div>
+      <div class="card"><div class="ic">🔗</div><h3>Smart link · MHS 智能链接</h3><p>Registers itself and every bridged device following the Model Hardware Standard pattern — standard read/write interface, auto-generated plain-language safety labels. Any MHS-compatible agent discovers it instantly.</p><div class="en-sub">CAN · RS-485 Modbus · OBD-II · BLE</div></div>
+      <div class="card"><div class="ic">📡</div><h3>Detection · 四模态检测</h3><p>Vibration (3-axis accelerometer), thermal (IR thermopile), current signature (CT clamp), and acoustic (MEMS mic) — plus bridging into existing fault codes on equipped machines.</p><div class="en-sub">0–16 g · −20 to 400 °C · 0–100 A</div></div>
+      <div class="card"><div class="ic">⚙️</div><h3>Edge computing · 边缘计算</h3><p>On-device NPU runs anomaly detection locally. Fully offline. Nothing leaves your network unless you say so — privacy is the default, not an option.</p><div class="en-sub">0.5 TOPS NPU · offline-first</div></div>
+      <div class="card"><div class="ic">💾</div><h3>Storage · 本地存储</h3><p>Rolling telemetry history on microSD (up to 512 GB) + 8 GB eMMC. The Deck runs the night shift: it senses and stores while your computer is off, and the agent ingests the buffer when you're back.</p><div class="en-sub">512 GB microSD · 8 GB eMMC</div></div>
+      <div class="card"><div class="ic">🔮</div><h3>Predictive maintenance · 预测维护</h3><p>Remaining-useful-life estimates from telemetry patterns — bearing wear, belt stretch, filter clog, refrigerant-loss curves. Alerts days or weeks before the failure, never after.</p><div class="en-sub">RUL estimates · early warnings</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="loop">
+  <div class="wrap">
+    <div class="kicker">// how it works / 夜班闭环</div>
+    <h2>The night-shift loop</h2>
+    <p class="sub">Your computer sleeps. The machines don't.</p>
+    <div class="loop">
+<span class="l1">your computer on: &nbsp; OpenWorker ↔ Deck ↔ equipment &nbsp;&nbsp;(live: agent reads, you approve)</span><br>
+<span class="l2">your computer off: Deck → senses → stores &nbsp;&nbsp;(night shift: buffered telemetry)</span><br>
+<span class="l3">you return: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Deck → buffered history → OpenWorker &nbsp;("while you were away...")</span>
+    </div>
+    <p class="sub" style="margin-top:24px">Pairs with the open-source <a href="https://github.com/andrewyng/openworker/pull/593" target="_blank">Hardware Repair Companion</a> coworker: the Deck senses, the agent diagnoses — telemetry as evidence, manuals and parts from public sources, a maintenance log per device.</p>
+  </div>
+</section>
+
+<section id="domains">
+  <div class="wrap">
+    <div class="kicker">// coverage / 九大领域</div>
+    <h2>Nine equipment domains, one posture</h2>
+    <p class="sub">The Deck works across the same nine domains the Hardware Repair Companion covers — with the compliance boundaries to match.</p>
+    <div class="domains">
+      <div class="dom"><b>Household · 家庭</b><span>HVAC, washer, water heater — full monitoring</span></div>
+      <div class="dom"><b>Garden · 庭院</b><span>Seasonal equipment, irrigation controllers</span></div>
+      <div class="dom"><b>Outdoor · 户外</b><span>Generators with CO-alarm integration, power stations</span></div>
+      <div class="dom"><b>Agriculture · 农业</b><span>Tractors via OBD-II/CAN, hour meters, pivots via Modbus</span></div>
+      <div class="dom safe"><b>Laboratory · 实验室</b><span>Equipment-room sensing, MHS-native, no contamination</span></div>
+      <div class="dom ltd"><b>Medical · 医用</b><span>Environment + equipment-room only — never patient-connected</span></div>
+      <div class="dom"><b>Clinic · 私人诊所</b><span>Uptime feeds: sterilizer cycles, compressor duty</span></div>
+      <div class="dom"><b>Dental · 口腔</b><span>Chair hydraulics, compressor and suction duty</span></div>
+      <div class="dom ltd"><b>Fire safety · 消防防护</b><span>Detector health, pressure trends, audit-proof logs — never a replacement for certified inspection</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="specs">
+  <div class="wrap">
+    <div class="kicker">// hardware / 规格</div>
+    <h2>Specs</h2>
+    <table>
+      <tr><th>模块</th><th>规格</th></tr>
+      <tr><td>SoC</td><td>Dual-core Cortex-A7 @ 1.2 GHz + <b>0.5 TOPS NPU</b></td></tr>
+      <tr><td>Memory / Storage</td><td>256 MB RAM · 8 GB eMMC · microSD up to <b>512 GB</b></td></tr>
+      <tr><td>Display</td><td>4″ LCD — todo/progress panel, permission cards</td></tr>
+      <tr><td>Controls</td><td>Approve / Deny buttons · rotary encoder · status ring</td></tr>
+      <tr><td>Sensors</td><td>3-axis accelerometer · IR thermopile · CT clamp (0–100 A) · MEMS mic</td></tr>
+      <tr><td>Ports</td><td>CAN 2.0B · RS-485 (Modbus RTU) · 1-Wire · OBD-II via adapter</td></tr>
+      <tr><td>Radios</td><td>BLE 5.2 · Wi-Fi 4</td></tr>
+      <tr><td>Power</td><td>USB-C PD · optional passive PoE</td></tr>
+      <tr><td>Enclosure</td><td>Desktop edition + IP65 field edition (−20 to 60 °C)</td></tr>
+      <tr><td>Firmware</td><td><b>Open source, MIT</b> — MHS-compatible registration</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="tiers">
+  <div class="wrap">
+    <div class="kicker">// crowdfunding / 众筹档位</div>
+    <h2>Reward tiers</h2>
+    <div class="tiers">
+      <div class="tier hot"><span class="flag">LIMITED 500</span><div class="tname">Early Bird</div><div class="price">$89</div><p>1× Deck · sensor set · desk stand</p></div>
+      <div class="tier"><div class="tname">Standard</div><div class="price">$109</div><p>1× Deck · sensor set</p></div>
+      <div class="tier"><div class="tname">Duo</div><div class="price">$199</div><p>2× Decks — desk + workshop</p></div>
+      <div class="tier"><div class="tname">Fleet</div><div class="price">$499</div><p>6× Decks · field edition · fleet dashboard</p></div>
+      <div class="tier"><div class="tname">Clinic / Lab</div><div class="price">$899</div><p>10× Decks · compliance templates · priority support</p></div>
+    </div>
+    <p class="sub" style="margin-top:24px">Estimated delivery: ~8 months after campaign close. See timeline below.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// plan / 时间线</div>
+    <h2>Timeline</h2>
+    <div class="tl">
+      <div><b>Campaign</b><span>30 days</span></div>
+      <div><b>Tooling & EVT</b><span>10 weeks</span></div>
+      <div><b>DVT</b><span>8 weeks</span></div>
+      <div><b>PVT & certification</b><span>6 weeks</span></div>
+      <div><b>Production & ship</b><span>8 weeks</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// honesty / 风险</div>
+    <h2>Risks, stated plainly</h2>
+    <ul class="risk">
+      <li><b>MHS is a research preview.</b> The Deck follows its published pattern — standard drivers, plain-language safety labels, read/write discipline — and tracks the spec as it stabilizes. Firmware is open source; updates ship as they land.</li>
+      <li><b>Certification timing</b> (FCC/CE and regional equivalents) gates shipping dates; PVT is buffered accordingly.</li>
+      <li><b>Component supply</b> — SoC and display both have second-source plans.</li>
+      <li><b>Compliance boundaries are fixed:</b> the Deck is a monitoring device. It is not a medical device, and it does not replace certified fire-safety inspection.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">// faq / 常见问题</div>
+    <h2>FAQ</h2>
+    <details><summary>Does it require Claude or a subscription?</summary><p>No. The Deck works standalone. MHS-compatibility means any MHS-native agent can use it — OpenWorker, Claude, or whatever comes next.</p></details>
+    <details><summary>Does it need the cloud?</summary><p>No. Sensing, anomaly detection, prediction and storage all run locally. An optional cloud bridge exists for fleet dashboards.</p></details>
+    <details><summary>What if my equipment has no diagnostic port?</summary><p>The four contactless modalities — vibration, thermal, current, acoustic — work on any machine with power.</p></details>
+    <details><summary>Can it control equipment, or only watch?</summary><p>Both, through MHS: reads are always safe; writes (resets, calibration, actuation) require explicit approval — on the physical buttons by default.</p></details>
+    <details><summary>Is it a medical device?</summary><p>No. In medical, clinic and dental settings the Deck monitors equipment rooms and duty cycles only — never patient-connected circuits. Fire-safety monitoring is record-keeping, never a replacement for certified inspection.</p></details>
+  </div>
+</section>
+
+<section id="creator">
+  <div class="wrap">
+    <div class="kicker">// creator / 创作者</div>
+    <h2>Hdhaidong</h2>
+    <p class="sub" style="max-width:760px">Custom business-agent creator · 代运营 / 品牌管理背景 · builds task-specific agents on open platforms. Author of the <a href="https://github.com/andrewyng/openworker/pull/592" target="_blank">Amazon Product Scout</a> and <a href="https://github.com/andrewyng/openworker/pull/593" target="_blank">Hardware Repair Companion</a> coworkers for OpenWorker.</p>
+    <p class="sub">This campaign is the hardware half of that work — <b style="color:var(--text)">the agent that thinks, and the desk it sits at.</b> 会思考的 Agent，和它坐镇的桌面。</p>
+    <a class="btn pri" href="https://github.com/Hdhaidong" target="_blank">github.com/Hdhaidong</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><a href="https://github.com/andrewyng/openworker" target="_blank">OpenWorker</a> companion hardware · MHS-compatible · open firmware (MIT)</p>
+    <p class="fr">© 2026 Hdhaidong — crowdfunding campaign page. Specs are targets for the EVT phase; tiers and dates are campaign commitments pending platform launch.</p>
+  </div>
+</footer>
+
+<script>
+  function tick(){
+    var d=new Date();
+    var t=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+    document.getElementById('clock').textContent=t+' · live';
+  }
+  setInterval(tick,1000);tick();
+</script>
+</body>
+</html>
