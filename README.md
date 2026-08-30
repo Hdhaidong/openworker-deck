@@ -4,7 +4,9 @@
 
 **给你的 AI 同事一个身体 · Give your AI coworker a body**
 
-An open-source hardware companion for [OpenWorker](https://github.com/andrewyng/openworker) — TRAE-style agent visibility on a desk device, MHS-native smart links to your equipment, edge-computed detection and predictive maintenance with local storage.
+四大支柱：**智能链接**（MHS 原生）· **边缘计算** · **检测** · **存储**，外加预测维护 —— 以及一块 TRAE 式的桌面 Agent 面板。
+
+An open-source hardware companion for [OpenWorker](https://github.com/andrewyng/openworker) — TRAE-style agent visibility on a desk device, built on four pillars: **smart link** (MHS-native) · **edge computing** · **detection** · **storage** — with predictive maintenance on top.
 
 [![Crowdfunding](https://img.shields.io/badge/Status-Crowdfunding_Coming_Soon-orange)]()
 [![MHS](https://img.shields.io/badge/Model_Hardware_Standard-compatible-blue)](https://modelhardwarestandard.com/)
