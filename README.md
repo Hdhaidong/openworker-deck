@@ -82,6 +82,17 @@ Legacy fieldbus on one side, MHS on the other. Every protocol below maps onto th
 | **LoRa 868/915 MHz** | Sub-GHz wireless gateway — field sensors at hundreds of meters to km range | Remote barns, pivots, tanks, greenhouses |
 | **1-Wire** | Direct chain — digital temperature probes | Cold chains, boiler rooms |
 
+### Northbound: the message gateway
+
+Southbound speaks fieldbus to machines; northbound speaks MQTT to everything else — the same capability class Moxa's AIG series and USR's edge gateways ship, minus their cloud lock-in:
+
+| Message layer | Capability | Talks to |
+|---|---|---|
+| **Built-in MQTT broker** (3.1.1 / 5.0) | Every bridged device mirrors onto a topic tree `deck/{device}/{register}` — telemetry publishes itself | Node-RED · Home Assistant · Grafana · SCADA |
+| **MHS ↔ MQTT mapping** | The MHS device tree mirrors onto topics: agents subscribe instead of polling; write commands still pass the permission gate | Any MQTT-client agent, script or automation |
+| **Cloud bridge** (opt-in) | TLS-bridged to your own broker — off by default, labeled when on | Azure IoT · AWS IoT · Alibaba Cloud · EMQX · self-hosted |
+| **Offline buffering** | Messages land on the encrypted cartridge during outages, replay on reconnect (QoS 1 · store-and-forward) | Weak-network sites: barns, pump stations, mobile fleets |
+
 No protocol island survives contact: the agent sees one MHS device tree, and the Deck translates underneath it. Devices with no digital interface at all fall back to the four contactless sensing modalities.
 
 ### Industrial design
@@ -123,6 +134,7 @@ The Deck works across the same nine domains the Hardware Repair Companion covers
 | Sensors | 3-axis accelerometer · IR thermopile · CT clamp (0–100 A) · MEMS mic |
 | Ports | CAN 2.0B / J1939 · RS-485 (Modbus RTU multi-drop) · 10/100M Ethernet (Modbus TCP) · 1-Wire · OBD-II via adapter |
 | Radios | BLE 5.2 · Wi-Fi 4 · LoRa 868/915 MHz (optional module) |
+| Message layer | Built-in MQTT broker (3.1.1 / 5.0) · MHS↔topic mapping · optional TLS cloud bridge · QoS 1 store-and-forward |
 | Power | USB-C PD · optional passive PoE |
 | Enclosure | Desktop edition + IP65 field edition (−20 to 60 °C) + DIN-rail industrial edition |
 | Firmware | Open source, MIT — MHS-compatible registration |
@@ -219,6 +231,15 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 - **BLE 5.2** —— 无线传感中枢：电动工具电池、BLE 传感器仪表
 - **LoRa 868/915 MHz** —— 远距离无线网关，数百米到公里级：远端大棚、粮仓、水塔、泵站
 - **1-Wire** —— 数字温度探头链：冷库、锅炉房
+
+### 北向：消息网关
+
+南向对设备说现场总线，北向对一切说 MQTT —— 与 Moxa AIG 系列、有人边缘网关同级的消息能力，但没有云锁定：
+
+- **内置 MQTT broker**（3.1.1 / 5.0）—— 每台桥接设备自动映射为话题树 `deck/{device}/{register}`，遥测自动发布：Node-RED · Home Assistant · Grafana · SCADA
+- **MHS ↔ MQTT 映射** —— MHS 设备树镜像到话题：Agent 订阅即感知；写指令仍过权限闸门
+- **云桥接（可选）** —— TLS 桥接到你自己的 broker：Azure IoT · AWS IoT · 阿里云 · EMQX · 自建；默认关闭
+- **离线缓冲** —— 断网消息落加密卡，重连补发（QoS 1 · store-and-forward）：弱网现场、大棚、泵站
 
 协议孤岛到此为止：Agent 看到的是一棵 MHS 设备树，翻译由 Deck 在底层完成。完全没有数字接口的设备，退回四模态非接触感知。
 
