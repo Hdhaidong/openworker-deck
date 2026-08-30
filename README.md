@@ -35,7 +35,7 @@ Meanwhile, the machines you rely on — the tractor, the HVAC, the clinic steril
 | **Smart link (MHS-native)** | Connects to equipment **directly** — Modbus RTU master (RS-485 multi-drop), Modbus TCP, CAN 2.0B/J1939, OBD-II, BLE 5.2 and LoRa — then registers itself and every bridged device on your network following the [Model Hardware Standard](https://modelhardwarestandard.com/) pattern: standard read/write interface, natural-language safety labels auto-generated. Any MHS-compatible agent (OpenWorker, Claude) discovers it instantly. |
 | **Detection** | Four sensing modalities: vibration (3-axis accelerometer), thermal (IR thermopile), current signature (CT clamp), and acoustic (MEMS mic). Plus CAN 2.0B / RS-485 Modbus / OBD-II / BLE bridging into existing fault codes. |
 | **Local model** | On-device NPU (0.5 TOPS) runs a **local model** — anomaly detection and small-model reasoning execute on the Deck itself. **Personal and private data are computed locally**: telemetry, logs and history never leave the device. Offline by default; the optional fleet bridge is opt-in and labeled. |
-| **Privacy storage** | The modern floppy, but a vault: a **removable, hardware-encrypted cartridge** (up to 512 GB). Pull it and your data physically leaves with you — the key lives in the cartridge, not the machine. The Deck runs the night shift: it senses and stores while your computer is off, and the agent ingests the buffer when you're back. |
+| **Privacy storage** | The floppy, reborn: a **removable floppy-form encrypted disk** (3.5″ silhouette in armored metal, up to 512 GB). Pull it and your data physically leaves with you — the key lives in the disk, not the machine. The Deck runs the night shift: it senses and stores while your computer is off, and the agent ingests the buffer when you're back. |
 | **Risk prediction** | Three risk classes per device, not just failure: **failure risk** (RUL curves — bearing wear, belt stretch, filter clog, refrigerant loss), **safety risk** (CO trends, thermal-runaway precursors, overload patterns — escalated before danger), **compliance risk** (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, recommended action, evidence. |
 
 ### The night-shift loop
@@ -97,14 +97,16 @@ No protocol island survives contact: the agent sees one MHS device tree, and the
 
 ### Industrial design
 
-Two editions, one design language — matte graphite enclosures, functional color accents, fanless passive cooling:
+Three editions, one design language — matte graphite enclosures, functional color accents, fanless passive cooling. Storage is a floppy-form removable disk:
 
 | Edition | Form factor | Role |
 |---|---|---|
 | **Desktop** | CNC anodized aluminum, 4″ console, USB-C powered, status ring | Sits next to you: todo/progress panel, physical Approve/Deny permission cards |
 | **Industrial** | 35 mm DIN-rail, terminal blocks (RS-485/CAN), RJ45 (Modbus TCP), LoRa antenna, heatsink fins | Goes in the cabinet: wide-temperature, IP65 variant for the field |
+| **Socket** | Smart-plug form factor, pass-through outlet, built-in current sensing | Zero-wiring entry: plug it in the wall, plug the appliance into it — washer, water heater, compressor |
+| **Privacy disk** | 3.5″ floppy silhouette in armored metal — metal shutter, engraved lock, violet status edge | The removable encrypted medium itself: pull-to-own, key lives in the disk |
 
-Concept renders (EVT-phase): [`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) — final tooling may adjust.
+Concept renders (EVT-phase): [`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) — final tooling may adjust.
 
 ### Nine equipment domains
 
@@ -136,7 +138,7 @@ The Deck works across the same nine domains the Hardware Repair Companion covers
 | Radios | BLE 5.2 · Wi-Fi 4 · LoRa 868/915 MHz (optional module) |
 | Message layer | Built-in MQTT broker (3.1.1 / 5.0) · MHS↔topic mapping · optional TLS cloud bridge · QoS 1 store-and-forward |
 | Power | USB-C PD · optional passive PoE |
-| Enclosure | Desktop edition + IP65 field edition (−20 to 60 °C) + DIN-rail industrial edition |
+| Enclosure | Desktop edition + IP65 field edition (−20 to 60 °C) + DIN-rail industrial edition + socket edition (smart-plug, pass-through) |
 | Firmware | Open source, MIT — MHS-compatible registration |
 
 ### Crowdfunding tiers (planned)
@@ -148,6 +150,7 @@ Platform: **Kickstarter** (all-or-nothing). Campaign goal: **$60,000**. Launch p
 | Early Bird | $89 (limited 500) | 1× Deck, sensor set, desk stand |
 | Standard | $109 | 1× Deck, sensor set |
 | Duo | $199 | 2× Decks — desk + workshop |
+| Socket Trio | $129 | 3× socket editions — zero-wiring coverage for three appliances |
 | Fleet | $499 | 6× Decks, field edition, fleet dashboard |
 | Clinic / Lab Pack | $899 | 10× Decks, compliance-report templates, priority support |
 
@@ -195,7 +198,7 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 | **智能链接（MHS 原生）** | **直连设备**：Modbus RTU 主站（RS-485 多点）· Modbus TCP · CAN/J1939 · OBD-II · BLE 5.2 · LoRa，再按模型硬件标准（[MHS](https://modelhardwarestandard.com/)）注册自己和桥接的每台设备 —— 标准读写接口 + 自动生成的自然语言安全标签。任何 MHS 兼容 Agent（OpenWorker、Claude）即插即发现。 |
 | **检测** | 四种感知模态：振动（三轴加速度计）、热成像（红外热电堆）、电流特征（钳形表）、声学（MEMS 麦克风）。外加 CAN / RS-485 Modbus / OBD-II / BLE 桥接现有故障码。 |
 | **本地模型** | 板载 NPU（0.5 TOPS）运行**本地模型** —— 异常检测与小模型推理都在 Deck 上执行。**个人隐私数据本地计算**：遥测、日志、历史不出设备。默认离线；车队云桥接为可选且明确标注。 |
-| **隐私存储** | 软盘的形态，保险库的内核：**可拔的硬件加密存储卡**（最高 512GB）。拔卡即离场 —— 数据物理上跟你走，机器里不留可读内容；密钥在卡里，不在机器里。电脑关机它值守夜班 —— 持续感知存储，你回来时 Agent 一键消化缓冲。 |
+| **隐私存储** | 软盘重生：**可插拔的软盘形态加密盘**（3.5″ 轮廓 · 装甲金属 · 最高 512GB）。拔盘即离场 —— 数据物理上跟你走，机器里不留可读内容；密钥在盘里，不在机器里。电脑关机它值守夜班 —— 持续感知存储，你回来时 Agent 一键消化缓冲。 |
 | **风险预测** | 不只预测故障，每台设备三类风险：**故障风险**（RUL 曲线 —— 轴承磨损、皮带拉伸、滤芯堵塞、制冷剂流失）、**安全风险**（CO 趋势、热失控前兆、过载模式 —— 在危险之前升级预警）、**合规风险**（年检与传感器到期日程）。输出：风险简报 —— 可能性、时间窗、建议动作、证据。 |
 
 ### 夜班闭环
@@ -245,12 +248,14 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 
 ### 工业设计
 
-一个设计语言，两种形态 —— 哑光深灰机身、功能色点睛、无风扇被动散热：
+三种形态，一个设计语言 —— 哑光深灰机身、功能色点睛、无风扇被动散热。存储介质为软盘形态的可插拔加密盘：
 
 - **桌面版**：CNC 铝合金阳极氧化外壳，4″ 控制台 + 状态灯环，USB-C 供电 —— 坐在你手边，值守 Agent 的任务面板与权限卡
 - **工业版**：35 mm DIN 轨安装，RS-485/CAN 端子排 + RJ45 + LoRa 天线 + 散热鳍片，宽温进柜，另有 IP65 场版
+- **插座版**：智能插座形态，直通插孔 + 内置电流传感 —— 零接线入门：插墙上，电器插它上，洗衣机/热水器/空压机即刻接入
+- **隐私盘**：3.5″ 软盘轮廓装甲金属重铸 —— 金属滑盖、铭刻锁孔、紫色状态边。可插拔加密介质本体：拔盘即离场，密钥在盘里
 
-概念渲染（EVT 阶段）：[`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) —— 量产模具或有微调。
+概念渲染（EVT 阶段）：[`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) —— 量产模具或有微调。
 
 ### 九大设备领域
 
