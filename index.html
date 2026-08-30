@@ -194,8 +194,8 @@
     <p class="sub">不是软盘，也不是黑盒 —— 计算平面与存储平面解耦：隐私数据由本地模型计算，历史装进可拔的加密卡。数据是你的，算力是它出的。</p>
     <div class="design-grid" style="margin-bottom:22px">
       <figure>
-        <img src="img/privacy-cartridge.jpg" alt="Fingers pulling the encrypted storage cartridge out of the OpenWorker Deck — gunmetal cartridge with engraved lock icon and violet unlock edge">
-        <figcaption><b>Pull-to-own · 拔卡即离场</b> — 软盘的形态，保险库的内核：密钥在卡里，不在机器里。The key lives in the cartridge, not the machine.</figcaption>
+        <img src="img/cartridge-floppy.jpg" alt="Floppy-form encrypted storage cartridge — the 3.5-inch silhouette reborn in armored metal with metal shutter and engraved lock icon">
+        <figcaption><b>Pull-to-own · 拔盘即离场</b> — 软盘的形态，保险库的内核：3.5″ 轮廓重铸装甲金属，密钥在盘里，不在机器里。The key lives in the disk, not the machine.</figcaption>
       </figure>
     </div>
     <div class="loop">
@@ -218,8 +218,8 @@
 <section id="design">
   <div class="wrap">
     <div class="kicker">// industrial design / 工业设计</div>
-    <h2>Two editions, one design language</h2>
-    <p class="sub">哑光深灰机身、功能色点睛、无风扇被动散热 —— 桌面版陪 Agent 值守，工业版上 DIN 轨进柜。</p>
+    <h2>Three editions, one design language</h2>
+    <p class="sub">哑光深灰机身、功能色点睛、无风扇被动散热 —— 桌面版陪 Agent 值守，工业版上 DIN 轨进柜，插座版插墙即用。存储介质是软盘形态的可插拔加密盘。</p>
     <div class="design-grid">
       <figure>
         <img src="img/deck-desktop.jpg" alt="OpenWorker Deck desktop edition — 4-inch agent console with Approve/Deny buttons and status ring">
@@ -228,6 +228,14 @@
       <figure>
         <img src="img/deck-industrial.jpg" alt="OpenWorker Deck industrial edition — DIN-rail gateway with RS-485, CAN, Ethernet, LoRa antenna and telemetry screen">
         <figcaption><b>Industrial edition · 工业版</b> — 35 mm DIN 轨安装进柜：RS-485 / CAN 端子排、RJ45（Modbus TCP）、microSD、LoRa 天线、被动散热鳍片，宽温运行。</figcaption>
+      </figure>
+      <figure>
+        <img src="img/deck-socket.jpg" alt="OpenWorker Deck socket edition — smart-plug form factor in a wall outlet with pass-through socket and current-waveform strip">
+        <figcaption><b>Socket edition · 插座版</b> — 插墙即用，电器插它上面：内置电流传感直读功率特征，洗衣机 / 热水器 / 空压机零接线接入。紫环状态灯 + 荧光绿电流波形条。</figcaption>
+      </figure>
+      <figure>
+        <img src="img/cartridge-floppy.jpg" alt="Floppy-form encrypted storage cartridge — armored 3.5-inch silhouette with metal shutter and engraved lock icon">
+        <figcaption><b>Privacy cartridge · 软盘形态</b> — 可插拔加密存储介质：3.5″ 软盘的轮廓，装甲金属的内核。金属滑盖 + 铭刻锁孔 + 紫色状态边。拔盘即离场。</figcaption>
       </figure>
     </div>
     <p class="sub" style="margin-top:20px">Design render, EVT-phase concept — final tooling may adjust. 设计渲染为 EVT 概念阶段，量产模具或有微调。</p>
@@ -319,7 +327,7 @@
       <tr><td>Radios</td><td>BLE 5.2 · Wi-Fi 4 · <b>LoRa 868/915 MHz</b> (optional)</td></tr>
       <tr><td>Message layer</td><td><b>Built-in MQTT broker</b> (3.1.1 / 5.0) · MHS↔topic mapping · optional TLS cloud bridge · QoS 1 store-and-forward</td></tr>
       <tr><td>Power</td><td>USB-C PD · optional passive PoE</td></tr>
-      <tr><td>Enclosure</td><td>Desktop + IP65 field edition (−20 to 60 °C) + <b>DIN-rail industrial edition</b></td></tr>
+      <tr><td>Enclosure</td><td>Desktop + IP65 field edition (−20 to 60 °C) + <b>DIN-rail industrial edition</b> + <b>socket edition</b> (smart-plug, pass-through)</td></tr>
       <tr><td>Firmware</td><td><b>Open source, MIT</b> — MHS-compatible registration</td></tr>
     </table>
   </div>
@@ -334,6 +342,7 @@
       <div class="tier hot"><span class="flag">LIMITED 500</span><div class="tname">Early Bird</div><div class="price">$89</div><p>1× Deck · sensor set · desk stand</p></div>
       <div class="tier"><div class="tname">Standard</div><div class="price">$109</div><p>1× Deck · sensor set</p></div>
       <div class="tier"><div class="tname">Duo</div><div class="price">$199</div><p>2× Decks — desk + workshop</p></div>
+      <div class="tier"><div class="tname">Socket Trio</div><div class="price">$129</div><p>3× socket editions — 零接线接入三台电器</p></div>
       <div class="tier"><div class="tname">Fleet</div><div class="price">$499</div><p>6× Decks · field edition · fleet dashboard</p></div>
       <div class="tier"><div class="tname">Clinic / Lab</div><div class="price">$899</div><p>10× Decks · compliance templates · priority support</p></div>
     </div>
