@@ -4,9 +4,9 @@
 
 **给你的 AI 同事一个身体 · Give your AI coworker a body**
 
-四大支柱：**智能链接**（MHS 原生，直连设备）· **边缘计算** · **检测** · **存储**，外加预测维护 —— 以及一块 TRAE 式的桌面 Agent 面板。它同时是一台**工业网关 + 无线网关**：Modbus（RTU/TCP）· CAN/J1939 · OBD-II · BLE · LoRa，直连现场设备，无需集成商。
+四大支柱：**智能链接**（MHS 原生，直连设备）· **本地模型**（个人隐私数据不出设备）· **检测** · **隐私存储**（可拔加密卡 · 计算存储分离），外加风险预测 —— 以及一块 TRAE 式的桌面 Agent 面板。它同时是一台**工业网关 + 无线网关**：Modbus（RTU/TCP）· CAN/J1939 · OBD-II · BLE · LoRa，直连现场设备，无需集成商。软盘的形态，保险库的内核。
 
-An open-source hardware companion for [OpenWorker](https://github.com/andrewyng/openworker) — TRAE-style agent visibility on a desk device, built on four pillars: **smart link** (MHS-native) · **edge computing** · **detection** · **storage** — with predictive maintenance on top. It talks to equipment **directly**: an industrial + wireless gateway speaking Modbus (RTU/TCP), CAN/J1939, OBD-II, BLE and LoRa.
+An open-source hardware companion for [OpenWorker](https://github.com/andrewyng/openworker) — TRAE-style agent visibility on a desk device, built on four pillars: **smart link** (MHS-native) · **local model** (personal private data computed on-device) · **detection** · **privacy storage** (removable encrypted cartridge, compute-storage separation) — with risk prediction on top. It talks to equipment **directly**: an industrial + wireless gateway speaking Modbus (RTU/TCP), CAN/J1939, OBD-II, BLE and LoRa. The floppy's form, the vault's soul.
 
 [![Kickstarter](https://img.shields.io/badge/Status-Kickstarter_Coming_Soon-orange)](https://hdhaidong.github.io/openworker-deck/)
 [![MHS](https://img.shields.io/badge/Model_Hardware_Standard-compatible-blue)](https://modelhardwarestandard.com/)
@@ -34,17 +34,37 @@ Meanwhile, the machines you rely on — the tractor, the HVAC, the clinic steril
 | **Agent console (TRAE-style)** | A 4″ screen that mirrors your coworker's live todo list and progress panel. When the agent needs permission — OpenWorker's `interactive` mode — it rings the desk: a physical card with **Approve / Deny** buttons. A status ring shows idle / thinking / needs-you. |
 | **Smart link (MHS-native)** | Connects to equipment **directly** — Modbus RTU master (RS-485 multi-drop), Modbus TCP, CAN 2.0B/J1939, OBD-II, BLE 5.2 and LoRa — then registers itself and every bridged device on your network following the [Model Hardware Standard](https://modelhardwarestandard.com/) pattern: standard read/write interface, natural-language safety labels auto-generated. Any MHS-compatible agent (OpenWorker, Claude) discovers it instantly. |
 | **Detection** | Four sensing modalities: vibration (3-axis accelerometer), thermal (IR thermopile), current signature (CT clamp), and acoustic (MEMS mic). Plus CAN 2.0B / RS-485 Modbus / OBD-II / BLE bridging into existing fault codes. |
-| **Edge computing** | On-device NPU (0.5 TOPS) runs anomaly detection locally. Works offline. Nothing leaves your network unless you say so. |
-| **Storage** | Rolling telemetry history on microSD (up to 512 GB) + 8 GB eMMC. The Deck runs the night shift — it keeps sensing while your computer is off, and the agent ingests the buffer when you're back. |
-| **Predictive maintenance** | Remaining-useful-life estimates from telemetry patterns: bearing wear, belt stretch, filter clog, refrigerant-loss curves — alerts days or weeks before the failure, not after. |
+| **Local model** | On-device NPU (0.5 TOPS) runs a **local model** — anomaly detection and small-model reasoning execute on the Deck itself. **Personal and private data are computed locally**: telemetry, logs and history never leave the device. Offline by default; the optional fleet bridge is opt-in and labeled. |
+| **Privacy storage** | The modern floppy, but a vault: a **removable, hardware-encrypted cartridge** (up to 512 GB). Pull it and your data physically leaves with you — the key lives in the cartridge, not the machine. The Deck runs the night shift: it senses and stores while your computer is off, and the agent ingests the buffer when you're back. |
+| **Risk prediction** | Three risk classes per device, not just failure: **failure risk** (RUL curves — bearing wear, belt stretch, filter clog, refrigerant loss), **safety risk** (CO trends, thermal-runaway precursors, overload patterns — escalated before danger), **compliance risk** (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, recommended action, evidence. |
 
 ### The night-shift loop
 
 ```
 your computer on:   OpenWorker ↔ Deck ↔ equipment   (live: agent reads, you approve)
-your computer off: Deck → senses → stores          (night shift: buffered telemetry)
+your computer off: Deck → senses → stores          (night shift: local model watches, vault records)
+cartridge pulled:  compute continues → eMMC        (history rides in your pocket)
 you return:        Deck → buffered history → OpenWorker   ("while you were away...")
 ```
+
+### Compute–storage separation
+
+Not a floppy disk, not a black box — the compute plane and the storage plane are decoupled:
+
+```
+compute plane:  local model · NPU anomaly detection · MHS registry · protocol bridge   (always on)
+storage plane:  hardware-encrypted cartridge · 8 GB eMMC buffer                         (swappable · yours)
+private data:   computed by the local model, on the Deck                                (never uploaded by default)
+cartridge out:  compute keeps running → eMMC buffer · history rides in your pocket
+```
+
+| Separation buys | Why it matters |
+|---|---|
+| Privacy by physics | Pull the cartridge and the history physically leaves the machine — no remote wipe needed, no "trust us" |
+| Local-model privacy | Personal and private data are computed by the on-device model — inference happens where the data lives, so nothing needs to be uploaded to be understood |
+| Independent upgrade | Swap cartridge capacity without touching compute; compute firmware updates never rewrite the data layer |
+| Failure isolation | A dead cartridge doesn't kill the sensor — edge detection continues, buffering to eMMC |
+| Audit path | Hand the cartridge (not the machine) to an auditor — the compliance trail travels without the live sensor |
 
 Pairs with the open-source [Hardware Repair Companion](https://github.com/andrewyng/openworker/pull/593) coworker: the Deck senses, the agent diagnoses — telemetry as evidence, manuals and parts pulled from public sources, maintenance logged per device.
 
@@ -95,9 +115,10 @@ The Deck works across the same nine domains the Hardware Repair Companion covers
 
 | | |
 |---|---|
-| SoC | Dual-core Cortex-A7 @ 1.2 GHz + 0.5 TOPS NPU |
-| Memory / storage | 256 MB RAM · 8 GB eMMC · microSD up to 512 GB |
-| Display | 4″ LCD — todo/progress panel, permission cards |
+| SoC | Dual-core Cortex-A7 @ 1.2 GHz + 0.5 TOPS NPU — runs the local model |
+| Memory / storage | 256 MB RAM · 8 GB eMMC buffer · removable **encrypted cartridge** up to 512 GB |
+| Security | Hardware AES cartridge encryption · secure element · the key lives in the cartridge — nothing readable without it |
+| Display | 4″ LCD — todo/progress panel, permission cards, risk briefs |
 | Controls | Approve / Deny buttons · rotary encoder · status ring |
 | Sensors | 3-axis accelerometer · IR thermopile · CT clamp (0–100 A) · MEMS mic |
 | Ports | CAN 2.0B / J1939 · RS-485 (Modbus RTU multi-drop) · 10/100M Ethernet (Modbus TCP) · 1-Wire · OBD-II via adapter |
@@ -161,17 +182,30 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 | **Agent 控制台（TRAE 式）** | 4″ 屏幕实时镜像同事的 todo 清单和进度面板。Agent 需要权限时（OpenWorker 的 `interactive` 模式），桌面响起提示：一张实体卡片 + **批准 / 拒绝** 物理按键。状态灯环显示 空闲 / 思考中 / 等你确认。 |
 | **智能链接（MHS 原生）** | **直连设备**：Modbus RTU 主站（RS-485 多点）· Modbus TCP · CAN/J1939 · OBD-II · BLE 5.2 · LoRa，再按模型硬件标准（[MHS](https://modelhardwarestandard.com/)）注册自己和桥接的每台设备 —— 标准读写接口 + 自动生成的自然语言安全标签。任何 MHS 兼容 Agent（OpenWorker、Claude）即插即发现。 |
 | **检测** | 四种感知模态：振动（三轴加速度计）、热成像（红外热电堆）、电流特征（钳形表）、声学（MEMS 麦克风）。外加 CAN / RS-485 Modbus / OBD-II / BLE 桥接现有故障码。 |
-| **边缘计算** | 板载 NPU（0.5 TOPS）本地跑异常检测。离线可用。不经你允许，数据不出你的网络。 |
-| **存储** | microSD（最高 512GB）+ 8GB eMMC 滚动遥测历史。电脑关机它值守夜班 —— 持续感知存储，你回来时 Agent 一键消化缓冲。 |
-| **预测维护** | 从遥测模式估算剩余使用寿命：轴承磨损、皮带拉伸、滤芯堵塞、制冷剂流失曲线 —— 在故障前几天到几周预警，而不是事后。 |
+| **本地模型** | 板载 NPU（0.5 TOPS）运行**本地模型** —— 异常检测与小模型推理都在 Deck 上执行。**个人隐私数据本地计算**：遥测、日志、历史不出设备。默认离线；车队云桥接为可选且明确标注。 |
+| **隐私存储** | 软盘的形态，保险库的内核：**可拔的硬件加密存储卡**（最高 512GB）。拔卡即离场 —— 数据物理上跟你走，机器里不留可读内容；密钥在卡里，不在机器里。电脑关机它值守夜班 —— 持续感知存储，你回来时 Agent 一键消化缓冲。 |
+| **风险预测** | 不只预测故障，每台设备三类风险：**故障风险**（RUL 曲线 —— 轴承磨损、皮带拉伸、滤芯堵塞、制冷剂流失）、**安全风险**（CO 趋势、热失控前兆、过载模式 —— 在危险之前升级预警）、**合规风险**（年检与传感器到期日程）。输出：风险简报 —— 可能性、时间窗、建议动作、证据。 |
 
 ### 夜班闭环
 
 ```
 电脑开机：  OpenWorker ↔ Deck ↔ 设备    （实时：Agent 读取，你批准）
-电脑关机：  Deck → 感知 → 存储          （夜班：缓冲遥测）
+电脑关机：  Deck → 感知 → 存储          （夜班：本地模型值守，加密卡记录）
+拔出存储卡：计算继续 → eMMC 缓冲        （历史揣进你口袋）
 你回来时：  Deck → 缓冲历史 → OpenWorker （"你不在的这段时间…"）
 ```
+
+### 计算存储分离
+
+不是软盘，也不是黑盒 —— 计算平面与存储平面解耦，隐私数据由本地模型计算，历史装进可拔的加密卡。数据是你的，算力是它出的。
+
+| 分离带来什么 | 为什么重要 |
+|---|---|
+| 物理即隐私 | 拔卡，历史物理离机 —— 无需远程擦除，不靠"请相信我们" |
+| 本地模型隐私 | 个人隐私数据由板载模型计算 —— 推理发生在数据所在之处，理解数据从不需要上传 |
+| 独立升级 | 换更大容量的卡不碰计算；计算固件升级永不重写数据层 |
+| 故障隔离 | 卡坏了传感器照常工作 —— 边缘检测继续，缓存在 eMMC |
+| 审计通道 | 把卡（不是机器）交给审计员 —— 合规记录脱离在役传感器流转 |
 
 与开源的 [Hardware Repair Companion](https://github.com/andrewyng/openworker/pull/593) 同事配对使用：Deck 负责感知，Agent 负责诊断 —— 遥测即证据，手册配件从公开来源检索，每台设备独立维护日志。
 
