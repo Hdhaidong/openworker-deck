@@ -122,7 +122,7 @@ Three editions, one design language — matte graphite enclosures, functional co
 | **Privacy disk** | 3.5″ floppy silhouette in armored metal — metal shutter, engraved lock, violet status edge | The removable encrypted medium itself: pull-to-own, key lives in the disk |
 | **Guardian pendant** | Screenless, nano-SIM (4G Cat.1bis), triple positioning, one SOS key | Four wearers: school kid, nursing-home elder, outdoor worker, solo hiker — calls home only, location to the family Deck, never a vendor cloud |
 
-Concept renders (EVT-phase): [`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) — final tooling may adjust.
+Concept renders (EVT-phase): [`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) — final tooling may adjust. Socket-edition industrial enclosure and PCB assembly: [`hardware/socket-enclosure-industrial.jpg`](hardware/socket-enclosure-industrial.jpg) · [`hardware/socket-exploded-view.jpg`](hardware/socket-exploded-view.jpg).
 
 ### Nine equipment domains
 
@@ -156,6 +156,8 @@ The Deck works across the same nine domains the Hardware Repair Companion covers
 | Power | USB-C PD · optional passive PoE |
 | Enclosure | Desktop edition + IP65 field edition (−20 to 60 °C) + DIN-rail industrial edition + socket edition (smart-plug, pass-through) |
 | Firmware | Open source, MIT — MHS-compatible registration |
+
+Board-level design documentation — the socket gateway base PCB and the privacy cartridge PCB (stackups, power tree, isolation targets, mainstream design references): **[hardware/pcb-design.md](hardware/pcb-design.md)**
 
 ### Product editions
 
@@ -271,7 +273,9 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 - **隐私盘**：3.5″ 软盘轮廓装甲金属重铸 —— 金属滑盖、铭刻锁孔、紫色状态边。可插拔加密介质本体：拔盘即离场，密钥在盘里
 - **守护吊牌**：无屏、nano-SIM（4G Cat.1bis）、三重定位、SOS 实体键 —— 四类佩戴者：小学生、养老院老人、户外作业者、独自徒步的旅行者（每 5 分钟轨迹点 · 气压骤变风暴预警 · 平安键超时自动升级 SOS）—— 只打回家的电话，位置回家里 Deck，永不进厂商云
 
-概念渲染（EVT 阶段）：[`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) —— 量产模具或有微调。
+概念渲染（EVT 阶段）：[`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) —— 量产模具或有微调。插座版工业级外壳与 PCB 装配：[`hardware/socket-enclosure-industrial.jpg`](hardware/socket-enclosure-industrial.jpg) · [`hardware/socket-exploded-view.jpg`](hardware/socket-exploded-view.jpg)。
+
+板级硬件设计文档 —— 插座网关底座 PCB 与隐私存储盘 PCB（叠层、电源树、隔离目标、主流方案设计参考）：**[hardware/pcb-design.md](hardware/pcb-design.md)**
 
 ### 九大设备领域
 
