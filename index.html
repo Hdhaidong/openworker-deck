@@ -77,7 +77,7 @@
 
   /* loop */
   .loop{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:26px;font-family:var(--mono);font-size:13.5px;overflow-x:auto}
-  .loop .l1{color:var(--acc2)} .loop .l2{color:var(--dim)} .loop .l3{color:var(--acc)} .loop .l4{color:var(--warn)}
+  .loop .l1{color:var(--acc2)} .loop .l2{color:var(--dim)} .loop .l3{color:var(--acc)} .loop .l4{color:var(--warn)} .loop .l5{color:var(--danger)}
 
   /* domains */
   .domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
@@ -137,10 +137,16 @@
       <span class="badge">隐私存储 Privacy Vault · 可拔</span>
       <span class="badge">计算存储分离 Compute ⊥ Storage</span>
       <span class="badge">风险预测 Risk Prediction</span>
+      <span class="badge">SOS 急救提醒 Emergency Alert</span>
+      <span class="badge">气象计算 Weather Intelligence</span>
+      <span class="badge">极端气候规避 Extreme Climate Guard</span>
+      <span class="badge">养老守护 Elder Care</span>
+      <span class="badge">机器人对接训练评估 Robot Eval</span>
+      <span class="badge">儿童无屏守护 Kids Screenless</span>
     </div>
     <h1>OpenWorker <span class="grad">Deck</span></h1>
-    <p class="tag">Give your AI coworker a body — <b>direct device link</b> (Modbus · industrial &amp; wireless gateway) · <b>local model</b> (private data never leaves) · <b>privacy storage</b> (pull-to-own cartridge) · <b>risk prediction</b>.</p>
-    <p class="zh-tag">给你的 AI 同事一个身体 —— 直连设备 · 智能链接 · 本地模型计算隐私数据 · 隐私存储（可拔）· 计算存储分离 · 风险预测</p>
+    <p class="tag">Give your AI coworker a body — <b>direct device link</b> (Modbus · industrial &amp; wireless gateway) · <b>local model</b> (private data never leaves) · <b>privacy storage</b> (pull-to-own cartridge) · <b>risk prediction</b> · <b>SOS + weather intelligence</b>.</p>
+    <p class="zh-tag">给你的 AI 同事一个身体 —— 直连设备 · 智能链接 · 本地模型计算隐私数据 · 隐私存储（可拔）· 风险预测 · SOS 急救提醒 · 气象计算 · 极端气候规避</p>
     <div class="cta-row">
       <a class="btn pri" href="https://github.com/andrewyng/openworker" target="_blank">Built for OpenWorker</a>
       <a class="btn sec" href="https://github.com/Hdhaidong/openworker-deck" target="_blank">Watch the repo · 收到上线通知</a>
@@ -155,6 +161,7 @@
         <div class="todo-item"><span class="box">✓</span><span>POLL Modbus RTU · 3 devices · unit 1–247</span></div>
         <div class="todo-item"><span class="box">✓</span><span>LOCAL model · telemetry — 1,247 cycles</span></div>
         <div class="todo-item"><span class="box">✓</span><span>RISK brief · failure 4% · compliance due 12d</span></div>
+        <div class="todo-item"><span class="box">✓</span><span>WEATHER · baro −6.2 hPa/6h → frost alert queued</span></div>
         <div class="todo-item"><span class="box">·</span><span>Write maintenance-log → vault</span></div>
         <div class="perm-card">
           <div class="pt">PERMISSION REQUEST</div>
@@ -174,8 +181,8 @@
 
 <section id="pillars">
   <div class="wrap">
-    <div class="kicker">// the device / 六大支柱</div>
-    <h2>One device, six jobs</h2>
+    <div class="kicker">// the device / 八大职责</div>
+    <h2>One device, eight jobs</h2>
     <p class="sub">Desk console and field sensor in the same box — the hardware half of an OpenWorker deployment.</p>
     <div class="grid">
       <div class="card"><div class="ic">🖥️</div><h3>Agent console · TRAE 式控制台</h3><p>4″ screen mirrors the coworker's live todo list and progress panel. Permission requests arrive as physical cards with Approve / Deny buttons — OpenWorker's <b>interactive</b> mode, in hardware.</p><div class="en-sub">status ring: idle / thinking / needs-you</div></div>
@@ -184,15 +191,18 @@
       <div class="card"><div class="ic">⚙️</div><h3>Local model · 本地模型计算</h3><p>The on-device NPU runs a <b>local model</b> — anomaly detection and small-model reasoning execute on the Deck itself. <b>Personal and private data are computed locally:</b> your telemetry, your logs, your history never leave the device. Fully offline by default; the optional cloud bridge is opt-in and labeled.</p><div class="en-sub">0.5 TOPS NPU · private data stays local</div></div>
       <div class="card"><div class="ic">🔐</div><h3>Privacy storage · 隐私存储</h3><p>The modern floppy, but a vault: a <b>removable, hardware-encrypted cartridge</b> (up to 512 GB). Pull it out and your data physically leaves with you — nothing readable stays behind. The key lives in the cartridge, not the machine. 软盘的形态，保险库的内核。</p><div class="en-sub">AES-encrypted cartridge · pull-to-own · 512 GB</div></div>
       <div class="card"><div class="ic">🛡️</div><h3>Risk prediction · 风险预测</h3><p>Three risk classes per device, not just failure: <b>failure risk</b> (RUL curves — bearing wear, belt stretch, filter clog), <b>safety risk</b> (CO trends, thermal-runaway precursors, overload patterns — flagged early for human review), <b>compliance risk</b> (inspection and sensor-expiry deadlines). Output: a risk brief with likelihood, time window, action, evidence. It informs decisions — it never acts as a safety system.</p><div class="en-sub">failure · safety · compliance — briefed, not buried</div></div>
+      <div class="card"><div class="ic">🆘</div><h3>SOS · 急救提醒</h3><p>Long-press the physical SOS button and the Deck does what a body should: strobes the status ring, sounds the piezo alarm, broadcasts an SOS card over MQTT and — where the link exists — LoRa long-range, with device location from the registry and the last-minute telemetry attached. First aid starts with someone knowing. <b>Notification only — it does not call emergency services.</b></p><div class="en-sub">one button · ring strobe · MQTT + LoRa broadcast</div></div>
+      <div class="card"><div class="ic">🌦️</div><h3>Weather intelligence · 气象计算</h3><p>A barometer and humidity sensor feed the <b>local model</b>: pressure-trend, dew-point and frost-probability math runs on the Deck itself — no cloud, no forecast subscription. It cross-reads your equipment: frost probability + pivot irrigation → a pre-dawn advisory; heat index + compressor duty → a derating schedule. Official warnings still come from meteorological agencies — the Deck complements them, offline.</p><div class="en-sub">baro + RH · local inference · extreme-climate playbooks</div></div>
+      <div class="card"><div class="ic">🧓</div><h3>Elder care · 养老守护</h3><p>BLE 直连标准健康设备（血压 / 血糖 / 血氧 / 体重 / 穿戴），本地模型为每位老人建<b>个人对照基线</b>——评估的是"对他自己而言的偏离"，不是诊断阈值；趋势提醒推给家人，护理机器人经 MHS 接入、动作在本地评估打分。<b>监测提醒，不做诊断。</b></p><div class="en-sub">BLE GATT health profiles · personal baseline · robot care-loop eval</div></div>
     </div>
   </div>
 </section>
 
 <section id="arch">
   <div class="wrap">
-    <div class="kicker">// privacy cartridge / 软盘形态隐私卡</div>
+    <div class="kicker">// privacy gateway / 隐私网关 · 计算与存储</div>
     <h2>Your data used to have a shape you could hold. It does again.</h2>
-    <p class="sub">你的数据曾经有形状、拿得起来——后来云把它吃掉了。隐私卡把形状还给你：3.5″ 软盘轮廓、装甲金属内核、512 GB 硬件加密。<b>The key lives in the disk, not in the machine.</b></p>
+    <p class="sub">个人智能隐私存储 + 隐私网关计算，一台设备两道闸：所有数据流经本地计算（隐私网关），所有历史落进可拔加密卡（隐私存储）——出网的只有你批准的摘要。<b>The key lives in the disk, not in the machine.</b> 你的数据曾经有形状、拿得起来——后来云把它吃掉了。隐私卡把形状还给你：3.5″ 软盘轮廓、装甲金属内核、512 GB 硬件加密。</p>
     <div class="design-grid" style="margin-bottom:22px">
       <figure>
         <img src="img/cartridge-floppy.jpg" alt="Floppy-form encrypted storage cartridge — the 3.5-inch silhouette reborn in armored metal with metal shutter and engraved lock icon">
@@ -218,6 +228,17 @@
       <tr><td>Failure isolation</td><td>A dead cartridge doesn't kill the sensor — edge detection continues, buffering to eMMC until you re-insert.</td></tr>
       <tr><td>Audit path</td><td>Hand the cartridge (not the machine) to an auditor — the compliance trail travels without the live sensor.</td></tr>
     </table>
+
+    <h3 style="margin-top:36px">🧊 Cold wallet, integrated — the floppy that signs offline</h3>
+    <p class="sub">同一张卡，第二重身份：<b>冷钱包</b>。安全元件（SE）在卡内生成并托管密钥，私钥从诞生那一刻起就不接触任何网络——签名在卡内完成，交易经 USB/二维码进出，网络只见过签名、从没见过钥匙。桌面版的 Approve / Deny 实体键就是确认键：一笔签名 = 一次拇指按压。拔出卡，钱包就是块金属——离线是它的物理属性，不是软件选项。</p>
+    <div class="loop">
+<span class="l1">keygen: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;secure element inside the cartridge &nbsp;&nbsp;(private key born offline, never leaves)</span><br>
+<span class="l2">signing: &nbsp;&nbsp;transaction in → SE signs in-cartridge → signed tx out &nbsp;&nbsp;(network sees signatures, never keys)</span><br>
+<span class="l3">confirm: &nbsp;&nbsp;physical Approve button — one thumb, one signature &nbsp;&nbsp;(the same key that gates hardware writes)</span><br>
+<span class="l4">airgap: &nbsp;&nbsp;&nbsp;cartridge pulled = wallet is metal &nbsp;&nbsp;(offline is a physical property, not a software option)</span>
+    </div>
+    <p class="sub" style="margin-top:16px;font-size:13px">冷钱包功能面向自主保管场景：自行负责助记词备份与丢失风险；本众筹不提供投资建议，加密资产相关功能在不同司法辖区的监管要求不同，发货前将按目标市场法规调整。The wallet is self-custody by design — we never hold your keys.</p>
+
     <div class="grid" style="margin-top:24px">
       <div class="card"><div class="ic">🏥</div><h3>Clinic · 诊所</h3><p>打烊时，盘进抽屉。今晚维护与合规记录不在任何网络上。</p></div>
       <div class="card"><div class="ic">🧪</div><h3>Lab · 实验室</h3><p>一整年的实验遥测，装在衬衫口袋里去合作方现场。</p></div>
@@ -273,6 +294,179 @@
     </div>
     <p class="sub" style="margin-top:16px;font-size:13px">以上为典型场景示例——检测能力为 EVT 阶段设计目标，实际效果以量产实测为准，不构成性能保证。</p>
     <p class="sub" style="margin-top:16px"><b>The cheapest seat in the ecosystem. 生态里最便宜的座位。</b> Not every machine deserves a DIN-rail gateway — some machines just need someone to notice when they start limping. That's the whole job — at Kickstarter it works out to <b>$43 an outlet</b>（三只装众筹价折算；量产零售价另定，认证参数 DVT 后写定）。</p>
+  </div>
+</section>
+
+<section id="sos">
+  <div class="wrap">
+    <div class="kicker">// sos &amp; weather / 急救与气象</div>
+    <h2>A body should know when to shout — and when to head for shelter</h2>
+    <p class="sub">智能硬件的提醒逻辑，装进 Deck 的身体里：一句话 SOS、一环灯光、一声鸣响、一条远距离广播；一台不用联网就算天气的本地气象台，替你的机器看天吃饭。</p>
+
+    <h3 style="margin-top:30px">🆘 SOS — one long press, everything it can do, it does</h3>
+    <p class="sub">长按 SOS 实体键 1.5 秒：状态灯环爆闪、压电蜂鸣响起——这是它自己的嗓子。然后是广播：SOS 卡片带设备位置（MHS 注册表）和最近一分钟遥测，经 MQTT 推给你指定的联系人、手机和 Agent；现场没有 Wi-Fi 时，走 LoRa 长距信道向数公里内的接收端喊话。误触取消：再按一次，3 秒内撤回。</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🔔</div><h3>Ring strobe + piezo</h3><p>灯环爆闪 + 90 dB 蜂鸣，车间另一头也能看见听见。它自己的嗓子先亮出来。</p></div>
+      <div class="card"><div class="ic">📡</div><h3>MQTT broadcast</h3><p>SOS 卡片：设备位置 + 最近一分钟遥测 + 域标签，推送到你指定的联系人与 Agent 订阅的话题。</p></div>
+      <div class="card"><div class="ic">📶</div><h3>LoRa long-range</h3><p>没有 Wi-Fi 的现场：868/915 MHz 长距信道向数公里内的 LoRa 接收端喊话——大棚、泵站、山谷牧场。</p></div>
+      <div class="card"><div class="ic">🧑‍🌾</div><h3>Solo-field escalation</h3><p>独居作业场景：SOS 触发后无确认，按预设序列升级——先家人，后备用联系人。有人知道，是急救的第一步。</p></div>
+    </div>
+
+    <h3 style="margin-top:36px">🌦️ Weather, computed where you stand</h3>
+    <p class="sub">不订云、不装 App：气压计 + 温湿度传感器喂给<b>本地模型</b>，气压趋势、露点、霜冻概率全在 Deck 上算。极端气候规避不是报天气——是把天气读进你的设备清单：每台机器一条应对动作。</p>
+    <div class="loop">
+<span class="l1">sense: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;barometer (±1.5 Pa) · RH · ambient temp &nbsp;&nbsp;(on-board, always on)</span><br>
+<span class="l2">compute: &nbsp;&nbsp;local model → pressure trend / dew point / frost probability / heat index &nbsp;(no cloud)</span><br>
+<span class="l3">cross-read: weather × equipment registry → per-machine action list &nbsp;(frost + pivot? pre-dawn advisory)</span><br>
+<span class="l4">remind: &nbsp;&nbsp;escalating — ring pattern → screen card → MQTT push → LoRa &nbsp;(confirm-tap to clear)</span>
+    </div>
+    <div class="grid" style="margin-top:22px">
+      <div class="card"><div class="ic">❄️</div><h3>Frost · 霜冻</h3><p>霜冻概率 × 灌溉枢轴 → 凌晨预灌建议：水护苗。提前 6 小时进早报，不用你半夜盯天。</p></div>
+      <div class="card"><div class="ic">🔥</div><h3>Heat wave · 热浪</h3><p>热指数 × 空压机负载 → 降容排程：高温时段减载运行，避开热故障高发窗口。</p></div>
+      <div class="card"><div class="ic">🌪️</div><h3>Storm · 风暴</h3><p>气压骤降率 → 户外设备防护清单：盖发电机、收工具、加固棚顶——清单式提醒，逐项确认。</p></div>
+      <div class="card"><div class="ic">🌊</div><h3>Flood · 洪涝</h3><p>连雨湿度 × 泵站状态 → 排水泵试机提醒：汛前验证每台泵打得着火。水位传感可经 1-Wire 挂入。</p></div>
+    </div>
+    <p class="sub" style="margin-top:18px;font-size:13px">SOS 为通知与警报功能，<b>不直接呼叫急救服务</b>、非认证生命安全或医疗设备——真实紧急情况请先拨打当地急救电话。气象推算为本地信息性参考，<b>官方预警永远以气象部门为准</b>，Deck 是补充不是替代。</p>
+  </div>
+</section>
+
+<section id="elder">
+  <div class="wrap">
+    <div class="kicker">// elder care / 养老守护</div>
+    <h2>父母的健康数据，算在家里，不在云上</h2>
+    <p class="sub">养老垂直的完整闭环：<b>健康数据对接</b>（BLE 标准设备直连）→ <b>对照模型</b>（每位老人自己的基线）→ <b>模型评估</b>（家人反馈闭环）→ <b>机器人对接</b>（护理机器人同标准接入、本地训练评估）。四段全在本地——数据不出门，判断留给人。</p>
+
+    <h3 style="margin-top:30px">🩺 健康数据对接 — standard BLE devices, zero cloud, zero accounts</h3>
+    <p class="sub">老人不用装 App、不用注册账号：血压计、血糖仪、血氧仪、体重秤、穿戴设备走蓝牙标准健康档案（GATT），Deck 做中枢直读，测完数据自动落本地加密卡——密钥在盘里，健康史跟着盘走。</p>
+    <table>
+      <tr><th>设备</th><th>蓝牙标准档案</th><th>Deck 做什么</th></tr>
+      <tr><td>血压计</td><td>Blood Pressure Profile</td><td>收缩 / 舒张 / 脉搏入库，个人基线滚动更新</td></tr>
+      <tr><td>血糖仪</td><td>Glucose Profile</td><td>测量值 + 时间戳，趋势偏离提醒</td></tr>
+      <tr><td>血氧仪</td><td>Pulse Oximeter Profile</td><td>SpO₂ 连续读数，超个人范围提醒</td></tr>
+      <tr><td>体重秤</td><td>Weight Scale Profile</td><td>体重 / BMI 趋势，急变提醒</td></tr>
+      <tr><td>穿戴设备</td><td>厂商服务 / GATT</td><td>步数、心率、睡眠——活动节律学习</td></tr>
+    </table>
+
+    <h3 style="margin-top:36px">📊 对照模型 — the baseline is the elder's own, not a population's</h3>
+    <p class="sub">不做人群诊断——模型学的是<b>"这位老人自己的正常"</b>：7 天滚动基线覆盖血压晨峰规律、活动节律、睡眠模式。评估 = 当前读数对<b>个人基线</b>的偏离度：今天的收缩压比他自己的基线高 18% → 提醒家人；不跟诊断阈值比，不输出"高血压"——那个词属于医生。</p>
+    <div class="loop">
+<span class="l1">ingest: &nbsp;&nbsp;&nbsp;&nbsp;BLE health devices → local model &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(on-device, encrypted at rest)</span><br>
+<span class="l2">baseline: &nbsp;&nbsp;7-day rolling personal baseline · BP rhythm · activity · sleep &nbsp;(HIS normal, not the population's)</span><br>
+<span class="l3">evaluate: &nbsp;&nbsp;current reading vs personal baseline → deviation score &nbsp;(never vs diagnostic thresholds)</span><br>
+<span class="l4">escalate: &nbsp;&nbsp;deviation + no family confirm in window → SOS sequence &nbsp;(the same button, the same ring)</span>
+    </div>
+
+    <h3 style="margin-top:36px">🔄 模型评估 — alerts that learn from the family</h3>
+    <div class="grid">
+      <div class="card"><div class="ic">✅</div><h3>反馈闭环</h3><p>家人对每条提醒确认 / 忽略——灵敏度自校准，误报逐周下降。评估的不是老人，是模型自己。</p></div>
+      <div class="card"><div class="ic">📨</div><h3>家人周报</h3><p>每周健康摘要经 MQTT 推送到家人订阅的话题：趋势、用药依从性、异常次数、模型灵敏度变化。</p></div>
+      <div class="card"><div class="ic">💊</div><h3>用药提醒</h3><p>时间触发灯环 + 蜂鸣 + 屏幕卡，确认打卡；漏服次数进周报——不唠叨，但记得。</p></div>
+      <div class="card"><div class="ic">🔐</div><h3>隐私边界</h3><p>健康数据本地计算：周报只有家人订阅的话题收到，云端永远拿不到原始读数。老人搬去哪家，拔盘带走。</p></div>
+    </div>
+
+    <h3 style="margin-top:36px">🤖 机器人对接 — training data and evaluation, both local</h3>
+    <p class="sub">护理机器人经 <b>MHS</b> 像任何设备一样注册接入——同一套读写纪律与安全标签；ROS / ROS2 机器人经内置 MQTT broker 挂上话题树 <span class="mono">deck/robot/{id}/{action}</span>。训练数据与评估打分都不出院：</p>
+    <div class="loop">
+<span class="l1">register: &nbsp;care robot joins via MHS / MQTT &nbsp;(same safety labels · same Approve/Deny gate for write-actions)</span><br>
+<span class="l2">dataset: &nbsp;&nbsp;sensors + health baseline + robot action log → encrypted cartridge &nbsp;(training data never leaves the house)</span><br>
+<span class="l3">evaluate: &nbsp;robot actions scored against elder baseline + family feedback &nbsp;(the loop that tunes the care model also grades the robot)</span><br>
+<span class="l4">gate: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;physical assistance requires the physical Approve button &nbsp;(a human stays in the loop — always)</span>
+    </div>
+    <p class="sub" style="margin-top:18px;font-size:13px">养老功能为<b>监测与提醒</b>：非医疗器械、不做诊断、不使用人群诊断阈值——异常是否就医由家人与医生判断。护理机器人的物理辅助动作必须经实体确认键：评估给分数，闸门不给人。机器人训练数据留在本地加密卡，不外传。</p>
+  </div>
+</section>
+
+<section id="pendant">
+  <div class="wrap">
+    <div class="kicker">// guardian pendant / 无屏守护终端</div>
+    <h2>打得了电话，刷不了视频——因为它没有屏幕</h2>
+    <p class="sub">插卡即用的无屏守护吊牌，一个硬件三类人：小学生（上学路上）、养老院老人（每人一枚）、户外作业者（农场与工地）。电话模式只通预设联系人，SOS 一键定位呼出，轨迹回到家里的 Deck——不是某家厂商的云。</p>
+
+    <div class="grid">
+      <div class="card"><div class="ic">📱</div><h3>电话模式</h3><p>只能拨打家长 / 家属预设的号码——爸妈、爷爷奶奶、班主任在名单里，陌生人进不来。免提外放，孩子不用记号码，老人不用学触屏。</p></div>
+      <div class="card"><div class="ic">💳</div><h3>插卡即用</h3><p>nano-SIM 插入即通（4G Cat.1bis 全网通），开号即守护——不用绑定谁的手机，不用装 App，不用注册账号。</p></div>
+      <div class="card"><div class="ic">🚫</div><h3>无屏设计</h3><p>没有屏幕，就没有短视频、没有游戏、没有"再看五分钟"。上学的路上、养老院的日常里，只有通话和定位该有的事。</p></div>
+      <div class="card"><div class="ic">🆘</div><h3>SOS 一键定位</h3><p>长按 SOS：当前位置 + 最近轨迹即刻成卡，推送到监护人序列并循环呼叫直至确认；家里的 Deck 同步灯环爆闪、蜂鸣提醒。误触 3 秒内再按取消。</p></div>
+    </div>
+
+    <h3 style="margin-top:36px">📍 定位数据不出户 — the privacy no watch or pendant offers</h3>
+    <p class="sub">儿童手表的默认是孩子位置进厂商云。这里的默认是：GPS + WiFi + 基站三重定位，经蜂窝或到家 BLE 回连<b>家里的 Deck</b>，轨迹落本地加密卡——密钥在盘里，拔盘带走，厂商云拿不到佩戴者的位置。</p>
+    <div class="loop">
+<span class="l1">locate: &nbsp;&nbsp;&nbsp;GPS + WiFi + cellular triangulation &nbsp;(triple positioning, on the pendant)</span><br>
+<span class="l2">relay: &nbsp;&nbsp;&nbsp;&nbsp;cellular (4G Cat.1bis) on the road · BLE at home → the family Deck &nbsp;(the home base, not a vendor cloud)</span><br>
+<span class="l3">store: &nbsp;&nbsp;&nbsp;&nbsp;track history → encrypted cartridge &nbsp;(key on the disk; pull it, the history leaves with it)</span><br>
+<span class="l4">alert: &nbsp;&nbsp;&nbsp;&nbsp;SOS → location card to the guardian sequence + Deck ring strobe &nbsp;(loops until someone confirms)</span>
+    </div>
+
+    <h3 style="margin-top:36px">🏥 方便急救 — the evidence a rescue actually needs</h3>
+    <p class="sub">急救的黄金信息是"在哪、什么情况、从什么时候开始"。SOS 触发的瞬间，这些已经就位：</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🎯</div><h3>一键定位</h3><p>位置卡片实时推送——户外（山谷牧场、工地）、养老院（楼层房间到床号）两类救援场景，找人不用先打电话描述。</p></div>
+      <div class="card"><div class="ic">📋</div><h3>救援背景卡</h3><p>预设医疗备注（血型、过敏、慢病）随 SOS 附带——急救人员到场前就知道关键信息。信息由家属填写，Deck 本地存储。</p></div>
+      <div class="card"><div class="ic">⏱️</div><h3>时间线</h3><p>从触发到每位监护人确认的时刻自动记录——救援复盘与理赔都用得上。</p></div>
+      <div class="card"><div class="ic">🔁</div><h3>循环确认</h3><p>第一个联系人未接，自动转向下一位，循环直至有人按下确认——独居老人与户外单人作业的安全网。</p></div>
+    </div>
+
+    <h3 style="margin-top:36px">📄 保险公司理赔 — the claim file assembles itself</h3>
+    <p class="sub">理赔最贵的是证据。SOS 之后，Deck 已经把它整理好：<b>理赔证据包</b>——事件时间线、位置轨迹、遥测摘要、监护确认记录，从本地加密卡一键导出为结构化文件（PDF/JSON），保险要的摘要在里面，原始数据留在盘里。<b>预付保险计划</b>与持牌保险机构合作推进中：监管审批通过后随守护档位附赠首年保障；审批未落地则等值折让——绝不承诺尚未成立的赔付。</p>
+    <div class="loop">
+<span class="l1">event: &nbsp;&nbsp;&nbsp;&nbsp;SOS trigger → timeline · location · telemetry · guardian confirmations &nbsp;(auto-assembled)</span><br>
+<span class="l2">package: &nbsp;surgical export — summary for the insurer, originals on the cartridge &nbsp;(the claim sees digest, not your data)</span><br>
+<span class="l3">prepaid: &nbsp;first-year care plan with a licensed underwriter, pending approval &nbsp;(falls back to equivalent credit — never a promise before it exists)</span>
+    </div>
+    <p class="sub" style="margin-top:18px;font-size:13px">守护终端为<b>通信、定位与提醒</b>：SOS 通知监护人序列而非急救服务，真实紧急情况先打当地急救电话；救援背景卡信息由家属自行填写、本地存储。未成年人个人信息遵循监护人同意与最小必要原则（PIPL），蜂窝与射频合规（SRRC 型号核准、进网许可）量产前完成；预付保险计划以持牌机构合作为前提，审批未落地不构成保障承诺。</p>
+  </div>
+</section>
+
+<section id="or">
+  <div class="wrap">
+    <div class="kicker">// medical facilities / 手术室与医疗环境</div>
+    <h2>手术室里最该被盯的，是没人在盯的</h2>
+    <p class="sub">手术有人盯——设备没人盯。Deck 进医疗设施只做两件事：<b>设备健康</b>与<b>环境合规</b>：不碰患者回路、不做临床判断，术中被动只读，写操作物理排队到术后。</p>
+    <div class="grid">
+      <div class="card"><div class="ic">🏥</div><h3>设备监控</h3><p>灭菌器周期与批次记录、麻醉机与呼吸机运行时长、无影灯镇流器、手术电梯——Modbus RTU/TCP 直读，维护周期自动递减，到期进风险预测。</p></div>
+      <div class="card"><div class="ic">🌡️</div><h3>环境合规</h3><p>温湿度、压差、HEPA 滤芯寿命、空气质量——1-Wire / BLE 传感挂入，合规记录自动落加密卡，审计跟盘走，拔盘即带走。</p></div>
+      <div class="card"><div class="ic">📊</div><h3>评估报告</h3><p>设备维护状态 × 环境合规记录 → 月度设施评估报告，审计格式一键导出——卫健委检查与 JCI 评审前的自检底稿。</p></div>
+      <div class="card"><div class="ic">🔒</div><h3>术中纪律</h3><p>手术进行中被动只读：任何写操作（校准 / 复位）排队到术后，实体确认键物理上锁——设备维护永远给手术让路。</p></div>
+    </div>
+    <div class="loop">
+<span class="l1">read: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sterilizer cycles · anesthesia run-hours · OR lights · surgical elevator &nbsp;(Modbus / RS-485)</span><br>
+<span class="l2">environment: temperature · humidity · pressure differential · HEPA lifetime &nbsp;(logged to the cartridge, audit-ready)</span><br>
+<span class="l3">evaluate: &nbsp;equipment state × environment compliance → monthly facility report &nbsp;(audit format, one-tap export)</span><br>
+<span class="l4">boundary: &nbsp;never patient-connected · never clinical · surgery = read-only, writes queue until after &nbsp;(fixed, by design)</span>
+    </div>
+    <p class="sub" style="margin-top:18px;font-size:13px">医疗设施场景为<b>设备与环境监测</b>：不接入患者回路、不做临床判断、术中只读不写；医疗环境电磁兼容（IEC 60601-1-2）为 DVT 目标，合规记录的效力以当地监管与评审机构认定为准。</p>
+  </div>
+</section>
+
+<section id="insure">
+  <div class="wrap">
+    <div class="kicker">// insurance full chain / 保险全链路 · 隐私计算</div>
+    <h2>保单看摘要，数据不出盘——人身保险的全链路</h2>
+    <p class="sub">人身保障 × 隐私计算 × 按权授权：从传感到理赔一条链，每一环里原始数据都留在本地加密卡，保险机构看到的只有你授权过的摘要。</p>
+    <div class="loop">
+<span class="l1">sense: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;health baseline · equipment · environment · SOS events &nbsp;(raw data, on the cartridge)</span><br>
+<span class="l2">compute: &nbsp;&nbsp;local risk computation — risk tiers, event summaries &nbsp;(摘要可验，原始不出盘)</span><br>
+<span class="l3">authorize: &nbsp;consent card — 保什么 · 给谁 · 看到什么程度，实体确认键按下才生效 &nbsp;(可随时撤回)</span><br>
+<span class="l4">underwrite: licensed insurer evaluates from verifiable digests &nbsp;(核保看得见可信，看不见原始数据)</span><br>
+<span class="l5">claims: &nbsp;&nbsp;&nbsp;SOS timeline + telemetry digest + guardian confirmations → 证据包一键导出 &nbsp;(理赔不扯皮)</span>
+    </div>
+    <div class="grid" style="margin-top:24px">
+      <div class="card"><div class="ic">🧮</div><h3>事前 · 隐私计算核保</h3><p>风险分数在本地模型算好，授权摘要送核保——原始健康数据不出盘。摘要可验证（签名 + 时间戳），伪造不了也偷不走。</p></div>
+      <div class="card"><div class="ic">🔔</div><h3>事中 · 风险提醒降出险</h3><p>核保之后的持续监测变成提醒：跌倒风险、用药偏离、极端天气——出险率降下来，风险双向受益，不与任何具体保费挂钩。</p></div>
+      <div class="card"><div class="ic">📦</div><h3>事后 · 证据包自组装</h3><p>SOS 时间线、遥测摘要、监护确认自动成包（PDF/JSON）——保险拿摘要，原始数据留盘里，理赔周期从扯皮变成对表。</p></div>
+      <div class="card"><div class="ic">↩️</div><h3>全程 · 按权授权可撤</h3><p>授权按粒度授予：某项数据、某家机构、某个期限。撤回即断流，链路每次授权都有审计记录——数据主权不是口号，是按键。</p></div>
+    </div>
+
+    <h3 style="margin-top:36px">⚕️ 手术保险链 — readiness in, evidence out</h3>
+    <p class="sub">手术场景的保险全链路：评的是<b>设施就绪</b>（设备与环境），不是患者手术风险；记录的是<b>中立证据</b>（带时间戳签名的日志），不是裁决。前后两段分开看：</p>
+    <div class="loop">
+<span class="l1">pre-op: &nbsp;&nbsp;手术就绪评估——灭菌器批次 ✓ 麻醉机维护 ✓ 环境（温湿度/压差/洁净）✓ → 就绪摘要 &nbsp;(facility readiness, never patient risk)</span><br>
+<span class="l2">intra-op: passive read-only timeline — auto-recorded, signed &amp; timestamped &nbsp;(tamper-evident by construction)</span><br>
+<span class="l3">post-op: &nbsp;设备周期递减 · 环境合规持续记录 · 授权恢复期摘要（按权授权）&nbsp;(detection &amp; monitoring, digests only)</span><br>
+<span class="l4">dispute: 医疗仲裁证据链——中立设备 / 环境记录供仲裁机构与司法鉴定调用 &nbsp;(records, never verdicts)</span>
+    </div>
+    <p class="sub" style="margin-top:18px;font-size:13px">保险全链路以<b>持牌保险机构合作与监管审批</b>为前提：不承诺核保结果、保费水平或赔付；健康数据用于核保需按 PIPL 敏感个人信息规则单独明示同意；预付保险计划审批未落地时等值折让。本链路是数据准备与授权基础设施，不是保险产品。手术保险链不做患者手术风险评估、不做临床判断、不裁决医疗纠纷——责任认定归仲裁机构、司法鉴定与持牌保险。</p>
   </div>
 </section>
 
@@ -356,7 +550,8 @@
       <tr><td>Security</td><td>Hardware AES cartridge encryption · secure element · key lives in the cartridge · nothing readable without it</td></tr>
       <tr><td>Display</td><td>4″ LCD — todo/progress panel, permission cards, risk briefs</td></tr>
       <tr><td>Controls</td><td>Approve / Deny buttons · rotary encoder · status ring</td></tr>
-      <tr><td>Sensors</td><td>3-axis accelerometer · IR thermopile · CT clamp (0–100 A) · MEMS mic</td></tr>
+      <tr><td>Sensors</td><td>3-axis accelerometer · IR thermopile · CT clamp (0–100 A) · MEMS mic · <b>barometer (±1.5 Pa) · RH/temp</b> — weather inference on-device</td></tr>
+      <tr><td>Emergency</td><td><b>SOS button</b> (long-press, cancel within 3 s) · status-ring strobe · piezo buzzer (~90 dB) · MQTT + LoRa SOS broadcast</td></tr>
       <tr><td>Ports</td><td>CAN 2.0B / J1939 · RS-485 (Modbus RTU multi-drop) · <b>10/100M Ethernet (Modbus TCP)</b> · 1-Wire · OBD-II via adapter</td></tr>
       <tr><td>Radios</td><td>BLE 5.2 · Wi-Fi 4 · <b>LoRa 868/915 MHz</b> (optional)</td></tr>
       <tr><td>Message layer</td><td><b>Built-in MQTT broker</b> (3.1.1 / 5.0) · MHS↔topic mapping · optional TLS cloud bridge · QoS 1 store-and-forward</td></tr>
@@ -377,6 +572,7 @@
       <div class="tier"><div class="tname">Standard</div><div class="price">$109</div><p>1× Deck · sensor set</p></div>
       <div class="tier"><div class="tname">Duo</div><div class="price">$199</div><p>2× Decks — desk + workshop</p></div>
       <div class="tier"><div class="tname">Socket Trio</div><div class="price">$129</div><p>3× socket editions — washer · water heater · compressor 零接线点名到机，不进配电柜的最便宜工业监控</p></div>
+      <div class="tier"><div class="tname">Guardian Pack</div><div class="price">$159</div><p>1× Deck · 2× 无屏守护吊牌（小学生 / 老人）· 预付保险计划首年（持牌合作审批后生效，未落地等值折让）</p></div>
       <div class="tier"><div class="tname">Fleet</div><div class="price">$499</div><p>6× Decks · field edition · fleet dashboard</p></div>
       <div class="tier"><div class="tname">Clinic / Lab</div><div class="price">$899</div><p>10× Decks · compliance templates · priority support</p></div>
     </div>
@@ -406,10 +602,13 @@
       <li><b>MHS is a research preview.</b> The Deck follows its published pattern — standard drivers, plain-language safety labels, read/write discipline — and tracks the spec as it stabilizes. Firmware is open source; updates ship as they land.</li>
       <li><b>Certification timing</b> (FCC/CE and regional equivalents) gates shipping dates; PVT is buffered accordingly. Nothing on this page is certified yet.</li>
       <li><b>Component supply</b> — SoC and display both have second-source plans.</li>
-      <li><b>Medical boundary, fixed:</b> the Deck is a <b>monitoring device</b>. It is not a medical device, makes no diagnosis or treatment claims, and is never patient-connected. Clinic scenarios describe data storage of maintenance records only. 涉及患者的任何判断，永远由持证人员进行。</li>
+      <li><b>Medical boundary, fixed:</b> the Deck is a <b>monitoring device</b>. It is not a medical device, makes no diagnosis or treatment claims, and is never patient-connected. Clinic scenarios describe data storage of maintenance records only. Elder-care features compare readings against a personal baseline and send trend reminders — they never diagnose, never apply population thresholds, and care decisions stay with family and clinicians; robotic physical-assistance actions sit behind the physical Approve gate with a human in the loop. 涉及患者的任何判断，永远由持证人员进行。</li>
       <li><b>Fire safety boundary, fixed:</b> detector-health and pressure-trend logs support — never replace — certified inspection and code-mandated testing.</li>
       <li><b>Electrical safety:</b> the socket edition's pass-through load rating is an EVT target spec; the final rating ships only after certification, and high-power resistive loads (space heaters etc.) are out of scope until certified figures are published.</li>
       <li><b>Encryption export:</b> the encrypted cartridge contains cryptography subject to export-control regulations; we ship in accordance with applicable law and will state any country restrictions before the campaign closes.</li>
+      <li><b>Minors &amp; consent, fixed:</b> the guardian pendant collects location and communication metadata only — guardian consent, data minimization (PIPL), local storage. SOS notifies the guardian sequence, never emergency services; cellular/radio approvals (SRRC, network access) complete before mass production.</li>
+      <li><b>Insurance boundary, fixed:</b> the full chain is data-preparation and consent infrastructure — <b>not an insurance product, and we are not an insurer</b>. Underwriting, pricing and payouts remain with licensed insurers subject to regulatory approval; the prepaid plan falls back to equivalent credit if approval doesn't land. No coverage exists until a licensed partner signs.</li>
+      <li><b>Medical facilities:</b> OR and clinic scenarios monitor equipment and environment only — never patient circuits, never clinical judgments. Surgery-time is read-only with writes queued; IEC 60601-1-2 EMC is a DVT target.</li>
       <li><b>Performance claims:</b> detection scenarios on this page are design goals illustrated with typical examples. Actual detection performance is established by DVT measurements and published in the build log — not guaranteed by the campaign.</li>
       <li><b>Pricing:</b> tier prices are campaign prices. Future retail pricing, if any, is not locked by this campaign.</li>
     </ul>
@@ -426,6 +625,11 @@
     <details><summary>What happens if I pull the storage cartridge out?</summary><p>Nothing breaks. Compute keeps running — sensing, the local model and protocol bridging continue, with telemetry buffering to the 8 GB eMMC. Your history travels with the cartridge: hardware-encrypted, the key lives in the cartridge itself, unreadable without it. Re-insert and the buffer syncs into the archive.</p></details>
     <details><summary>How is my personal data kept private?</summary><p>Three layers. Compute: a local model does the inference on-device, so understanding your data never requires uploading it. Storage: the archive sits on a removable hardware-encrypted cartridge — pull it and the data physically leaves the machine. Network: offline by default, the fleet bridge is opt-in.</p></details>
     <details><summary>What if my equipment has no diagnostic port?</summary><p>The four contactless modalities — vibration, thermal, current, acoustic — work on any machine with power.</p></details>
+    <details><summary>Elder care — is this a medical monitor?</summary><p>No. It reads standard BLE health devices, compares readings against the elder's own rolling baseline, and sends trend reminders to family. It never diagnoses, never applies diagnostic thresholds, and is not a certified medical device — anything clinical goes to a doctor.</p></details>
+    <details><summary>Can care robots really train on it?</summary><p>Robots join via MHS or the built-in MQTT broker like any device. Interaction history — sensors, health baseline, robot action logs — stays on the encrypted cartridge as local training data, and robot actions are scored against the elder's baseline plus family feedback. Physical assistance actions require the physical Approve button: a human stays in the loop, always.</p></details>
+    <details><summary>The insurance chain — am I buying insurance from you?</summary><p>No. The Deck prepares authorized, verifiable digests and assembles claim evidence — it is not an insurance product, and we are not an insurer. Underwriting, pricing and payouts stay with licensed partners, subject to regulatory approval; if the prepaid plan's approvals don't land, the tier falls back to equivalent credit.</p></details>
+    <details><summary>Surgical insurance chain — does it assess surgical risk?</summary><p>No. Pre-op it evaluates <b>facility readiness</b> — sterilizer batches, anesthesia-machine maintenance, temperature, humidity, pressure differential — never the patient's surgical risk. Intra-op it records a passive, signed, timestamped timeline; post-op it tracks equipment cycles and environment compliance plus authorized recovery digests. For medical disputes, that evidence chain is available to arbitration bodies and forensic experts — the Deck provides records, never verdicts.</p></details>
+    <details><summary>Operating rooms — is that safe?</summary><p>The Deck monitors equipment and environment only: sterilizer cycles, anesthesia run-hours, temperature, humidity, pressure differential, HEPA lifetime. It is never connected to patient circuits, makes no clinical judgments, and during surgery it is read-only — writes queue behind the physical button until the procedure ends.</p></details>
     <details><summary>Can it control equipment, or only watch?</summary><p>Both, through MHS: reads are always safe; writes (resets, calibration, actuation) require explicit approval — on the physical buttons by default.</p></details>
     <details><summary>Why not just buy an industrial gateway from Moxa or USR IOT?</summary><p>Because they solve a different problem. A Modbus gateway from an established industrial vendor (e.g. Moxa's MGate series) lists around $400+, and Chinese IIoT edge gateways (e.g. USR's edge series) run ¥1,099 — excellent boxes, but they translate protocols for <b>SCADA and clouds</b>. The Deck at $89–$109 covers the same field protocols in one box (Modbus RTU/TCP · CAN/J1939 · OBD-II · BLE · LoRa) <b>plus what gateways don't do: MHS-native registration an AI agent can operate, a desk console with physical Approve/Deny, four-modality sensing, a local model computing your private data on-device, an encrypted pull-to-own storage cartridge, and three-class risk prediction. 不是更便宜的网关，是不同品类：Agent 能亲手操作的网关。</p></details>
     <details><summary>Is it a medical device?</summary><p>No. In medical, clinic and dental settings the Deck monitors equipment rooms and duty cycles only — never patient-connected circuits. Fire-safety monitoring is record-keeping, never a replacement for certified inspection.</p></details>
