@@ -112,6 +112,9 @@ li{margin:6px 0;color:var(--text)}
       <a href="#pendantkit">08e 守护吊牌 · 专项文案</a>
       <a href="#orkit">08f 手术室与医疗设施 · 专项文案</a>
       <a href="#insurekit">08g 保险全链路 · 专项文案</a>
+      <a href="#gatewaykit">08h 插座网关底座 · 专项文案</a>
+      <a href="#hikerkit">08i 独自徒步 · 专项文案</a>
+      <a href="#exportkit">08j 加密出口合规 · 专项文案</a>
       <a href="#tiers">09 众筹档位</a>
       <a href="#timeline">10 时间线</a>
       <a href="#rr">11 风险与挑战</a>
@@ -798,7 +801,133 @@ you return:         Deck → buffered history → OpenWorker   <span class="b">(
       <p><b>手术保险链是同一套架构，收紧一档。</b>术前评的是<b>设施就绪</b>——灭菌器批次、麻醉机维护、环境达标——绝不评患者手术风险。术中被动只读、签名时间线。术后追踪设备周期、环境合规与授权恢复期摘要。纠纷进仲裁时，中立的设备与环境记录就在那里——Deck 提供记录，不提供裁决。</p>
     </div>
 
+    <h3>私有模型互联 <em>— 合规后发行 · 强制授权</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "The model comes to the data — never the reverse."</p>
+      <p><b>B.</b> "Their model, your rules: no consent card, no model call."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "模型来找数据——永远不是反过来。"</p>
+      <p><b>B.</b> "他们的模型，你的规矩：无授权卡，不调用。"</p>
+    </div>
+    <div class="copy en">
+      <div class="lang">English · body copy</div>
+      <p><b>Insurers have underwriting models. Companies have evaluation models. They all want your data — so the interconnect flips the direction.</b> Post-compliance, an institution's proprietary model plugs in sandboxed: it reads only the fields the consent card names, runs on the Deck's isolated compute, and leaves with nothing but a signed inference output. Between them stands the mandatory authorization gate — hardware-enforced, no bypass, no direct API: no active consent card, the model call is refused before it starts. Revoke the card and the next call is already dead. Every invocation leaves an audit line: which model, what it read, when, under which card.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 主文案</div>
+      <p><b>保险公司有核保模型，各类公司有评估模型——它们都想碰你的数据。互联层把方向反过来。</b>机构合规审批后，其私有模型沙箱化接入：只读授权卡声明的字段，在 Deck 的隔离算力里跑，离开时只带走一份签名推理输出。中间横着一道强制授权闸门——硬件执行、无旁路、无直连 API：没有生效的授权卡，模型调用在开始之前就被拒绝。撤回授权，下一次调用即刻失效。每次调用留一条审计记录：哪家模型、读过什么、何时、依据哪张卡。</p>
+    </div>
+
+    <div class="note"><b>合规红线（私有模型互联）：</b>模型接入永远以"机构资质审查 + 监管要求满足"为前提（合规后发行），沙箱与强制授权闸门是技术前置条件——文案不得暗示"任何模型随时可接"。禁用词：数据共享、模型直连、无条件接入。安全词：沙箱 · 签名输出 · 强制授权 · 审计留痕。</div>
+
     <div class="note"><b>合规红线（金融 + 医疗双敏感）：</b>我们不是保险公司，全链路是数据准备与授权基础设施——核保、定价、赔付归持牌机构；监管审批前不承诺任何核保结果与赔付；健康数据用于核保按 PIPL 敏感个人信息规则单独明示同意；预付保险计划未获批则等值折让。<i>禁用词：保障、赔付承诺、保费优惠、免责。手术链禁用词：患者风险评估、手术成功率、责任判定。"授权""摘要""证据包"是安全词。</i></div>
+  </div>
+</section>
+
+<!-- ============ 08h SOCKET GATEWAY ============ -->
+<section id="gatewaykit">
+  <div class="wrap">
+    <div class="kicker">// 08h · socket gateway base · dedicated copy</div>
+    <h2>插座即网关 <em>— "网关在墙，存储随身"</em></h2>
+
+    <h3>标题方案 <em>— A/B 二选一</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "The gateway lives in the wall. The vault travels with you."</p>
+      <p><b>B.</b> "Plug in the socket, slide in the disk — that's a privacy node."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "网关在墙，存储随身。"</p>
+      <p><b>B.</b> "插座上墙，存储盘入槽——一台隐私节点就成了。"</p>
+    </div>
+
+    <h3>主文案 <em>— 产品故事</em></h3>
+    <div class="copy en">
+      <div class="lang">English · body copy</div>
+      <p><b>The socket edition is not a smart plug that watches current. It's the smallest gateway in the ecosystem.</b> The MQTT broker runs inside the socket — plug it into the wall and a message hub comes online, topic tree and all. Now slide the privacy cartridge into the side slot: the socket becomes a standalone privacy-compute storage node. Night watch, pendant-track archiving, SOS evidence assembly — all of it happens in that one wall slot, no desktop edition required. Gateway stays, vault travels: pull the disk and the history rides in your pocket while the socket keeps watching.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 主文案</div>
+      <p><b>插座版不是一块会看电流的插线板——它是生态里最小的网关。</b>MQTT broker 直接在插座里跑：插上墙，消息中枢上线，话题树自带。再把隐私计算存储盘从侧卡口推入，插座当场升级为独立的隐私计算存储节点——夜班值守、吊牌轨迹归档、SOS 证据包生成，全部发生在墙上那一格，不需要桌面版到场。网关在墙值守，存储随身携带：拔盘，历史揣进口袋；插座留在墙上继续看家。</p>
+    </div>
+
+    <div class="note"><b>叙事要点：</b>这一节回答"没有桌面版怎么入生态"——Socket Trio 档位由此从"三只电流插线板"升维成"三格网关底座 + 一块盘"的入门隐私中枢。<i>禁用表述：存储盘作为独立加密产品零售（合规红线——盘仅作整机原厂配件随生态销售）。</i></div>
+  </div>
+</section>
+
+<!-- ============ 08i SOLO HIKER ============ -->
+<section id="hikerkit">
+  <div class="wrap">
+    <div class="kicker">// 08i · solo hiker · dedicated copy</div>
+    <h2>独自徒步 <em>— "独步者的最后一道网，不是追踪器"</em></h2>
+
+    <h3>标题方案 <em>— A/B 二选一</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "The lifeline for walking alone — not a tracker."</p>
+      <p><b>B.</b> "Before you lose signal, everything a rescue needs is already home."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "独步者的生命线，不是追踪器。"</p>
+      <p><b>B.</b> "信号消失之前，救援要的一切已经到家了。"</p>
+    </div>
+
+    <h3>主文案 <em>— 产品故事</em></h3>
+    <div class="copy en">
+      <div class="lang">English · body copy</div>
+      <p><b>A solo hiker doesn't want a screen on the trail — screens drain batteries, pull eyes off the terrain, and shaking hands can't tap glass.</b> The pendant rides on a backpack strap: breadcrumbs every five minutes, a barometer that catches the pressure drop before the storm, a check-in timer that escalates on its own if you miss it. When you cross into the no-signal zone, your last known position and planned route are already on the family Deck's encrypted cartridge — the starting coordinates a search team asks for, without waiting for family to remember. Seven days standby, seventy-two hours of continuous tracking: outlasts any screened device in the cold.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 主文案</div>
+      <p><b>独步进山的人，要的不是一块带屏幕的户外手表——屏幕费电、看表分心、失温时手抖得按不动。</b>吊牌挂在背包肩带上：每 5 分钟一个轨迹点，气压计在风暴来临前捕捉降压骤变，平安键超时自动升级。走进无信号区的那一刻，最后已知位置与计划路线已经落在家里 Deck 的加密卡上——搜救队要的起点坐标，不用等家属回忆。待机 7 天、连续轨迹 72 小时：低温下比任何带屏设备撑得久。</p>
+    </div>
+
+    <div class="note"><b>合规红线（户外场景）：</b>SOS 通知监护人序列而非专业搜救；定位精度以当地卫星信号为准；不得表述为"替代卫星电话/专业户外装备/保证获救"。守护吊牌四类佩戴者口径统一：小学生 · 养老院老人 · 户外作业者 · 独自徒步的旅行者。</div>
+  </div>
+</section>
+
+<!-- ============ 08j EXPORT COMPLIANCE ============ -->
+<section id="exportkit">
+  <div class="wrap">
+    <div class="kicker">// 08j · encryption export compliance · dedicated copy</div>
+    <h2>加密出口合规 <em>— "核查已完成，边界写清楚"</em></h2>
+
+    <h3>标题方案 <em>— A/B 二选一</em></h3>
+    <div class="copy en">
+      <div class="lang">English · headline options</div>
+      <p><b>A.</b> "Export review done. The map is published."</p>
+      <p><b>B.</b> "We checked where your encryption can go — before you backed it."</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 标题方案</div>
+      <p><b>A.</b> "出口核查已完成，发货地图已公布。"</p>
+      <p><b>B.</b> "你的加密盘能去哪——下注之前就写清楚。"</p>
+    </div>
+
+    <h3>主文案 <em>— 落地页发货政策节 + FAQ 双用</em></h3>
+    <div class="copy en">
+      <div class="lang">English · body copy</div>
+      <p><b>The cartridge's AES-256 encryption makes this an export-controlled item — so we did the review before the campaign, not after.</b> Embargoed destinations never ship: Belarus, Cuba, Iran, North Korea, Russia, Sudan, Syria and occupied Ukrainian regions, matching the platform's own list. A second tier — Vietnam, Indonesia, Venezuela, Kazakhstan — ships only after import-side approvals, and we contact affected backers first. Everywhere else the Deck rides the mass-market path: US self-classification with annual reporting, the Cryptography Law consumer carve-out for China, mass-market waivers in Hong Kong. In mainland China the same hardware is presented as local key custody and offline signing — identical features, market-appropriate language.</p>
+    </div>
+    <div class="copy zh">
+      <div class="lang">中文 · 主文案</div>
+      <p><b>存储盘的 AES-256 加密让这台设备成为受管制物项——所以我们把核查做在众筹之前，而不是之后。</b>禁运目的地永不发货：白俄罗斯、古巴、伊朗、朝鲜、俄罗斯、苏丹、叙利亚及乌克兰争议地区，与平台禁发清单一致。第二梯队——越南、印尼、委内瑞拉、哈萨克斯坦——进口侧许可认证先行，受影响的支持者会收到单独联系。其余目的地走大众市场路径：美国自分类申报、中国《密码法》大众消费类豁免、香港大众市场豁免。在中国大陆，同一块硬件以"本地密钥保管 · 离线签名"呈现——功能一致，措辞随市场合规。</p>
+    </div>
+
+    <h3>三级发货地图 <em>— 落地页图表文案</em></h3>
+    <table>
+      <tr><th>级别</th><th>目的地</th><th>口径</th></tr>
+      <tr><td><b>RED · 永不发货</b></td><td>白俄罗斯 · 古巴 · 伊朗 · 朝鲜 · 俄罗斯 · 苏丹 · 叙利亚 · 乌克兰争议地区</td><td>禁运与平台规则双重禁止——一句话，不做例外</td></tr>
+      <tr><td><b>YELLOW · 认证先行</b></td><td>越南（加密进口许可）· 印尼（SDPPI）· 委内瑞拉（CONATEL）· 哈萨克斯坦（本地 IOR）</td><td>"进口许可就绪后发货，受影响支持者优先通知"</td></tr>
+      <tr><td><b>GREEN · 正常发货</b></td><td>美 · 加 · 英 · 欧盟 · 日 · 韩 · 新 · 澳 等（含中国大陆：不受限，仅物料措辞合规）</td><td>"大众市场路径，逐单最终用户筛查"</td></tr>
+    </table>
+
+    <div class="note"><b>合规红线（表述纪律）：</b>国际版可保留 "cold wallet"；<b>面向中国大陆受众的一切物料停用"冷钱包/私钥/虚拟货币/加密资产"字样</b>，统一替换为"本地密钥保管 · 离线签名"。不承诺"任何国家都能发货"；黄色清单永远加"认证/许可先行"限定语。完整核查底稿：compliance-export-control.html。</div>
   </div>
 </section>
 
