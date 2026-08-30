@@ -43,9 +43,9 @@ Meanwhile, the machines you rely on — the tractor, the HVAC, the clinic steril
 | **Weather intelligence** | On-board barometer and humidity feed the local model — pressure trend, dew point, frost probability, heat index computed on-device, no forecast subscription. Cross-read with the equipment registry turns weather into per-machine action lists (frost → pre-dawn irrigation advisory; heat wave → compressor derating). Official warnings stay with meteorological agencies — the Deck is the offline complement. |
 | **Cold wallet (in the cartridge)** | The cartridge's secure element can hold keys that never touch a network: transactions are signed inside the cartridge, confirmed with the physical Approve button — one thumb, one signature. Self-custody by design; market-specific regulatory posture before shipping. |
 | **Elder care** | BLE-standard health devices (blood pressure, glucose, SpO₂, weight, wearables) pair directly — no apps, no accounts — and the local model builds each elder's **personal baseline**. Evaluation is deviation from *their own* normal, never population thresholds; trend reminders go to family, anomalies escalate to SOS. Care robots join via MHS/MQTT and are scored against the same baseline; physical assistance requires the physical Approve button. **Monitoring and reminders — never diagnosis.** |
-| **Guardian pendant (screenless)** | A screenless, nano-SIM (4G Cat.1bis) pendant for school kids, nursing-home elders and outdoor workers: calls preset contacts only, one-key SOS with location, guardian-loop confirmation, and triple positioning (GPS/WiFi/cellular) relaying to the family Deck — track history on the encrypted cartridge, **not a vendor cloud**. Minor data under guardian consent and minimization (PIPL); SRRC approvals before mass production. |
+| **Guardian pendant (screenless)** | A screenless, nano-SIM (4G Cat.1bis) pendant for school kids, nursing-home elders, outdoor workers **and solo hikers**: calls preset contacts only, one-key SOS with location, guardian-loop confirmation, and triple positioning (GPS/WiFi/cellular) relaying to the family Deck — track history on the encrypted cartridge, **not a vendor cloud**. For the solo hiker: track breadcrumbs every 5 minutes, storm warning from the on-board barometer, and a check-in timer that auto-escalates if missed — last-known position and planned route already on the family Deck before signal is lost. Minor data under guardian consent and minimization (PIPL); SRRC approvals before mass production. |
 | **Medical facilities (OR)** | In operating rooms and clinics the Deck monitors **equipment and environment only** — sterilizer cycles, anesthesia run-hours, temperature, humidity, pressure differential, HEPA lifetime — with a monthly audit-format facility report. Never patient-connected, never clinical; during surgery it is read-only, writes queue behind the physical button. |
-| **Insurance full chain** | Privacy-computing infrastructure for personal insurance: the local model computes risk tiers from health baseline + equipment + environment; sharing happens through **granular, revocable consent cards** (activated by the physical button, every grant audited); a licensed insurer underwrites from verifiable digests; SOS evidence packages assemble themselves at claim time. The surgical chain evaluates *facility readiness* pre-op, records a signed read-only timeline intra-op, tracks equipment and environment post-op — and hands neutral records to arbitration bodies, never verdicts. **Not an insurance product — data preparation and consent infrastructure.** |
+| **Insurance full chain** | Privacy-computing infrastructure for personal insurance: the local model computes risk tiers from health baseline + equipment + environment; sharing happens through **granular, revocable consent cards** (activated by the physical button, every grant audited); a licensed insurer underwrites from verifiable digests; SOS evidence packages assemble themselves at claim time. **Private-model interconnect (post-compliance):** insurer and third-party proprietary models plug in sandboxed — *the model comes to the data, never the reverse* — reading only consented fields, leaving with signed inference outputs only, behind a **hardware-enforced mandatory authorization gate** (no consent card, no model call; no bypass, no direct API; revocation cuts access on the spot). The surgical chain evaluates *facility readiness* pre-op, records a signed read-only timeline intra-op, tracks equipment and environment post-op — and hands neutral records to arbitration bodies, never verdicts. **Not an insurance product — data preparation and consent infrastructure.** |
 
 ### The night-shift loop
 
@@ -112,9 +112,9 @@ Three editions, one design language — matte graphite enclosures, functional co
 |---|---|---|
 | **Desktop** | CNC anodized aluminum, 4″ console, USB-C powered, status ring | Sits next to you: todo/progress panel, physical Approve/Deny permission cards |
 | **Industrial** | 35 mm DIN-rail, terminal blocks (RS-485/CAN), RJ45 (Modbus TCP), LoRa antenna, heatsink fins | Goes in the cabinet: wide-temperature, IP65 variant for the field |
-| **Socket** | Smart-plug form factor, pass-through outlet, built-in current sensing | Zero-wiring entry: plug it in the wall, plug the appliance into it — washer, water heater, compressor |
+| **Socket** | Smart-plug form factor, pass-through outlet, built-in current sensing — **and the ecosystem's smallest gateway base**: the MQTT broker runs in the socket, and sliding the privacy cartridge into its side slot turns it into a standalone privacy-compute storage node (night watch, track archive, SOS evidence) — no desktop edition needed | Zero-wiring entry: plug it in the wall, plug the appliance into it — washer, water heater, compressor |
 | **Privacy disk** | 3.5″ floppy silhouette in armored metal — metal shutter, engraved lock, violet status edge | The removable encrypted medium itself: pull-to-own, key lives in the disk |
-| **Guardian pendant** | Screenless, nano-SIM (4G Cat.1bis), triple positioning, one SOS key | Three wearers: school kid, nursing-home elder, outdoor worker — calls home only, location to the family Deck, never a vendor cloud |
+| **Guardian pendant** | Screenless, nano-SIM (4G Cat.1bis), triple positioning, one SOS key | Four wearers: school kid, nursing-home elder, outdoor worker, solo hiker — calls home only, location to the family Deck, never a vendor cloud |
 
 Concept renders (EVT-phase): [`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) — final tooling may adjust.
 
@@ -183,6 +183,7 @@ Campaign (30 days) → tooling & EVT (10 weeks) → DVT (8 weeks) → PVT & cert
 - **MHS is a research preview.** The Deck follows its published pattern (standard drivers, plain-language safety labels, read/write discipline) and will track the spec as it stabilizes — firmware updates are open source and shipped as they land.
 - **Certification timing** (FCC/CE and regional equivalents) gates shipping dates; we buffer PVT accordingly.
 - **Component supply** — the SoC and display have second-source plans.
+- **Encryption export, reviewed (pre-campaign):** the cartridge's AES-256 encryption and the secure element are export-controlled items. Completed review: **embargoed destinations never ship** (Belarus, Cuba, Iran, North Korea, Russia, Sudan, Syria, occupied Ukrainian regions — aligned with platform rules); a second tier (Vietnam, Indonesia, Venezuela, Kazakhstan) ships only after import-side approvals; everywhere else the Deck ships under mass-market treatment — US: 5A992.c self-classification with annual reporting; China: Cryptography Law consumer-product carve-out; Hong Kong: mass-market waiver. China-mainland materials present the wallet as *local key custody* per mainland regulations. Full working paper: [`compliance-export-control.html`](compliance-export-control.html).
 - **Compliance boundaries are fixed, not stretch goals**: the Deck is a monitoring device. It is not a medical device, and it does not replace certified fire-safety inspection. Elder care compares readings against personal baselines and never diagnoses; the guardian pendant handles minors' data under guardian consent and minimization (PIPL), and SOS notifies guardians — never emergency services; medical-facility monitoring is equipment-and-environment only (read-only during surgery); the insurance full chain is data-preparation and consent infrastructure — underwriting, pricing and payouts stay with licensed insurers subject to regulatory approval, and the prepaid plan falls back to equivalent credit if approval doesn't land.
 
 ### The creator
@@ -263,8 +264,9 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 
 - **桌面版**：CNC 铝合金阳极氧化外壳，4″ 控制台 + 状态灯环，USB-C 供电 —— 坐在你手边，值守 Agent 的任务面板与权限卡
 - **工业版**：35 mm DIN 轨安装，RS-485/CAN 端子排 + RJ45 + LoRa 天线 + 散热鳍片，宽温进柜，另有 IP65 场版
-- **插座版**：智能插座形态，直通插孔 + 内置电流传感 —— 零接线入门：插墙上，电器插它上，洗衣机/热水器/空压机即刻接入
+- **插座版**：智能插座形态，直通插孔 + 内置电流传感 —— 零接线入门：插墙上，电器插它上，洗衣机/热水器/空压机即刻接入。**它还是生态里最小的网关底座**：MQTT broker 直接在插座里跑，隐私计算存储盘从侧卡口推入，插座即升级为独立的隐私计算存储节点（夜班值守 · 轨迹归档 · SOS 证据包）——不需要桌面版到场
 - **隐私盘**：3.5″ 软盘轮廓装甲金属重铸 —— 金属滑盖、铭刻锁孔、紫色状态边。可插拔加密介质本体：拔盘即离场，密钥在盘里
+- **守护吊牌**：无屏、nano-SIM（4G Cat.1bis）、三重定位、SOS 实体键 —— 四类佩戴者：小学生、养老院老人、户外作业者、独自徒步的旅行者（每 5 分钟轨迹点 · 气压骤变风暴预警 · 平安键超时自动升级 SOS）—— 只打回家的电话，位置回家里 Deck，永不进厂商云
 
 概念渲染（EVT 阶段）：[`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) —— 量产模具或有微调。
 
@@ -290,6 +292,8 @@ Deck 不是更便宜的网关，是不同品类：**Agent 能亲手操作的网�
 ### 风险，说实话
 
 MHS 仍是研究预览版（固件开源，随标准演进持续更新）；认证周期可能影响发货；元器件供应有二供方案；合规边界是固定的 —— Deck 是监测设备，不是医疗器械，也不替代消防法定检测。
+
+**加密出口管制（众筹前已完成核查）**：加密卡与安全元件属受管制物项 —— 禁运目的地永不发货（白俄罗斯、古巴、伊朗、朝鲜、俄罗斯、苏丹、叙利亚、乌克兰争议地区，与平台规则一致）；第二梯队（越南、印尼、委内瑞拉、哈萨克斯坦）进口侧许可认证先行；其余目的地走大众市场路径：美国 5A992.c 自分类 + 年度申报，中国《密码法》大众消费类豁免，香港大众市场豁免。面向中国大陆的物料将钱包功能表述为"本地密钥保管"。完整核查底稿见 [`compliance-export-control.html`](compliance-export-control.html)。
 
 ### 创作者
 
