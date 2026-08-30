@@ -257,6 +257,24 @@ li{margin:6px 0;color:var(--text)}
       <tr><td><b>1-Wire</b></td><td>直挂数字温度探头链</td><td>冷库 · 锅炉房 · 温度链</td></tr>
     </table>
 
+    <div class="copy en" style="margin-top:20px">
+      <div class="lang">English · 北向消息网关（本节下半屏）</div>
+      <p><b>Northbound: the message gateway.</b> Southbound speaks fieldbus to machines; northbound speaks MQTT to everything else — the same capability class Moxa's AIG series and USR's edge gateways ship, minus the cloud lock-in:</p>
+      <ul>
+        <li><b>Built-in MQTT broker</b> (3.1.1 / 5.0) — every bridged device mirrors onto a topic tree <b>deck/{device}/{register}</b>; telemetry publishes itself. Node-RED · Home Assistant · Grafana · SCADA subscribe instead of polling.</li>
+        <li><b>MHS ↔ MQTT mapping</b> — the MHS device tree mirrors onto topics; agents subscribe to sense. Write commands still pass the permission gate.</li>
+        <li><b>Cloud bridge</b> (opt-in) — TLS-bridged to your own broker: Azure IoT · AWS IoT · Alibaba Cloud · EMQX · self-hosted. Off by default, labeled when on.</li>
+        <li><b>Offline buffering</b> — messages land on the encrypted cartridge during outages, replay on reconnect (QoS 1 · store-and-forward).</li>
+      </ul>
+    </div>
+
+    <div class="copy zh">
+      <div class="lang">中文</div>
+      <p><b>北向：消息网关。</b>南向对设备说现场总线，北向对一切说 MQTT——与 Moxa AIG、有人边缘网关同级的消息能力，但没有云锁定：内置 MQTT broker（设备自动映射为话题树，遥测自动发布）· MHS↔MQTT 映射（Agent 订阅即感知，写指令仍过权限闸门）· 可选云桥接（默认关闭）· 断网离线缓冲（落加密卡，重连补发）。</p>
+    </div>
+
+    <div class="note"><b>排布：</b>两张表上下排——上表南向直连（设备侧），下表北向消息（集成侧），中间一行小字过渡。<i>"minus the cloud lock-in" 是对竞品的一记直拳：Moxa AIG 深度绑定 ThingsPro/Azure，有人的网关导向有人云。</i></div>
+
     <div class="note"><b>设计说明：</b>表格是本节主角——黑白灰底 + 高亮协议名。<i>此表同时是 SEO 落点（"modbus gateway" / "j1939" 搜索流量）。</i>移动端表格转卡片式堆叠。</div>
   </div>
 </section>
@@ -494,8 +512,8 @@ you return:         Deck → buffered history → OpenWorker   <span class="b">(
       <p><b>2. What happens if I pull the cartridge out?</b> Nothing breaks. Compute keeps running, buffering to 8 GB eMMC. Your history travels with the cartridge — hardware-encrypted, key inside it. Re-insert and the buffer syncs into the archive.</p>
       <p><b>3. How is my personal data kept private?</b> Three layers: local-model compute, encrypted removable storage, offline-by-default network.</p>
       <p><b>4. Can it control equipment, or only watch?</b> Both, through MHS — reads are always safe; writes require explicit approval on the physical buttons by default.</p>
-      <p><b>5. Which agents does it work with?</b> Any MHS-compatible agent — OpenWorker and Claude today; the standard is model-agnostic.</p>
-      <p><b>6. Why not just buy an industrial gateway from Moxa or USR IOT?</b> They solve a different problem — protocol translation for SCADA and clouds. The Deck covers the same field protocols plus MHS-native registration an agent can operate, the approval console, sensing, local-model detection, the vault cartridge and risk prediction. Not a cheaper gateway — a different category: the gateway your agent operates.</p>
+      <p><b>5. Which agents does it work with?</b> Any MHS-compatible agent — OpenWorker and Claude today; the standard is model-agnostic. MQTT-client agents subscribe to the topic tree too.</p>
+      <p><b>6. Why not just buy an industrial gateway from Moxa or USR IOT?</b> They solve a different problem — protocol translation for SCADA and clouds. The Deck covers the same field protocols and the MQTT message layer plus MHS-native registration an agent can operate, the approval console, sensing, local-model detection, the vault cartridge and risk prediction. Not a cheaper gateway — a different category: the gateway your agent operates.</p>
     </div>
 
     <div class="copy zh">
