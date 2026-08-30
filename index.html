@@ -293,6 +293,60 @@
       <div class="card"><div class="ic">🏭</div><h3>Workshop · 车间</h3><p>入门尺寸的工业监控：空压机、除尘器、冷却泵——三个插座，一份点名到机的早报。柜内配 DIN 轨工业版，同一个 Agent 同时读现场总线和插拔舰队。</p></div>
     </div>
     <p class="sub" style="margin-top:16px;font-size:13px">以上为典型场景示例——检测能力为 EVT 阶段设计目标，实际效果以量产实测为准，不构成性能保证。</p>
+
+    <h3 style="margin-top:36px">🔌 插座即网关 — the MQTT gateway base, the disk makes it a vault</h3>
+    <p class="sub">插座版不只是"会看电流的插线板"——它是 Deck 生态里<b>最小的消息中枢</b>：MQTT broker 直接在插座里跑，插上墙它就是家里的网关底座。再把<b>隐私计算存储盘</b>从侧面卡口推入，插座当场升级为一台完整的隐私计算存储节点——夜班值守、轨迹归档、证据包生成，全部发生在墙上那一格里，不需要桌面版到场。</p>
+    <div class="loop">
+<span class="l1">base: &nbsp;&nbsp;&nbsp;&nbsp;socket in the wall → built-in MQTT broker on-line &nbsp;(topic tree: deck/{outlet}/{appliance} — 插上墙，网关就在了)</span><br>
+<span class="l2">insert: &nbsp;&nbsp;privacy cartridge slides into the side slot &nbsp;(存储盘插入插座侧卡口——盘进，加密存储上线)</span><br>
+<span class="l3">compute: local model runs on the socket's MCU &nbsp;(电流特征学习 · 夜班值守 · 事件归档，都在墙上完成)</span><br>
+<span class="l4">north: &nbsp;&nbsp;MQTT over Wi-Fi to your broker / the family Deck &nbsp;(吊牌轨迹、SOS 卡片、电器遥测在这里汇聚落盘)</span><br>
+<span class="l5">pull: &nbsp;&nbsp;&nbsp;拔盘带走——插座留在墙上值守，历史揣进口袋 &nbsp;(gateway stays, vault travels)</span>
+    </div>
+    <div class="grid" style="margin-top:22px">
+      <div class="card"><div class="ic">🧱</div><h3>网关在墙，存储随身</h3><p>计算与存储分离做到插座级：网关（插座）永久值守，加密盘即插即拔——搬家的拔盘，换盘的拔盘，墙上那格永远在线。</p></div>
+      <div class="card"><div class="ic">🏠</div><h3>入门级隐私中枢</h3><p>没有桌面版？插座 + 存储盘就是最小可用的家庭隐私计算节点：守护吊牌的轨迹回连它，电器遥测落盘到它，SOS 证据包也从它生成。</p></div>
+      <div class="card"><div class="ic">📈</div><h3>按需长成舰队</h3><p>三个插座各守一台电器，共享同一块盘的归档空间；将来加桌面版，插座无缝并入 MHS 设备树——投资从 $43 一格起步，不浪费任何一级。</p></div>
+      <div class="card"><div class="ic">🗂️</div><h3>配件即网关附件</h3><p>存储盘作为整机原厂配件随生态销售、不单独面向第三方提供加密接口——单一事实来源的归档，也是合规上最干净的形态。</p></div>
+    </div>
+
+    <h3 style="margin-top:36px">🛠️ 底座技术细节 — the stack inside that wall slot</h3>
+    <p class="sub">插座里跑的是一套按"墙上值守"这个职责重新裁剪的边缘消息基础设施——broker 在本地、遗言机制、盘座互认握手。以下为 EVT 设计目标，量产参数 DVT 认证后写定：</p>
+    <div class="loop">
+<span class="l1">broker: &nbsp;&nbsp;&nbsp;embedded MQTT 5.0 · QoS 0/1 · retained messages · <b>LWT 遗言</b> &nbsp;(座失联即向话题树广播——家庭 Deck 立刻知道哪一格掉线)</span><br>
+<span class="l2">topics: &nbsp;&nbsp;&nbsp;&nbsp;deck/{outlet}/{appliance}/telemetry · /event · /config &nbsp;(MHS 读/写分级映射进话题权限——命令通道单独授权)</span><br>
+<span class="l3">security: TLS 1.3 北向 · 每座一证 · 盘座挑战-响应互认 &nbsp;(插错盘不认座，插错座不写盘)</span><br>
+<span class="l4">buffer: &nbsp;&nbsp;&nbsp;&nbsp;北向断链 → 插座端 128 MB 环形缓冲，插盘后自动同步归档 &nbsp;(断网不丢报文，拔盘不等补录)</span><br>
+<span class="l5">update: &nbsp;&nbsp;&nbsp;&nbsp;签名 OTA · A/B 双分区回滚 &nbsp;(升级失败自动退回，值守不断)</span>
+    </div>
+    <table style="margin-top:18px">
+      <tr><th>模块</th><th>插座网关底座 · EVT 目标规格</th></tr>
+      <tr><td>电流采样</td><td>1 kHz 波形采样 · 有功功率 ±1% · 特征窗口 200 ms 滚动——启动尖峰、占空比漂移、运行电流爬升都在窗口里</td></tr>
+      <tr><td>边缘计算</td><td>双核 MCU @ 240 MHz + 0.1 TOPS 级微型 NPU——电流特征学习、夜班值守、事件归档三类轻模型本地跑</td></tr>
+      <tr><td>北向链路</td><td>Wi-Fi 4（2.4 GHz）到自家 broker 或家庭 Deck · mDNS 同网段自动发现，上电即入 MHS 设备树</td></tr>
+      <tr><td>近场接入</td><td>BLE 5.2——守护吊牌到家回连、BLE 传感档案直读，不经任何外部服务</td></tr>
+      <tr><td>本地环回</td><td>插座内传感到话题订阅 &lt; 50 ms，全程不出局域网——夜班值守的判断延迟以毫秒计</td></tr>
+      <tr><td>存储盘接口</td><td>侧卡口高速连接器 · AES-256 握手 · 支持热插拔：拔盘瞬间遥测转环形缓冲，插回自动补齐归档</td></tr>
+      <tr><td>通流能力</td><td>直通插孔 EVT 目标 16 A / 250 V——认证定稿前，高功率阻性负载（取暖器等）不在支持范围</td></tr>
+    </table>
+    <p class="sub" style="margin-top:14px;font-size:13px">默认本地闭环：broker 只监听局域网，北向桥接是显式开关（opt-in）——插座不知道你的外网密码，它只认识你允许它认识的 broker。</p>
+
+    <h3 style="margin-top:36px">🧠 特征学习流水线 — how the wall slot learns your washer</h3>
+    <p class="sub">电流特征不是拿阈值卡出来的——插座上电后先学后判：头 7 天是"只看不说"的基线学习期，之后每个周期输出风险分类。整条流水线跑在插座自己的 NPU 上：</p>
+    <div class="loop">
+<span class="l1">learn: &nbsp;&nbsp;&nbsp;&nbsp;上电起 7 天滚动基线——每台电器的启动瞬态 · 运行占空比 · 待机底噪各自成档 &nbsp;(它先认识这台机器，再谈判断)</span><br>
+<span class="l2">extract: &nbsp;1 kHz 原始波形 → 启动瞬态包络 · 工频谐波族（1–13 次）· 占空比 · 功率爬升斜率 &nbsp;(四类特征, 200 ms 窗口滚动)</span><br>
+<span class="l3">classify: 三个轻模型本地推理——异常分 · 风险三级（failure/safety/compliance）· 置信度 &nbsp;(低置信度事件只归档不上报)</span><br>
+<span class="l4">night: &nbsp;&nbsp;&nbsp;22:00–06:00 深观察窗：采样加密、待机突变即记事件 &nbsp;(夜班是插座的主场)</span><br>
+<span class="l5">digest: &nbsp;&nbsp;晨报一页：每台电器一行——状态 · 夜间事件 · 风险分级 &nbsp;(到家庭 Deck 或存储盘，不到云端)</span>
+    </div>
+    <div class="grid" style="margin-top:22px">
+      <div class="card"><div class="ic">⏱️</div><h3>跨座时间同步</h3><p>舰队模式 NTP-lite 同步 ±20 ms：三个插座的事件时间轴可对齐——"热水器 06:02:14 启动失败"与"空压机 06:02:31 电流跌落"能被关联成一次电压骤降事件。</p></div>
+      <div class="card"><div class="ic">🔀</div><h3>多座共享一盘</h3><p>存储盘插在其中一格：其余插座经本地 MQTT 把归档遥测中继给"持盘座"，统一落盘——拔盘时全舰队历史一起走，不留分散的副本。</p></div>
+      <div class="card"><div class="ic">🎯</div><h3>第一级降噪</h3><p>学习期事件只记不报：基线未成前，插座不产生警报——杜绝新装第一周的误报轰炸。</p></div>
+      <div class="card"><div class="ic">🧾</div><h3>双层留存</h3><p>eMMC 热数据 30 天（事件+摘要）· 存储盘冷归档全量轨迹与原始特征——盘在时自动分层，盘不在时热层照常转。</p></div>
+    </div>
+
     <p class="sub" style="margin-top:16px"><b>The cheapest seat in the ecosystem. 生态里最便宜的座位。</b> Not every machine deserves a DIN-rail gateway — some machines just need someone to notice when they start limping. That's the whole job — at Kickstarter it works out to <b>$43 an outlet</b>（三只装众筹价折算；量产零售价另定，认证参数 DVT 后写定）。</p>
   </div>
 </section>
@@ -380,7 +434,7 @@
   <div class="wrap">
     <div class="kicker">// guardian pendant / 无屏守护终端</div>
     <h2>打得了电话，刷不了视频——因为它没有屏幕</h2>
-    <p class="sub">插卡即用的无屏守护吊牌，一个硬件三类人：小学生（上学路上）、养老院老人（每人一枚）、户外作业者（农场与工地）。电话模式只通预设联系人，SOS 一键定位呼出，轨迹回到家里的 Deck——不是某家厂商的云。</p>
+    <p class="sub">插卡即用的无屏守护吊牌，一个硬件四类人：小学生（上学路上）、养老院老人（每人一枚）、户外作业者（农场与工地）、独自徒步的旅行者（进山的独行者）。电话模式只通预设联系人，SOS 一键定位呼出，轨迹回到家里的 Deck——不是某家厂商的云。</p>
 
     <div class="grid">
       <div class="card"><div class="ic">📱</div><h3>电话模式</h3><p>只能拨打家长 / 家属预设的号码——爸妈、爷爷奶奶、班主任在名单里，陌生人进不来。免提外放，孩子不用记号码，老人不用学触屏。</p></div>
@@ -396,6 +450,53 @@
 <span class="l2">relay: &nbsp;&nbsp;&nbsp;&nbsp;cellular (4G Cat.1bis) on the road · BLE at home → the family Deck &nbsp;(the home base, not a vendor cloud)</span><br>
 <span class="l3">store: &nbsp;&nbsp;&nbsp;&nbsp;track history → encrypted cartridge &nbsp;(key on the disk; pull it, the history leaves with it)</span><br>
 <span class="l4">alert: &nbsp;&nbsp;&nbsp;&nbsp;SOS → location card to the guardian sequence + Deck ring strobe &nbsp;(loops until someone confirms)</span>
+    </div>
+
+    <h3 style="margin-top:36px">🥾 独自徒步 — the solo hiker's lifeline, not a tracker</h3>
+    <p class="sub">独步进山的旅行者要的不是一块带屏幕的户外手表——屏幕费电、看表分心、失温时手抖得按不动。吊牌挂在背包肩带上：全天轨迹自动记录，进无信号区前最后已知位置、气压骤变的风暴预警、坠线即 SOS——<b>救援要的三样东西（在哪、什么情况、什么时候开始）在失联前已经发出去了。</b></p>
+    <div class="grid">
+      <div class="card"><div class="ic">🏔️</div><h3>轨迹断点即警报</h3><p>每 5 分钟一次轨迹点：进山前家人能看实时位置；信号消失后，<b>最后已知位置 + 计划路线</b>已经在家里 Deck 的加密卡上——搜救队要的起点坐标，不用等家属回忆。</p></div>
+      <div class="card"><div class="ic">📉</div><h3>气压骤变预警</h3><p>内置气压计持续测压：3 小时内降压超过阈值 → 蜂鸣 + 免提语音提醒"风暴概率高，请评估下撤路线"——进山天气突变的第一信号，不靠手机信号。</p></div>
+      <div class="card"><div class="ic">🔋</div><h3>失温级续航</h3><p>无屏意味着功耗极低：一次充电待机 7 天、连续轨迹 72 小时——覆盖一条两天的独步线还有余量，低温环境下比任何带屏设备撑得久。</p></div>
+      <div class="card"><div class="ic">🆘</div><h3>坠线 SOS</h3><p>预设"每 N 小时按一次平安键"——超时未按且无移动，吊牌自动触发 SOS 序列循环呼叫。摔昏迷也报得出位置：这是独行者最后的一道网。</p></div>
+    </div>
+
+    <h3 style="margin-top:36px">🛠️ 徒步技术细节 — every milliamp spent on coming home</h3>
+    <p class="sub">无屏的意义在规格表上看得最清楚：没有屏幕耗电，没有背光抢功率，剩下的每一毫安都花在定位、测压、守时上。以下为 EVT 设计目标：</p>
+    <div class="loop">
+<span class="l1">breadcrumbs: GNSS fix every 5 min (1–15 min 可配) → 本机闪存 &nbsp;(进山起就在记，不依赖信号)</span><br>
+<span class="l2">barometer: &nbsp;&nbsp;1 Hz 连续测压 · 3 h 降压超阈值（默认 4 hPa）→ 蜂鸣 + 免提语音 &nbsp;(风暴预警不需要基站)</span><br>
+<span class="l3">check-in: &nbsp;&nbsp;&nbsp;定时平安键 · 超时未按 + 加速度计判静止 → 自动升级 SOS &nbsp;(没人按键，序列自己走)</span><br>
+<span class="l4">last-known: 位置卡片 = 最后 GNSS 修复 + 最近 10 个轨迹点 + 计划路线 &nbsp;(信号消失前已落家庭加密卡)</span><br>
+<span class="l5">home: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到家 BLE 回连 → 30 天轨迹一次性同步进存储盘 &nbsp;(闪存清空，历史归档，继续守下一天)</span>
+    </div>
+    <table style="margin-top:18px">
+      <tr><th>模块</th><th>守护吊牌 · 独步配置 EVT 目标</th></tr>
+      <tr><td>定位</td><td>GNSS 多星座（GPS / 北斗 / GLONASS）· 冷启动 ~30 s · A-GPS 蜂窝辅助秒级修复 · WiFi/基站三重兜底——峡谷与林线之下仍有最后已知位置</td></tr>
+      <tr><td>轨迹存储</td><td>本机闪存 30 天轨迹（5 min 间隔）· 到家 BLE 5.2 回连同步进加密卡——卡上才是长档案，吊牌只做循环缓冲</td></tr>
+      <tr><td>气压风暴算法</td><td>±1.5 Pa 气压计 · 1 Hz 连续采样 · 滑动 3 h 窗口降压超 4 hPa 触发预警——比体感早约半小时到一小时看到天气转向</td></tr>
+      <tr><td>平安键</td><td>间隔 1–24 h 可配 · 超时未按 + 加速度计静止判定 → 自动 SOS 升级；误按 3 s 内可取消，避免虚惊一条线</td></tr>
+      <tr><td>电池</td><td>900 mAh 锂聚合物 · 待机 7 天 / 连续轨迹 72 h / 低温降额曲线按 −10 °C 标定 · 磁吸充电座，零接口设计</td></tr>
+      <tr><td>防护</td><td>IP67 防尘水浸 · −20 至 60 °C 宽温——雨雪、失温边缘、暴晒车顶都在值守范围</td></tr>
+      <tr><td>SOS 呼叫</td><td>长按 1.5 s 触发 · 循环呼叫监护人序列直至确认 · 位置卡片附带最后 10 个轨迹点与剩余电量</td></tr>
+      <tr><td>射频</td><td>4G Cat.1bis 全网通（2G 漫游兜底）· 免提通话单麦克风降噪 · BLE 5.2 到家回连</td></tr>
+    </table>
+    <p class="sub" style="margin-top:14px;font-size:13px">技术细节的边界与正文一致：轨迹与位置数据只落家庭加密卡，不进厂商云；气压预警是信息性参考，官方气象预警永远优先；户外 SOS 通知监护人序列而非专业搜救，定位精度以当地卫星与基站信号为准，不能替代卫星电话与专业户外装备。</p>
+
+    <h3 style="margin-top:36px">🔋 电量与信号策略 — what degrades first, and in what order</h3>
+    <p class="sub">户外设备真正的设计题不是"续航几天"，而是<b>电量见底时先放弃什么</b>。吊牌的降级是排好序的：保命功能永远最后关断——每一步降级时，SOS 与平安键保持满血，直到电池耗尽的最后一刻：</p>
+    <div class="loop">
+<span class="l1">100–40%: &nbsp;全功能——5 min 轨迹 · 1 Hz 测压 · 定位三重 &nbsp;(标准独步日)</span><br>
+<span class="l2">40–15%: &nbsp;轨迹间隔 5→15 min · 测压降至 0.2 Hz · 通话限 1 次保留 &nbsp;(省下的电量都留给定位)</span><br>
+<span class="l3">15–5%: &nbsp;&nbsp;&nbsp;仅保——平安键 · SOS · 每小时一个定位点 &nbsp;(低电模式：能定位、能呼救，不再漫游)</span><br>
+<span class="l4">&lt;5%: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后已知位置卡发出后进入 SOS-only 待机，剩余电量全部留给一次呼出 &nbsp;(最后一格电也是用来回家的)</span><br>
+<span class="l5">no-cell: &nbsp;&nbsp;无信号区——蜂窝搜索退避（10 min 起，指数回退），GNSS 继续记 · 到信号区自动补发 &nbsp;(找网不再烧电)</span>
+    </div>
+    <div class="grid" style="margin-top:22px">
+      <div class="card"><div class="ic">🚶</div><h3>自适应轨迹间隔</h3><p>加速度计判静止时自动放宽：原地扎营、午休时轨迹降频，移动即恢复——同一格电量，多守一个白天。</p></div>
+      <div class="card"><div class="ic">📉</div><h3>坠落·静止双判</h3><p>三轴加速度计冲击检测（&gt;3 g 瞬态）+ 后续 60 s 静止判定 → 自动触发 SOS 序列；比平安键超时快得多——摔下去的那一刻就开始工作。</p></div>
+      <div class="card"><div class="ic">🗺️</div><h3>轨迹压缩存储</h3><p>轨迹点差分编码：30 天 5 min 间隔约 8600 点，压缩后 &lt;200 KB 闪存占用——闪存大头留给事件记录，轨迹只是轻装。</p></div>
+      <div class="card"><div class="ic">🏔️</div><h3>气压高度交叉验证</h3><p>气压换算高度与 GNSS 海拔互验：漂移超 80 m 标记低可信点——救援时轨迹里标出哪些位置是"确定可依赖的"。</p></div>
     </div>
 
     <h3 style="margin-top:36px">🏥 方便急救 — the evidence a rescue actually needs</h3>
@@ -448,7 +549,7 @@
 <span class="l1">sense: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;health baseline · equipment · environment · SOS events &nbsp;(raw data, on the cartridge)</span><br>
 <span class="l2">compute: &nbsp;&nbsp;local risk computation — risk tiers, event summaries &nbsp;(摘要可验，原始不出盘)</span><br>
 <span class="l3">authorize: &nbsp;consent card — 保什么 · 给谁 · 看到什么程度，实体确认键按下才生效 &nbsp;(可随时撤回)</span><br>
-<span class="l4">underwrite: licensed insurer evaluates from verifiable digests &nbsp;(核保看得见可信，看不见原始数据)</span><br>
+<span class="l4">underwrite: licensed insurer evaluates from verifiable digests — <b>its own private model, connected post-compliance</b> &nbsp;(核保看得见可信，看不见原始数据)</span><br>
 <span class="l5">claims: &nbsp;&nbsp;&nbsp;SOS timeline + telemetry digest + guardian confirmations → 证据包一键导出 &nbsp;(理赔不扯皮)</span>
     </div>
     <div class="grid" style="margin-top:24px">
@@ -456,6 +557,111 @@
       <div class="card"><div class="ic">🔔</div><h3>事中 · 风险提醒降出险</h3><p>核保之后的持续监测变成提醒：跌倒风险、用药偏离、极端天气——出险率降下来，风险双向受益，不与任何具体保费挂钩。</p></div>
       <div class="card"><div class="ic">📦</div><h3>事后 · 证据包自组装</h3><p>SOS 时间线、遥测摘要、监护确认自动成包（PDF/JSON）——保险拿摘要，原始数据留盘里，理赔周期从扯皮变成对表。</p></div>
       <div class="card"><div class="ic">↩️</div><h3>全程 · 按权授权可撤</h3><p>授权按粒度授予：某项数据、某家机构、某个期限。撤回即断流，链路每次授权都有审计记录——数据主权不是口号，是按键。</p></div>
+    </div>
+
+    <h3 style="margin-top:36px">🔗 私有模型互联 — the model comes to the data, never the reverse</h3>
+    <p class="sub">保险公司有自己的核保模型，各类公司有自己的评估模型——它们都想碰你的数据。互联层的答案是反过来：<b>数据不动，模型动。</b>机构的私有模型经<b>合规审批后</b>接入，在 Deck 的隔离沙箱里跑，读到的只有授权卡允许的那部分；离开的只有签名后的推理输出。而这一切的前提是一道硬件级的闸门——<b>强制授权</b>：</p>
+
+    <div style="margin:22px 0">
+    <svg viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="强制授权闸门架构示意图 — 模型进得来，原始数据出不去" style="width:100%;height:auto;display:block;background:#0d1119;border:1px solid #232c44;border-radius:14px">
+      <defs>
+        <marker id="arrT" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#38e0b0"/></marker>
+        <marker id="arrP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7c5cff"/></marker>
+      </defs>
+      <style>.t{font-family:'Segoe UI',system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif}.m{font-family:'Cascadia Code',Consolas,'Courier New',monospace}</style>
+
+      <path d="M 400 110 C 360 35, 240 35, 152 62" fill="none" stroke="#7c5cff" stroke-width="2" marker-end="url(#arrP)"/>
+      <text x="275" y="18" class="m" font-size="11" fill="#7c5cff" text-anchor="middle">signed inference output</text>
+      <text x="275" y="34" class="t" font-size="10" fill="#93a0ba" text-anchor="middle">签名推理输出 — 模型带走结论，带不走数据</text>
+
+      <rect x="20" y="55" width="250" height="345" rx="12" fill="#111623" stroke="#232c44"/>
+      <text x="145" y="79" class="m" font-size="11" fill="#7c5cff" text-anchor="middle" letter-spacing="2">EXTERNAL MODELS</text>
+      <text x="145" y="97" class="t" font-size="10.5" fill="#93a0ba" text-anchor="middle">外部模型 · 机构自带 (BYOM)</text>
+      <rect x="42" y="112" width="206" height="58" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="145" y="137" class="t" font-size="13" font-weight="700" fill="#e8edf7" text-anchor="middle">保险公司 · 核保模型</text>
+      <text x="145" y="155" class="t" font-size="10" fill="#93a0ba" text-anchor="middle">insurer underwriting model</text>
+      <rect x="42" y="182" width="206" height="58" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="145" y="207" class="t" font-size="13" font-weight="700" fill="#e8edf7" text-anchor="middle">各类公司 · 评估模型</text>
+      <text x="145" y="225" class="t" font-size="10" fill="#93a0ba" text-anchor="middle">health / safety / maintenance</text>
+      <rect x="42" y="262" width="206" height="46" rx="8" fill="none" stroke="#ff6b81" stroke-dasharray="4 3" opacity="0.6"/>
+      <text x="145" y="283" class="t" font-size="11.5" font-weight="700" fill="#ff6b81" text-anchor="middle">✗ 无授权直连 API</text>
+      <text x="145" y="299" class="t" font-size="9.5" fill="#ff6b81" opacity="0.75" text-anchor="middle">no consent card, no call</text>
+      <rect x="42" y="320" width="206" height="46" rx="8" fill="none" stroke="#ff6b81" stroke-dasharray="4 3" opacity="0.6"/>
+      <text x="145" y="341" class="t" font-size="11.5" font-weight="700" fill="#ff6b81" text-anchor="middle">✗ 未过审模型</text>
+      <text x="145" y="357" class="t" font-size="9.5" fill="#ff6b81" opacity="0.75" text-anchor="middle">unreviewed — rejected at onboarding</text>
+
+      <rect x="330" y="55" width="300" height="345" rx="12" fill="#111623" stroke="#232c44"/>
+      <text x="480" y="79" class="m" font-size="11" fill="#7c5cff" text-anchor="middle" letter-spacing="2">MANDATORY AUTH GATE</text>
+      <text x="480" y="97" class="t" font-size="10.5" fill="#93a0ba" text-anchor="middle">强制授权闸门 · 硬件执行</text>
+      <rect x="355" y="112" width="250" height="228" rx="10" fill="#161d2e" stroke="#7c5cff" stroke-width="2"/>
+      <rect x="355" y="112" width="10" height="228" rx="3" fill="#7c5cff" opacity="0.3"/>
+      <rect x="595" y="112" width="10" height="228" rx="3" fill="#7c5cff" opacity="0.3"/>
+      <circle cx="480" cy="152" r="24" fill="#141026" stroke="#38e0b0" stroke-width="2"/>
+      <path d="M 469 152 L 477 160 L 492 144" fill="none" stroke="#38e0b0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="480" y="196" class="t" font-size="12" font-weight="700" fill="#38e0b0" text-anchor="middle">实体确认键 · Approve</text>
+      <line x1="375" y1="208" x2="585" y2="208" stroke="#232c44"/>
+      <rect x="380" y="218" width="200" height="62" rx="8" fill="#0d1420" stroke="#38e0b0" stroke-opacity="0.45"/>
+      <text x="480" y="242" class="t" font-size="12.5" font-weight="700" fill="#e8edf7" text-anchor="middle">隔离沙箱 SANDBOX</text>
+      <text x="480" y="260" class="t" font-size="10.5" fill="#93a0ba" text-anchor="middle">只读授权字段 · 越界即拒</text>
+      <text x="480" y="302" class="t" font-size="12" font-weight="700" fill="#ff6b81" text-anchor="middle">无授权卡 → 调用即拒</text>
+      <text x="480" y="320" class="t" font-size="10.5" fill="#93a0ba" text-anchor="middle">无旁路 · 无直连 · 硬件级执行</text>
+      <text x="480" y="336" class="t" font-size="10.5" fill="#ffb454" text-anchor="middle">撤回 → 下一次调用即刻失效</text>
+      <text x="480" y="368" class="t" font-size="10" fill="#93a0ba" opacity="0.75" text-anchor="middle">授权检查于安全元件内执行，不在可绕过的软件层</text>
+
+      <rect x="690" y="55" width="250" height="345" rx="12" fill="#111623" stroke="#232c44"/>
+      <text x="815" y="79" class="m" font-size="11" fill="#7c5cff" text-anchor="middle" letter-spacing="2">LOCAL DATA</text>
+      <text x="815" y="97" class="t" font-size="10.5" fill="#93a0ba" text-anchor="middle">本地数据 · 原始不出盘</text>
+      <rect x="712" y="112" width="206" height="70" rx="8" fill="#161d2e" stroke="#7c5cff" stroke-width="1.5"/>
+      <rect x="726" y="126" width="28" height="28" rx="3" fill="none" stroke="#7c5cff" stroke-width="1.5"/>
+      <rect x="733" y="129" width="14" height="9" fill="#7c5cff" opacity="0.55"/>
+      <rect x="733" y="144" width="14" height="6" fill="none" stroke="#7c5cff" stroke-width="1" opacity="0.5"/>
+      <text x="766" y="138" class="t" font-size="13" font-weight="700" fill="#e8edf7">隐私存储卡</text>
+      <text x="766" y="155" class="t" font-size="10" fill="#93a0ba">AES-256 · 密钥在盘内</text>
+      <rect x="712" y="196" width="206" height="74" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <rect x="724" y="216" width="16" height="20" rx="2" fill="none" stroke="#7c5cff" opacity="0.5"/>
+      <rect x="732" y="212" width="16" height="20" rx="2" fill="none" stroke="#7c5cff" opacity="0.7"/>
+      <rect x="740" y="208" width="16" height="20" rx="2" fill="#141026" stroke="#7c5cff"/>
+      <text x="766" y="218" class="t" font-size="12.5" font-weight="700" fill="#e8edf7">授权卡 · consent cards</text>
+      <text x="766" y="235" class="t" font-size="10" fill="#93a0ba">哪项数据 · 哪家机构 · 多久</text>
+      <text x="766" y="251" class="t" font-size="10" fill="#38e0b0">按键生效 · 随时可撤</text>
+      <rect x="712" y="284" width="206" height="62" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <rect x="726" y="298" width="26" height="26" rx="3" fill="none" stroke="#38e0b0" stroke-width="1.5"/>
+      <rect x="732" y="304" width="14" height="14" fill="none" stroke="#38e0b0" opacity="0.5"/>
+      <text x="766" y="310" class="t" font-size="12.5" font-weight="700" fill="#e8edf7">本地模型</text>
+      <text x="766" y="327" class="t" font-size="10" fill="#93a0ba">摘要计算 · 风险分级</text>
+      <text x="815" y="372" class="t" font-size="10" fill="#93a0ba" opacity="0.75" text-anchor="middle">原始数据与中间特征，全部留在本地</text>
+
+      <line x1="248" y1="141" x2="347" y2="141" stroke="#38e0b0" stroke-width="2" marker-end="url(#arrT)"/>
+      <line x1="248" y1="211" x2="347" y2="211" stroke="#38e0b0" stroke-width="2" marker-end="url(#arrT)"/>
+      <text x="301" y="172" class="t" font-size="11" font-weight="700" fill="#38e0b0" text-anchor="middle">合规后接入</text>
+      <text x="301" y="187" class="t" font-size="9.5" fill="#38e0b0" opacity="0.8" text-anchor="middle">post-compliance</text>
+      <line x1="609" y1="247" x2="706" y2="247" stroke="#38e0b0" stroke-width="2" marker-end="url(#arrT)"/>
+      <text x="657" y="234" class="t" font-size="10.5" font-weight="700" fill="#38e0b0" text-anchor="middle">只读授权字段</text>
+      <text x="657" y="264" class="t" font-size="9.5" fill="#38e0b0" opacity="0.8" text-anchor="middle">consented only</text>
+
+      <line x1="110" y1="428" x2="850" y2="428" stroke="#ff6b81" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.55"/>
+      <line x1="470" y1="418" x2="490" y2="438" stroke="#ff6b81" stroke-width="3" stroke-linecap="round"/>
+      <line x1="490" y1="418" x2="470" y2="438" stroke="#ff6b81" stroke-width="3" stroke-linecap="round"/>
+      <text x="480" y="452" class="t" font-size="11" fill="#ff6b81" text-anchor="middle">无授权直连 · 旁路 · API 绕过 — 这套架构里没有通路</text>
+
+      <rect x="20" y="464" width="920" height="46" rx="10" fill="#0d1420" stroke="#232c44"/>
+      <text x="480" y="483" class="m" font-size="11" fill="#93a0ba" text-anchor="middle">audit · 每次调用一条记录 — 哪家模型 · 读过什么 · 何时 · 依据哪张授权卡</text>
+      <text x="480" y="500" class="m" font-size="10" fill="#ffb454" text-anchor="middle">revocation · 撤回授权 → 该模型下一次调用即刻失效</text>
+    </svg>
+    </div>
+
+    <div class="loop">
+<span class="l1">onboard: &nbsp;&nbsp;机构合规审查通过 → 其私有模型（BYOM）签名登记入生态 &nbsp;(合规后发行——未过审的模型进不来)</span><br>
+<span class="l2">enforce: &nbsp;&nbsp;<b>强制授权闸门</b>：无生效授权卡 → 模型调用直接拒绝，无旁路、无 API 直连 &nbsp;(授权是前提，不是选项)</span><br>
+<span class="l3">sandbox: &nbsp;&nbsp;模型在隔离沙箱内运行——能读的字段 = 授权卡声明的字段，多一个都不行 &nbsp;(最小够用，越界即拒)</span><br>
+<span class="l4">output: &nbsp;&nbsp;&nbsp;离开设备的只有签名推理结果（风险分级/决策摘要）——原始数据与中间特征全部留在本地 &nbsp;(模型带走结论，带不走你)</span><br>
+<span class="l5">audit: &nbsp;&nbsp;&nbsp;&nbsp;每次调用一条审计记录：哪家模型 · 读过什么 · 何时 · 依据哪张授权卡 &nbsp;(撤回授权，下一次调用即刻失效)</span>
+    </div>
+    <div class="grid" style="margin-top:22px">
+      <div class="card"><div class="ic">🏦</div><h3>保险公司私有模型</h3><p>持牌核保模型接入沙箱：从授权摘要与授权字段做风险评估——它评估得了风险，复制不走数据。</p></div>
+      <div class="card"><div class="ic">🏢</div><h3>各类公司私有模型</h3><p>不只保险：健康管理、居家安全、设备维保——任何机构的模型同一套闸门接入，同一套审计留痕。</p></div>
+      <div class="card"><div class="ic">🔒</div><h3>硬件级强制</h3><p>授权检查在安全元件里执行，不在可绕过的软件层——拔掉确认键的授权链路，模型层一点脾气都没有。</p></div>
+      <div class="card"><div class="ic">🛑</div><h3>撤回即断流</h3><p>授权卡撤回的瞬间起，该模型的后续调用全部拒绝——不是"下次生效"，是"这一刻生效"。</p></div>
     </div>
 
     <h3 style="margin-top:36px">⚕️ 手术保险链 — readiness in, evidence out</h3>
@@ -466,7 +672,7 @@
 <span class="l3">post-op: &nbsp;设备周期递减 · 环境合规持续记录 · 授权恢复期摘要（按权授权）&nbsp;(detection &amp; monitoring, digests only)</span><br>
 <span class="l4">dispute: 医疗仲裁证据链——中立设备 / 环境记录供仲裁机构与司法鉴定调用 &nbsp;(records, never verdicts)</span>
     </div>
-    <p class="sub" style="margin-top:18px;font-size:13px">保险全链路以<b>持牌保险机构合作与监管审批</b>为前提：不承诺核保结果、保费水平或赔付；健康数据用于核保需按 PIPL 敏感个人信息规则单独明示同意；预付保险计划审批未落地时等值折让。本链路是数据准备与授权基础设施，不是保险产品。手术保险链不做患者手术风险评估、不做临床判断、不裁决医疗纠纷——责任认定归仲裁机构、司法鉴定与持牌保险。</p>
+    <p class="sub" style="margin-top:18px;font-size:13px">保险全链路以<b>持牌保险机构合作与监管审批</b>为前提：不承诺核保结果、保费水平或赔付；健康数据用于核保需按 PIPL 敏感个人信息规则单独明示同意；预付保险计划审批未落地时等值折让。本链路是数据准备与授权基础设施，不是保险产品。私有模型互联同样是<b>合规后</b>的产物：机构模型接入以该机构资质审查与监管要求满足为前提，沙箱与强制授权闸门是接入的技术前置条件——未过审的模型、无授权的调用，在架构上就不存在通路。手术保险链不做患者手术风险评估、不做临床判断、不裁决医疗纠纷——责任认定归仲裁机构、司法鉴定与持牌保险。</p>
   </div>
 </section>
 
@@ -605,7 +811,7 @@
       <li><b>Medical boundary, fixed:</b> the Deck is a <b>monitoring device</b>. It is not a medical device, makes no diagnosis or treatment claims, and is never patient-connected. Clinic scenarios describe data storage of maintenance records only. Elder-care features compare readings against a personal baseline and send trend reminders — they never diagnose, never apply population thresholds, and care decisions stay with family and clinicians; robotic physical-assistance actions sit behind the physical Approve gate with a human in the loop. 涉及患者的任何判断，永远由持证人员进行。</li>
       <li><b>Fire safety boundary, fixed:</b> detector-health and pressure-trend logs support — never replace — certified inspection and code-mandated testing.</li>
       <li><b>Electrical safety:</b> the socket edition's pass-through load rating is an EVT target spec; the final rating ships only after certification, and high-power resistive loads (space heaters etc.) are out of scope until certified figures are published.</li>
-      <li><b>Encryption export:</b> the encrypted cartridge contains cryptography subject to export-control regulations; we ship in accordance with applicable law and will state any country restrictions before the campaign closes.</li>
+      <li><b>Encryption export, verified:</b> the cartridge and secure element contain cryptography subject to export control. Pre-campaign review completed: <b>embargoed destinations never ship</b> (Belarus, Cuba, Iran, North Korea, Russia, Sudan, Syria and occupied Ukrainian regions — matching platform rules); a second tier (Vietnam, Indonesia, Venezuela, Kazakhstan) ships only after import-side approvals; elsewhere the device ships under mass-market treatment (US: <span style="font-family:var(--mono)">5A992.c</span> self-classification with annual reporting; China: consumer-product carve-out under the Cryptography Law; HK: mass-market waiver) — full review in <a href="compliance-export-control.html" style="color:var(--acc)">the compliance report</a>. Country restrictions finalized with fulfillment planning.</li>
       <li><b>Minors &amp; consent, fixed:</b> the guardian pendant collects location and communication metadata only — guardian consent, data minimization (PIPL), local storage. SOS notifies the guardian sequence, never emergency services; cellular/radio approvals (SRRC, network access) complete before mass production.</li>
       <li><b>Insurance boundary, fixed:</b> the full chain is data-preparation and consent infrastructure — <b>not an insurance product, and we are not an insurer</b>. Underwriting, pricing and payouts remain with licensed insurers subject to regulatory approval; the prepaid plan falls back to equivalent credit if approval doesn't land. No coverage exists until a licensed partner signs.</li>
       <li><b>Medical facilities:</b> OR and clinic scenarios monitor equipment and environment only — never patient circuits, never clinical judgments. Surgery-time is read-only with writes queued; IEC 60601-1-2 EMC is a DVT target.</li>
@@ -630,6 +836,8 @@
     <details><summary>The insurance chain — am I buying insurance from you?</summary><p>No. The Deck prepares authorized, verifiable digests and assembles claim evidence — it is not an insurance product, and we are not an insurer. Underwriting, pricing and payouts stay with licensed partners, subject to regulatory approval; if the prepaid plan's approvals don't land, the tier falls back to equivalent credit.</p></details>
     <details><summary>Surgical insurance chain — does it assess surgical risk?</summary><p>No. Pre-op it evaluates <b>facility readiness</b> — sterilizer batches, anesthesia-machine maintenance, temperature, humidity, pressure differential — never the patient's surgical risk. Intra-op it records a passive, signed, timestamped timeline; post-op it tracks equipment cycles and environment compliance plus authorized recovery digests. For medical disputes, that evidence chain is available to arbitration bodies and forensic experts — the Deck provides records, never verdicts.</p></details>
     <details><summary>Operating rooms — is that safe?</summary><p>The Deck monitors equipment and environment only: sterilizer cycles, anesthesia run-hours, temperature, humidity, pressure differential, HEPA lifetime. It is never connected to patient circuits, makes no clinical judgments, and during surgery it is read-only — writes queue behind the physical button until the procedure ends.</p></details>
+    <details><summary>Can you ship to my country? — encryption export control</summary><p>The cartridge's AES-256 encryption and the secure element make this an export-controlled item, and we've completed the pre-campaign review. We <b>never ship</b> to embargoed destinations (Belarus, Cuba, Iran, North Korea, Russia, Sudan, Syria, occupied Ukrainian regions). A second tier (Vietnam, Indonesia, Venezuela, Kazakhstan) ships only after import-side approvals — we'll contact affected backers. Everywhere else the Deck ships under mass-market treatment: US self-classification with annual reporting, the Cryptography Law consumer carve-out for China, mass-market waivers in Hong Kong. Backers in China mainland: shipping is unrestricted, but the wallet feature is presented there as <i>local key custody</i> per mainland regulations.</p></details>
+    <details><summary>The "cold wallet" — is that legal where I live?</summary><p>The cartridge's secure element generates and stores keys offline and signs inside the disk — self-custody by design, market-specific posture before shipping. In jurisdictions that restrict crypto-related promotion (notably mainland China), the same hardware is described as a <i>local key custody and offline signing module</i> — the feature set is identical, the marketing language adapts. The device itself is a storage and signing tool; it never transacts, exchanges, or prices anything.</p></details>
     <details><summary>Can it control equipment, or only watch?</summary><p>Both, through MHS: reads are always safe; writes (resets, calibration, actuation) require explicit approval — on the physical buttons by default.</p></details>
     <details><summary>Why not just buy an industrial gateway from Moxa or USR IOT?</summary><p>Because they solve a different problem. A Modbus gateway from an established industrial vendor (e.g. Moxa's MGate series) lists around $400+, and Chinese IIoT edge gateways (e.g. USR's edge series) run ¥1,099 — excellent boxes, but they translate protocols for <b>SCADA and clouds</b>. The Deck at $89–$109 covers the same field protocols in one box (Modbus RTU/TCP · CAN/J1939 · OBD-II · BLE · LoRa) <b>plus what gateways don't do: MHS-native registration an AI agent can operate, a desk console with physical Approve/Deny, four-modality sensing, a local model computing your private data on-device, an encrypted pull-to-own storage cartridge, and three-class risk prediction. 不是更便宜的网关，是不同品类：Agent 能亲手操作的网关。</p></details>
     <details><summary>Is it a medical device?</summary><p>No. In medical, clinic and dental settings the Deck monitors equipment rooms and duty cycles only — never patient-connected circuits. Fire-safety monitoring is record-keeping, never a replacement for certified inspection.</p></details>
@@ -648,7 +856,7 @@
 
 <footer>
   <div class="wrap">
-    <p><a href="https://github.com/andrewyng/openworker" target="_blank">OpenWorker</a> companion hardware · MHS-compatible · open firmware (MIT) · <a href="campaign-kit.html">Campaign copy &amp; design kit · 文案与视觉设计稿</a></p>
+    <p><a href="https://github.com/andrewyng/openworker" target="_blank">OpenWorker</a> companion hardware · MHS-compatible · open firmware (MIT) · <a href="campaign-kit.html">Campaign copy &amp; design kit · 文案与视觉设计稿</a> · <a href="compliance-export-control.html">Export-control review · 加密出口管制核查</a></p>
     <p class="fr">This is an independent community project. It is <b>not affiliated with, endorsed by, or sponsored by</b> Andrew Ng, deeplearning.ai, or the OpenWorker project — "OpenWorker" is used solely to indicate compatibility, under its <a href="https://github.com/andrewyng/openworker" target="_blank">MIT license</a> terms with attribution. 本项目为独立社区项目，与 Andrew Ng、deeplearning.ai 及 OpenWorker 官方无任何隶属或背书关系；"OpenWorker" 名称仅用于说明兼容性。</p>
     <p class="fr">© 2026 Hdhaidong — Kickstarter campaign page (pre-launch). Specs are targets for the EVT phase; tiers and dates are campaign commitments pending platform launch review.</p>
   </div>
