@@ -213,7 +213,84 @@
         <figcaption><b>Three seconds, no menus · 三秒，无菜单</b> — 没有设置页，没有导出向导，没有"正在准备您的档案"进度条。像当年退软盘一样，用手把数据退出来。</figcaption>
       </figure>
     </div>
-    <p class="sub" style="margin-bottom:22px"><b>Compute here. Store there. 计算在这，存储在那。</b> The Deck runs two planes, separated on purpose: the compute plane — NPU, local model, sensing — never leaves the device; the storage plane is the cartridge. Pull it and the archive physically leaves with you; the Deck keeps running on 8 GB eMMC and syncs the moment you re-insert. Nothing breaks — and by design, nothing readable is left behind. 这就是"计算存储分离"做成金属而不是做成隐私政策的样子。</p>
+    <p class="sub" style="margin-bottom:22px"><b>One base, one cartridge. 一件产品，两个物理件。</b> 底座常开常连——网关、算力、闸门都在座上；插拔卡随身冷存——密钥、数据、模型授权都在卡内。<b>Compute here. Store there. 计算在这，存储在那。</b> Pull the cartridge and the archive physically leaves with you; the base keeps running on 8 GB eMMC and syncs the moment you re-insert. Nothing breaks — and by design, nothing readable is left behind. 这就是"计算存储分离"做成金属而不是做成隐私政策的样子。</p>
+    <svg viewBox="0 0 960 612" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="两件套架构 — 一个底座 + 一个插拔卡：七类模型经闸门接入、现场设备零集成连接、算力在座，密钥、数据、授权全在卡内冷存" style="width:100%;height:auto;display:block;background:#0d1119;border:1px solid #232c44;border-radius:14px;margin:22px 0">
+      <defs>
+        <marker id="tpA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7c5cff"/></marker>
+        <marker id="tpB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#38e0b0"/></marker>
+      </defs>
+      <style>.t2{font-family:'Segoe UI',system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif}.m2{font-family:'Cascadia Code',Consolas,'Courier New',monospace}</style>
+      <text x="480" y="18" class="m2" font-size="11" fill="#7c5cff" text-anchor="middle" letter-spacing="2">MODELS · 七类模型接入 — 全部经强制授权闸门</text>
+      <rect x="23" y="30" width="122" height="36" rx="7" fill="#161d2e" stroke="#232c44"/>
+      <text x="84" y="52" class="t2" font-size="10.5" fill="#93a0ba" text-anchor="middle">保险 · 核保</text>
+      <rect x="155" y="30" width="122" height="36" rx="7" fill="#161d2e" stroke="#232c44"/>
+      <text x="216" y="52" class="t2" font-size="10.5" fill="#93a0ba" text-anchor="middle">养老 · 基线</text>
+      <rect x="287" y="30" width="122" height="36" rx="7" fill="#161d2e" stroke="#232c44"/>
+      <text x="348" y="52" class="t2" font-size="10.5" fill="#93a0ba" text-anchor="middle">户外 · 轨迹</text>
+      <rect x="419" y="30" width="122" height="36" rx="7" fill="#161d2e" stroke="#232c44"/>
+      <text x="480" y="52" class="t2" font-size="10.5" fill="#93a0ba" text-anchor="middle">机械 · 诊断</text>
+      <rect x="551" y="30" width="122" height="36" rx="7" fill="#161d2e" stroke="#232c44"/>
+      <text x="612" y="52" class="t2" font-size="10.5" fill="#93a0ba" text-anchor="middle">消防 · 前兆</text>
+      <rect x="683" y="30" width="122" height="36" rx="7" fill="#161d2e" stroke="#232c44"/>
+      <text x="744" y="52" class="t2" font-size="10.5" fill="#93a0ba" text-anchor="middle">气象 · 推算</text>
+      <rect x="815" y="30" width="122" height="36" rx="7" fill="#161d2e" stroke="#7c5cff" stroke-opacity="0.6"/>
+      <text x="876" y="52" class="t2" font-size="10.5" fill="#b9a8ff" text-anchor="middle">通用 · LLM</text>
+      <path d="M 235 72 L 235 90" fill="none" stroke="#7c5cff" stroke-width="2" marker-end="url(#tpA)"/>
+      <text x="247" y="84" class="m2" font-size="9.5" fill="#7c5cff">BYOM · 合规过审</text>
+      <rect x="20" y="94" width="430" height="288" rx="12" fill="#111623" stroke="#38e0b0" stroke-width="2"/>
+      <text x="235" y="120" class="m2" font-size="11" fill="#38e0b0" text-anchor="middle" letter-spacing="2">THE BASE · 底座</text>
+      <text x="235" y="138" class="t2" font-size="9.5" fill="#93a0ba" text-anchor="middle">always on · 常开常连 — 网关 + 算力 + 闸门</text>
+      <rect x="40" y="152" width="390" height="36" rx="8" fill="#161d2e" stroke="#7c5cff" stroke-width="1.5"/>
+      <text x="235" y="174" class="t2" font-size="11" font-weight="700" fill="#e8edf7" text-anchor="middle">强制授权闸门 · Approve / Deny 实体键</text>
+      <rect x="40" y="194" width="390" height="36" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="235" y="216" class="t2" font-size="11" fill="#e8edf7" text-anchor="middle">本地算力 NPU · 沙箱推理 + 异常检测 + 基线学习</text>
+      <rect x="40" y="236" width="390" height="36" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="235" y="258" class="t2" font-size="11" fill="#e8edf7" text-anchor="middle">MQTT broker · agent 绑定 + MHS 话题树</text>
+      <rect x="40" y="278" width="390" height="36" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="235" y="300" class="t2" font-size="11" fill="#e8edf7" text-anchor="middle">协议桥 · Modbus / CAN / OBD-II / BLE / LoRa</text>
+      <rect x="40" y="320" width="390" height="36" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="235" y="342" class="t2" font-size="11" fill="#e8edf7" text-anchor="middle">传感四模态 · 振动 / 热 / 电流 / 声</text>
+      <rect x="510" y="94" width="430" height="288" rx="12" fill="#111623" stroke="#7c5cff" stroke-width="2"/>
+      <text x="725" y="120" class="m2" font-size="11" fill="#7c5cff" text-anchor="middle" letter-spacing="2">THE CARTRIDGE · 插拔卡</text>
+      <text x="725" y="138" class="t2" font-size="9.5" fill="#93a0ba" text-anchor="middle">cold · 冷存储随身 — 密钥 + 数据 + 授权</text>
+      <rect x="530" y="152" width="390" height="36" rx="8" fill="#161d2e" stroke="#38e0b0" stroke-width="1.5"/>
+      <text x="725" y="174" class="t2" font-size="11" font-weight="700" fill="#e8edf7" text-anchor="middle">安全元件 SE · 密钥卡内生成 · 永不导出</text>
+      <rect x="530" y="194" width="390" height="36" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="725" y="216" class="t2" font-size="11" fill="#e8edf7" text-anchor="middle">AES-256 加密存储 · 最高 512 GB</text>
+      <rect x="530" y="236" width="390" height="36" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="725" y="258" class="t2" font-size="11" fill="#e8edf7" text-anchor="middle">授权卡 · 哪个模型 · 读什么 · 读多久</text>
+      <rect x="530" y="278" width="390" height="36" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="725" y="300" class="t2" font-size="11" fill="#e8edf7" text-anchor="middle">个人基线 · 健康 / 设备 / 环境对照档案</text>
+      <rect x="530" y="320" width="390" height="36" rx="8" fill="#161d2e" stroke="#232c44"/>
+      <text x="725" y="342" class="t2" font-size="11" fill="#e8edf7" text-anchor="middle">冷钱包 · 交易进 → 卡内签名 → 签名出</text>
+      <path d="M 450 190 L 508 190" fill="none" stroke="#7c5cff" stroke-width="2" marker-end="url(#tpA)"/>
+      <text x="479" y="178" class="m2" font-size="9" fill="#7c5cff" text-anchor="middle">互认握手</text>
+      <path d="M 508 250 L 450 250" fill="none" stroke="#38e0b0" stroke-width="2" marker-end="url(#tpB)"/>
+      <text x="479" y="238" class="m2" font-size="9" fill="#38e0b0" text-anchor="middle">授权字段</text>
+      <text x="479" y="272" class="m2" font-size="8.5" fill="#93a0ba" text-anchor="middle">热插拔</text>
+      <path d="M 235 382 L 235 404" fill="none" stroke="#38e0b0" stroke-width="2" marker-end="url(#tpB)"/>
+      <rect x="20" y="406" width="430" height="38" rx="8" fill="#111623" stroke="#232c44"/>
+      <text x="235" y="429" class="m2" font-size="10" fill="#93a0ba" text-anchor="middle">FIELD · 现场设备 — 零集成 · 点名即达</text>
+      <rect x="510" y="406" width="430" height="38" rx="8" fill="#111623" stroke="#7c5cff" stroke-opacity="0.4"/>
+      <text x="725" y="429" class="m2" font-size="10" fill="#93a0ba" text-anchor="middle">TRAVELS · 盘随人走 — 上衣口袋就是数据中心</text>
+      <rect x="20" y="470" width="290" height="96" rx="10" fill="#161d2e" stroke="#38e0b0" stroke-opacity="0.5"/>
+      <text x="165" y="496" class="t2" font-size="12" font-weight="700" fill="#38e0b0" text-anchor="middle">插入 · 热运行</text>
+      <text x="165" y="518" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">数据面在线 · 挑战应答通过</text>
+      <text x="165" y="538" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">授权模型调用 · NPU 推理</text>
+      <text x="165" y="558" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">遥测落盘 · 审计记录</text>
+      <rect x="330" y="470" width="290" height="96" rx="10" fill="#161d2e" stroke="#ff6b81" stroke-opacity="0.6"/>
+      <text x="475" y="496" class="t2" font-size="12" font-weight="700" fill="#ff6b81" text-anchor="middle">拔出 · 冷断</text>
+      <text x="475" y="518" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">ACCESS DENIED · 调用全拒</text>
+      <text x="475" y="538" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">物理离线 · 不是锁定</text>
+      <text x="475" y="558" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">遥测转 eMMC · 插回即恢复</text>
+      <rect x="640" y="470" width="300" height="96" rx="10" fill="#161d2e" stroke="#7c5cff" stroke-opacity="0.6"/>
+      <text x="790" y="496" class="t2" font-size="12" font-weight="700" fill="#7c5cff" text-anchor="middle">他机 · 沉默</text>
+      <text x="790" y="518" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">挑战不匹配 · 卡保持沉默</text>
+      <text x="790" y="538" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">字节不出卡 · 拆解自毁密钥</text>
+      <text x="790" y="558" class="t2" font-size="10" fill="#93a0ba" text-anchor="middle">密钥 · 数据 · 基线全在卡内</text>
+      <rect x="20" y="578" width="920" height="30" rx="8" fill="#0d1420" stroke="#232c44"/>
+      <text x="480" y="597" class="m2" font-size="10" fill="#e8edf7" text-anchor="middle">计算在这，存储在那 — 模型到数据端来算 · 数据不出卡 · 密钥永不导出</text>
+    </svg>
     <div class="loop">
 <span class="l1">compute plane: &nbsp;local model · NPU anomaly detection · MHS registry · protocol bridge · MQTT broker &nbsp;(always on)</span><br>
 <span class="l2">storage plane: &nbsp;encrypted cartridge · 8 GB eMMC buffer &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(swappable · yours)</span><br>
@@ -657,6 +734,18 @@
 <span class="l4">output: &nbsp;&nbsp;&nbsp;离开设备的只有签名推理结果（风险分级/决策摘要）——原始数据与中间特征全部留在本地 &nbsp;(模型带走结论，带不走你)</span><br>
 <span class="l5">audit: &nbsp;&nbsp;&nbsp;&nbsp;每次调用一条审计记录：哪家模型 · 读过什么 · 何时 · 依据哪张授权卡 &nbsp;(撤回授权，下一次调用即刻失效)</span>
     </div>
+    <p class="sub" style="margin-top:24px"><b>七类模型，同一条路。</b> 过审 → 沙箱 → 授权字段 → 签名输出——私有模型、通用模型、本地算力，全部走同一道闸门：</p>
+    <table style="margin-top:14px">
+      <tr><th>模型类别</th><th>读什么（= 授权卡字段）</th><th>返回什么</th><th>算力在哪</th></tr>
+      <tr><td>保险 · 核保</td><td>健康基线摘要 · 设备风险分级 · 环境合规记录</td><td>核保决定（签名输出）</td><td>机构沙箱</td></tr>
+      <tr><td>养老 · 基线对照</td><td>BLE 健康数据 · 老人个人基线</td><td>趋势卡给家人 · 提请人工复核</td><td>本地 NPU</td></tr>
+      <tr><td>户外 · 轨迹风险</td><td>GNSS 轨迹 · 气压趋势 · 里程</td><td>路线风险提示</td><td>本地 NPU</td></tr>
+      <tr><td>机械 · 故障诊断</td><td>振动 / 电流 / 热 / 声特征 · 故障码</td><td>诊断结论 + RUL</td><td>本地 NPU</td></tr>
+      <tr><td>消防 · 前兆检测</td><td>CO 趋势 · 热失控前兆 · 过载模式</td><td>检测标记 + 通知指定联系人</td><td>本地 NPU</td></tr>
+      <tr><td>气象 · 本地推算</td><td>气压 · 湿度 · 温度 · 露点</td><td>设备关联行动清单</td><td>本地 NPU</td></tr>
+      <tr><td>通用 · LLM 推理</td><td>授权的任务上下文 · 注册表摘要</td><td>签名推理输出</td><td>沙箱（本地 / 机构）</td></tr>
+    </table>
+    <p class="sub" style="margin-top:14px;font-size:13px">算力在网关侧：外部模型接入即获得算力——在沙箱内用本地 NPU 推理，模型到数据端来算，数据不出卡。The model comes to the compute; the data never travels to the model.</p>
     <div class="grid" style="margin-top:22px">
       <div class="card"><div class="ic">🏦</div><h3>保险公司私有模型</h3><p>持牌核保模型接入沙箱：从授权摘要与授权字段做风险评估——它评估得了风险，复制不走数据。</p></div>
       <div class="card"><div class="ic">🏢</div><h3>各类公司私有模型</h3><p>不只保险：健康管理、居家安全、设备维保——任何机构的模型同一套闸门接入，同一套审计留痕。</p></div>
