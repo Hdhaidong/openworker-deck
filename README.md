@@ -160,6 +160,8 @@ The Deck works across the same nine domains the Hardware Repair Companion covers
 
 Board-level design documentation — the socket gateway base PCB and the privacy cartridge PCB (stackups, power tree, isolation targets, mainstream design references): **[hardware/pcb-design.md](hardware/pcb-design.md)**
 
+Any-agent architecture note — three compute layers, one hardware boundary (on-device NPU sandbox → cloud supercompute through the mandatory gate → satellite backhaul; compute-credit cold wallet; EVT acceptance checklist): **[docs/any-agent-architecture.md](docs/any-agent-architecture.md)**
+
 ### Product editions
 
 One protocol stack, five form factors — desktop, DIN-rail industrial, socket, the Home Hub (agent-compute gateway for the home) and the screenless guardian pendant. All share the privacy cartridge and the physical Approve/Deny gate. Retail pricing and availability will be announced closer to production, after certification figures are locked.
@@ -284,6 +286,8 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 概念渲染（EVT 阶段）：[`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/deck-home-hub.jpg`](img/deck-home-hub.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) —— 量产模具或有微调。插座版工业级外壳与 PCB 装配：[`hardware/socket-enclosure-industrial.jpg`](hardware/socket-enclosure-industrial.jpg) · [`hardware/socket-exploded-view.jpg`](hardware/socket-exploded-view.jpg)。工业场景渲染 —— 墙上值守（[`img/render-hero-workshop.jpg`](img/render-hero-workshop.jpg)）· 拔盘微距（[`img/render-cartridge-macro.jpg`](img/render-cartridge-macro.jpg)）· 电柜夜景（[`img/render-cabinet-night.jpg`](img/render-cabinet-night.jpg)）· 全家福（[`img/render-family-lineup.jpg`](img/render-family-lineup.jpg)）· 客厅里的家庭网关（[`img/home-hub-scene.jpg`](img/home-hub-scene.jpg)）。
 
 板级硬件设计文档 —— 插座网关底座 PCB 与隐私存储盘 PCB（叠层、电源树、隔离目标、主流方案设计参考）：**[hardware/pcb-design.md](hardware/pcb-design.md)**
+
+任意 agent 架构说明 —— 三层算力、一条硬件边界（本地 NPU 沙箱 → 经强制闸门的云端超算 → 卫星回程；算力冷钱包；EVT 验收清单）：**[docs/any-agent-architecture.md](docs/any-agent-architecture.md)**
 
 ### 九大设备领域
 
