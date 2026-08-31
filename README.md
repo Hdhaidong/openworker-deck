@@ -170,7 +170,7 @@ One protocol stack, five form factors — desktop, DIN-rail industrial, socket, 
 
 ### Swap the brain, keep the body — Grok-ready editions
 
-MHS is an open protocol: each custom edition ships with one dedicated brain — the OpenWorker edition carries the OpenWorker agent, the Grok edition carries the Grok agent, private models enter by consent card. One production line, one protocol stack; the difference is the preinstalled brain. **Swapping an agent is a software action; swapping a body is a retooling.**
+MHS is an open protocol: each custom edition ships with one dedicated brain — the OpenWorker edition carries the OpenWorker agent, the Grok edition carries the Grok agent, private models enter by consent card. One production line, one protocol stack; the difference is the preinstalled brain. **Swapping an agent is a software action; swapping a body is a retooling.** The Grok edition now lives in its own dedicated repo — [Hdhaidong/grok-deck](https://github.com/Hdhaidong/grok-deck) ("Grok thinks. Here's its body.").
 
 ![Grok-ready edition — satellite backhaul](img/deck-grok-edition.jpg)
 
@@ -303,7 +303,7 @@ Deck 覆盖与 Hardware Repair Companion 相同的九个领域，合规姿态一
 
 ### 换大脑，不换身体 —— Grok-ready 定制版
 
-MHS 是开放协议：每个定制版出厂绑定一个专属大脑——OpenWorker 版带 OpenWorker agent，Grok 版带 Grok agent，私有模型版走授权卡进门。同一条产线、同一套协议栈，区分只在预装的大脑。**换 agent 是一次软件动作，换身体才要重新开模。**
+MHS 是开放协议：每个定制版出厂绑定一个专属大脑——OpenWorker 版带 OpenWorker agent，Grok 版带 Grok agent，私有模型版走授权卡进门。同一条产线、同一套协议栈，区分只在预装的大脑。**换 agent 是一次软件动作，换身体才要重新开模。** Grok 定制版现已开通独立仓库——[Hdhaidong/grok-deck](https://github.com/Hdhaidong/grok-deck)（"Grok thinks. Here's its body."）。
 
 ![Grok-ready 版 —— 卫星回程形态](img/deck-grok-edition.jpg)
 
