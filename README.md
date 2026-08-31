@@ -172,6 +172,8 @@ One protocol stack, five form factors — desktop, DIN-rail industrial, socket, 
 
 MHS is an open protocol: each custom edition ships with one dedicated brain — the OpenWorker edition carries the OpenWorker agent, the Grok edition carries the Grok agent, private models enter by consent card. One production line, one protocol stack; the difference is the preinstalled brain. **Swapping an agent is a software action; swapping a body is a retooling.**
 
+![Grok-ready edition — satellite backhaul](img/deck-grok-edition.jpg)
+
 The Grok edition's differential path: beyond the on-device NPU sandbox, it can call xAI cloud supercompute for large-model inference through the mandatory gate, with Starlink satellite backhaul for sites with no ground network — **compute lives in the cloud and in space, but the data boundary stays in the cartridge**. Cloud inference is priced per token; prepaid credit lives in the floppy cartridge's cold wallet — stored offline, deducted atomically per call, double-spend impossible, denominated at a USDT-pegged rate, with a gift-card form factor (give the card, give the compute). The card stores a credit number only — no token issued, no chain, no yield, no appreciation: a prepaid meter, not a wealth-management product. Grok is an xAI trademark; this independent community project has no affiliation with xAI — "Grok-ready" refers to protocol compatibility only.
 
 ### Competitive landscape
@@ -302,6 +304,8 @@ Deck 覆盖与 Hardware Repair Companion 相同的九个领域，合规姿态一
 ### 换大脑，不换身体 —— Grok-ready 定制版
 
 MHS 是开放协议：每个定制版出厂绑定一个专属大脑——OpenWorker 版带 OpenWorker agent，Grok 版带 Grok agent，私有模型版走授权卡进门。同一条产线、同一套协议栈，区分只在预装的大脑。**换 agent 是一次软件动作，换身体才要重新开模。**
+
+![Grok-ready 版 —— 卫星回程形态](img/deck-grok-edition.jpg)
 
 Grok 定制版的差异化路径：本地 NPU 沙箱之外，经强制闸门调用 xAI 云端超算做大模型推理，无地面网现场走 Starlink 卫星回程——**算力在云上在太空，数据边界仍在这张卡里**。云端推理按 token 计价，预付额度写进软盘卡的冷钱包：离线保存、按次扣减、双花不可能，充值结算按 USDT 锚定价折算，另有礼品卡形态（赠卡即赠算力）。卡里只存额度数字——不发币、不上链，余额不生息不增值，是一块预付电表，不是理财产品。Grok 为 xAI 商标；本项目为独立社区项目，与 xAI 无任何隶属或合作，"Grok-ready" 仅指协议兼容性。
 
