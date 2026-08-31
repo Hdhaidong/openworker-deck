@@ -112,17 +112,18 @@ No protocol island survives contact: the agent sees one MHS device tree, and the
 
 ### Industrial design
 
-Three editions, one design language — matte graphite enclosures, functional color accents, fanless passive cooling. Storage is a floppy-form removable disk:
+Five form factors, one design language — matte graphite enclosures, functional color accents, fanless passive cooling. Storage is a floppy-form removable disk:
 
 | Edition | Form factor | Role |
 |---|---|---|
 | **Desktop** | CNC anodized aluminum, 4″ console, USB-C powered, status ring | Sits next to you: todo/progress panel, physical Approve/Deny permission cards |
 | **Industrial** | 35 mm DIN-rail, terminal blocks (RS-485/CAN), RJ45 (Modbus TCP), LoRa antenna, heatsink fins | Goes in the cabinet: wide-temperature, IP65 variant for the field |
 | **Socket** | Smart-plug form factor, pass-through outlet, built-in current sensing — **and the ecosystem's smallest gateway base**: the MQTT broker runs in the socket, and sliding the privacy cartridge into its side slot turns it into a standalone privacy-compute storage node (night watch, track archive, SOS evidence) — no desktop edition needed | Zero-wiring entry: plug it in the wall, plug the appliance into it — washer, water heater, compressor |
+| **Home Hub** | Low-profile fanless hub for the TV console or the wiring closet — RJ45 wired backhaul, Wi-Fi/BLE/LoRa/1-Wire stack, Thread/Matter-ready bridging, front e-ink window mirroring agent tasks and permission cards, side cartridge slot | **The home's agent computer**: the local-model tier runs here — personal baselines, anomaly detection, weather math and risk briefs computed on the local NPU; in a star topology it is the cartridge-holding seat (pull the disk, the whole family's history travels) and the family-side mandatory authorization gate for external models |
 | **Privacy disk** | 3.5″ floppy silhouette in armored metal — metal shutter, engraved lock, violet status edge | The removable encrypted medium itself: pull-to-own, key lives in the disk |
 | **Guardian pendant** | Screenless, nano-SIM (4G Cat.1bis), triple positioning, one SOS key | Four wearers: school kid, nursing-home elder, outdoor worker, solo hiker — calls home only, location to the family Deck, never a vendor cloud |
 
-Concept renders (EVT-phase): [`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) — final tooling may adjust. Socket-edition industrial enclosure and PCB assembly: [`hardware/socket-enclosure-industrial.jpg`](hardware/socket-enclosure-industrial.jpg) · [`hardware/socket-exploded-view.jpg`](hardware/socket-exploded-view.jpg). Industrial scene renders — wall duty ([`img/render-hero-workshop.jpg`](img/render-hero-workshop.jpg)) · pull-to-own macro ([`img/render-cartridge-macro.jpg`](img/render-cartridge-macro.jpg)) · in the cabinet at night ([`img/render-cabinet-night.jpg`](img/render-cabinet-night.jpg)) · the family lineup ([`img/render-family-lineup.jpg`](img/render-family-lineup.jpg)).
+Concept renders (EVT-phase): [`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/deck-home-hub.jpg`](img/deck-home-hub.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) — final tooling may adjust. Socket-edition industrial enclosure and PCB assembly: [`hardware/socket-enclosure-industrial.jpg`](hardware/socket-enclosure-industrial.jpg) · [`hardware/socket-exploded-view.jpg`](hardware/socket-exploded-view.jpg). Industrial scene renders — wall duty ([`img/render-hero-workshop.jpg`](img/render-hero-workshop.jpg)) · pull-to-own macro ([`img/render-cartridge-macro.jpg`](img/render-cartridge-macro.jpg)) · in the cabinet at night ([`img/render-cabinet-night.jpg`](img/render-cabinet-night.jpg)) · the family lineup ([`img/render-family-lineup.jpg`](img/render-family-lineup.jpg)) · the Home Hub in the living room ([`img/home-hub-scene.jpg`](img/home-hub-scene.jpg)).
 
 ### Nine equipment domains
 
@@ -161,7 +162,7 @@ Board-level design documentation — the socket gateway base PCB and the privacy
 
 ### Product editions
 
-One protocol stack, four form factors — desktop, DIN-rail industrial, socket, and the screenless guardian pendant. All share the privacy cartridge and the physical Approve/Deny gate. Retail pricing and availability will be announced closer to production, after certification figures are locked.
+One protocol stack, five form factors — desktop, DIN-rail industrial, socket, the Home Hub (agent-compute gateway for the home) and the screenless guardian pendant. All share the privacy cartridge and the physical Approve/Deny gate. Retail pricing and availability will be announced closer to production, after certification figures are locked.
 
 ### Competitive landscape
 
@@ -265,15 +266,16 @@ Built by **[Hdhaidong](https://github.com/Hdhaidong)** — custom business-agent
 
 ### 工业设计
 
-三种形态，一个设计语言 —— 哑光深灰机身、功能色点睛、无风扇被动散热。存储介质为软盘形态的可插拔加密盘：
+五种形态，一个设计语言 —— 哑光深灰机身、功能色点睛、无风扇被动散热。存储介质为软盘形态的可插拔加密盘：
 
 - **桌面版**：CNC 铝合金阳极氧化外壳，4″ 控制台 + 状态灯环，USB-C 供电 —— 坐在你手边，值守 Agent 的任务面板与权限卡
 - **工业版**：35 mm DIN 轨安装，RS-485/CAN 端子排 + RJ45 + LoRa 天线 + 散热鳍片，宽温进柜，另有 IP65 场版
 - **插座版**：智能插座形态，直通插孔 + 内置电流传感 —— 零接线入门：插墙上，电器插它上，洗衣机/热水器/空压机即刻接入。**它还是生态里最小的网关底座**：MQTT broker 直接在插座里跑，隐私计算存储盘从侧卡口推入，插座即升级为独立的隐私计算存储节点（夜班值守 · 轨迹归档 · SOS 证据包）——不需要桌面版到场
+- **家庭网关**：低矮无风扇中枢，电视柜一格或弱电箱壁挂 —— RJ45 有线回程 + Wi-Fi/BLE/LoRa/1-Wire 全栈，Thread/Matter-ready 桥接既有智能家居；正面墨水屏镜像 Agent 任务与权限卡，侧边软盘卡槽。**家庭的 Agent 计算中枢**：本地模型层跑在这里 —— 个人基线 · 异常检测 · 气象数学 · 风险简报全在本地 NPU 计算；星型拓扑下的"持盘座"（拔盘全家历史一起走），也是外部模型进家门的那道强制授权闸门
 - **隐私盘**：3.5″ 软盘轮廓装甲金属重铸 —— 金属滑盖、铭刻锁孔、紫色状态边。可插拔加密介质本体：拔盘即离场，密钥在盘里
 - **守护吊牌**：无屏、nano-SIM（4G Cat.1bis）、三重定位、SOS 实体键 —— 四类佩戴者：小学生、养老院老人、户外作业者、独自徒步的旅行者（每 5 分钟轨迹点 · 气压骤变风暴预警 · 平安键超时自动升级 SOS）—— 只打回家的电话，位置回家里 Deck，永不进厂商云
 
-概念渲染（EVT 阶段）：[`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) —— 量产模具或有微调。插座版工业级外壳与 PCB 装配：[`hardware/socket-enclosure-industrial.jpg`](hardware/socket-enclosure-industrial.jpg) · [`hardware/socket-exploded-view.jpg`](hardware/socket-exploded-view.jpg)。工业场景渲染 —— 墙上值守（[`img/render-hero-workshop.jpg`](img/render-hero-workshop.jpg)）· 拔盘微距（[`img/render-cartridge-macro.jpg`](img/render-cartridge-macro.jpg)）· 电柜夜景（[`img/render-cabinet-night.jpg`](img/render-cabinet-night.jpg)）· 全家福（[`img/render-family-lineup.jpg`](img/render-family-lineup.jpg)）。
+概念渲染（EVT 阶段）：[`img/deck-desktop.jpg`](img/deck-desktop.jpg) · [`img/deck-industrial.jpg`](img/deck-industrial.jpg) · [`img/deck-socket.jpg`](img/deck-socket.jpg) · [`img/deck-home-hub.jpg`](img/deck-home-hub.jpg) · [`img/cartridge-floppy.jpg`](img/cartridge-floppy.jpg) —— 量产模具或有微调。插座版工业级外壳与 PCB 装配：[`hardware/socket-enclosure-industrial.jpg`](hardware/socket-enclosure-industrial.jpg) · [`hardware/socket-exploded-view.jpg`](hardware/socket-exploded-view.jpg)。工业场景渲染 —— 墙上值守（[`img/render-hero-workshop.jpg`](img/render-hero-workshop.jpg)）· 拔盘微距（[`img/render-cartridge-macro.jpg`](img/render-cartridge-macro.jpg)）· 电柜夜景（[`img/render-cabinet-night.jpg`](img/render-cabinet-night.jpg)）· 全家福（[`img/render-family-lineup.jpg`](img/render-family-lineup.jpg)）· 客厅里的家庭网关（[`img/home-hub-scene.jpg`](img/home-hub-scene.jpg)）。
 
 板级硬件设计文档 —— 插座网关底座 PCB 与隐私存储盘 PCB（叠层、电源树、隔离目标、主流方案设计参考）：**[hardware/pcb-design.md](hardware/pcb-design.md)**
 
@@ -283,7 +285,7 @@ Deck 覆盖与 Hardware Repair Companion 相同的九个领域，合规姿态一
 
 ### 产品形态
 
-一套协议栈，四种形态：桌面版、DIN 导轨工业版、插座版、无屏守护吊牌。全部共享隐私存储卡与实体批准/拒绝闸门。零售定价与销售渠道将在量产临近、认证参数锁定后公布。
+一套协议栈，五种形态：桌面版、DIN 导轨工业版、插座版、家庭网关（家用 Agent 计算中枢）、无屏守护吊牌。全部共享隐私存储卡与实体批准/拒绝闸门。零售定价与销售渠道将在量产临近、认证参数锁定后公布。
 
 ### 竞品对标
 
