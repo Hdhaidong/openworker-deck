@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="img/readme-hero.jpg" alt="OpenWorker Deck family lineup — desk console, DIN-rail industrial gateway, socket edition, home hub, guardian pendant and the floppy-form encrypted cartridge" width="920">
+
 # OpenWorker Deck
 
 **给你的 AI 同事一个身体 · Give your AI coworker a body**
